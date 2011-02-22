@@ -101,6 +101,35 @@ div.field, div.actions {
   margin:0 auto;
 }
 
+.topbar
+{
+  padding:5px 0;
+  height:30px;
+  background:#000;
+  width:100%;
+}
+
+.topbar ul
+{
+  margin:0;
+  padding:5px 0;
+  text-align:right;
+  float:right;
+}
+
+.topbar ul li
+{
+  list-style:none;
+  display:inline;
+  margin:0 15px;
+  font-size:14px;
+}
+
+.topbar ul li a
+{
+  color:#fff;
+}
+
 h1.header
 {
   background:url('/images/header.png');
@@ -117,13 +146,6 @@ h1.header
   -moz-border-radius:10px;
   border-radius:10px;
   padding:15px;
-}
-
-.wide_col
-{
-  width:700px;
-  margin-right:20px;
-  float:left;
 }
 
 .col1
@@ -143,12 +165,6 @@ h1.header
 .col3
 {
   width:290px;
-  float:left;
-}
-
-.col4
-{
-  width:180px;
   float:left;
 }
 
@@ -260,6 +276,7 @@ img.twitter
   float:left;
   border:4px solid #ecebeb;
   margin-right:6px;
+  width:48px;
 }
 
 .info
