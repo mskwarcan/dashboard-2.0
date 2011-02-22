@@ -13,4 +13,12 @@ $(document).ready(function(){
     }
   });
   
+  $('.reply').click(function() {
+    $(this).fadeOut('fast', function() {
+        // Animation complete.
+        $(this).siblings('.reply_hide').fadeIn('fast');
+      });
+    return false;
+  });
+  
 });

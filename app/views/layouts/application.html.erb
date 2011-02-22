@@ -11,6 +11,9 @@
 <body>
 <div class="wrapper">
 	<a href="/"><h1 class="header">Balcom Social Dashboard</h1></a>
+	<% if flash[:error]%>
+		<div class="error_message"><%= flash[:error] %></div>
+	<% end %>
 <%= yield %>
 </div>
 </body>

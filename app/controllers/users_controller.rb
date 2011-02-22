@@ -5,16 +5,8 @@ class UsersController < ApplicationController
   require 'facebook_oauth'
   require 'twitter'
   
-  # GET /users
-  # GET /users.xml
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
-  end
+  before_filter :is_admin, :except => [:show, :logout, :authenticate]
+  before_filter :current_user, :only => :show
 
   # GET /users/1
   # GET /users/1.xml
@@ -102,7 +94,7 @@ class UsersController < ApplicationController
           format.xml  { head :ok }
         end
     else
-      flash[:login] = "Incorrect Username or Password"
+      flash[:error] = "Incorrect Username or Password"
       respond_to do |format|
         format.html { render "/" }
         format.xml  { head :ok }
@@ -169,6 +161,7 @@ class UsersController < ApplicationController
      @user.twitter_token = access_token.token
      @user.twitter_secret = access_token.secret
      @user.twitter_authenticated = true
+     @user.twitter_monthly_count = client.info["followers_count"]
      @user.save
      
      redirect_to "/"

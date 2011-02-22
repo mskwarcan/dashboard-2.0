@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_filter :is_admin, :only => :admin
+  
   def index
     @user = session[:user]
     

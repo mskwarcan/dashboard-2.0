@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110221164948) do
+ActiveRecord::Schema.define(:version => 20110222173330) do
 
   create_table "users", :force => true do |t|
     t.string   "username"
@@ -18,15 +18,13 @@ ActiveRecord::Schema.define(:version => 20110221164948) do
     t.string   "password"
     t.string   "twitter_token"
     t.string   "twitter_secret"
-    t.string   "linkedin_token"
-    t.string   "linkedin_secret"
     t.string   "facebook_token"
-    t.boolean  "fb_authenticated"
-    t.boolean  "twitter_authenticated"
-    t.boolean  "linkedin_authenticated"
+    t.boolean  "fb_authenticated",      :default => false
+    t.boolean  "twitter_authenticated", :default => false
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "twitter_monthly_count"
   end
 
 end
