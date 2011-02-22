@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   require "rubygems"
   require 'twitter_oauth'
   require 'linkedin'
-  require 'facebook_oauth'
+  require 'fbgraph'
   require 'twitter'
   
   before_filter :is_admin, :except => [:show, :logout, :authenticate]
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to("/admin") }
       format.xml  { head :ok }
     end
   end
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
     else
       flash[:error] = "Incorrect Username or Password"
       respond_to do |format|
-        format.html { render "/" }
+        format.html { redirect_to "/" }
         format.xml  { head :ok }
       end
     end
