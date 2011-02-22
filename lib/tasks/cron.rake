@@ -8,5 +8,6 @@ task :cron => :environment do
         user.twitter_monthly_count = client.info["followers_count"]
         user.save
       end
+    end
   end
 end
