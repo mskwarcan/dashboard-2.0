@@ -1,0 +1,36 @@
+<div class="container clearfix">
+	<div class="wide_col">
+		<table id="users">
+			<tr>
+		    <th>Client</th>
+				<th>Username</th>
+				<th>Email</th>
+		    <th>Facebook authenticated</th>
+		    <th>Twitter Authenticated</th>
+		    <th></th>
+		    <th></th>
+		    <th></th>
+		  </tr>
+			<% @users.each do |user| %>
+			  <tr>
+					<td><%= user.client %></td>	
+			    <td><%= user.username %></td>
+					<td><%= user.email %></td>
+			    <td><% if user.fb_authenticated == true %>Yes<% else %><a href="#">Add Page</a><% end %></td>
+			    <td><% if user.twitter_authenticated == true %>Yes
+							<% else %>
+							<form id="twitter_<%= user.username %>" action="/twitter_register">
+								<input type="hidden" value="<%= user.username %>" name="user">
+								<input type="submit" value="Register">
+							</form>
+							<% end %></td>
+			    <td><%= link_to 'Show', user %></td>
+			    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+			    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+			  </tr>
+			<% end %>
+		</table>
+	</div>
+
+	<%= render :partial => "/shared/admin_subnav" %>
+</div>

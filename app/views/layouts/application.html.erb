@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag "jquery", "jquery.infieldlabel.min.js", "jquery.validate.min.js", "application" %>
+  <%= csrf_meta_tag %>
+	<script type="text/javascript" src="http://use.typekit.com/epq8thw.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+<div class="wrapper">
+	<a href="/"><h1 class="header">Balcom Social Dashboard</h1></a>
+<%= yield %>
+</div>
+</body>
+</html>

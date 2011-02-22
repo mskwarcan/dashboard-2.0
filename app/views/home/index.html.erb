@@ -1,0 +1,17 @@
+<div class="login container">
+	<h3>Welcome to the balcom social dashboard</h3>
+	<div class="form">
+	<form id="login" method="post" action="/login">
+		<% if flash[:login]%>
+			<div class="error"><%= flash[:login] %></div>
+		<% end %>
+		<p><label for="username">Username</label>
+		<input name="username" id="username" class="required text" type="text" /></p>
+		<p><label for="password">Password</label>
+		<input name="password" id="password" class="required text" type="password" /></p>
+		<input class="submit" type="submit" value="Login" />
+	</form>
+	<a class="forgot" href="#">Forgot your Password?</a>
+	</div>
+</div>
+<p class="footer">Copyright 2011 Balcom Agency.</p>
