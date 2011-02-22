@@ -13,10 +13,12 @@ $(document).ready(function(){
     }
   });
   
-  $('.reply').click(function() {
+  
+  
+  $('.add').click(function() {
     $(this).fadeOut('fast', function() {
         // Animation complete.
-        $(this).siblings('.reply_hide').fadeIn('fast');
+        $(this).siblings('form.facebook').fadeIn('fast');
       });
     return false;
   });

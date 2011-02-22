@@ -1,0 +1,25 @@
+<% if @user.facebook_authd?(@user) %>
+	<h2 class="notop">Your Facebook</h2>
+	<% client = User.facebook(@user) %>
+	<% page = client.selection.page(@user.facebook_token) %>
+	<img class="twitter" src="<%= page.picture %>" />
+	<h3><%= page.info!["name"] %></h3>
+	Likes: <%= page.info!["likes"] %><br />
+	<b>New Likes this Month: <%= page.info!["likes"] - @user.facebook_monthly_count %></b>
+	<% feed = page.feed.info!["data"] %>
+	<ul class="tweets">
+	<% feed.each do | feed |%>
+		<li class="clearfix"><img class="twitter" src="<%= client.selection.user(feed["from"]["id"]).picture %>" /> <b><a target="_blank" href="<%= client.selection.user(feed["from"]["id"]).info!["link"] %>"><%= feed["from"]["name"] %></a></b><br />
+		<p class="message"><%= feed["message"] %></p>
+		<% if feed["picture"] %>
+			<img class="facebook" src="<%= feed["picture"] %>" />
+			<a href="<%= feed["link"] %>"><%= feed["name"] %></a><br />
+			<p class="description"><%= feed["description"] %></p>
+		<% end %>
+		</li>
+	<% end %>
+	</ul>
+<% else %>
+	<h3>Register Your account on Facebook!</h3>
+	<p>Please contact <a href="mailto:steph@balcomagency.com">Steph</a> at The Balcom Agency in order to get your facebook account set up.</p>
+<% end %>

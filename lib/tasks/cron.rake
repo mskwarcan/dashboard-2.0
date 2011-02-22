@@ -8,6 +8,11 @@ task :cron => :environment do
         user.twitter_monthly_count = client.info["followers_count"]
         user.save
       end
+      if user.facebook_authd?(user)
+        client = User.facebook(user)
+        user.facebook_monthly_count = client.selection.page(@user.facebook_token).info!["likes"]
+        user.save
+      end
     end
   end
 end

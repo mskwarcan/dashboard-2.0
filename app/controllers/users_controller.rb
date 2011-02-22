@@ -102,30 +102,16 @@ class UsersController < ApplicationController
     end
   end
   
-  def facebook_register
-    @user = session[:user]
+  def facebook_id
+    @user = User.first(:conditions => {:username => params[:user]})
+    session[:client] = @user
     
-    client = FacebookOAuth::Client.new(
-        :application_id => '129898603745111',
-        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
-        :callback => 'http://socialintegration.heroku.com/facebook_oauth'
-    )
+    #Set client up
+    client = User.facebook(@user)
     
-    redirect_to client.authorize_url
-  end
-  
-  def facebook_oauth
-    @user = session[:user]
-    
-    client = FacebookOAuth::Client.new(
-        :application_id => '129898603745111',
-        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
-        :callback => 'http://socialintegration.heroku.com/facebook_oauth'
-    )
-    
-    access_token = client.authorize(:code => params[:code])
-    @user.facebook_access = access_token.token
-    @user.facebook_authenticated = true
+    @user.facebook_token = params[:id]
+    @user.fb_authenticated = true
+    @user.facebook_monthly_count = client.selection.page(params[:id]).info!["likes"]
     @user.save
     
     redirect_to "/"

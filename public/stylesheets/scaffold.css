@@ -23,6 +23,11 @@ h3
   margin-bottom:0;
 }
 
+.notop
+{
+  margin-top:0;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
@@ -230,6 +235,11 @@ table#users tr:nth-child(2n)
   background:#f4f4f4;
 }
 
+form.facebook
+{
+  display:none;
+}
+
 /* Show */
 h1.client
 {
@@ -274,6 +284,25 @@ ul.tweets li
 ul.tweets li:nth-child(2n)
 {
   background:#f4f4f4;
+}
+
+/* Facebook */
+img.facebook
+{
+  float:left;
+  border:2px solid #7e7d7d;
+  margin-right:6px;
+}
+
+p.message
+{
+  margin:8px 0;
+}
+
+p.description
+{
+  margin:4px 0;
+  font-size:11px;
 }
 
 /* Footer */

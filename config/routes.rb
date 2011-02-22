@@ -7,9 +7,8 @@ Dashboard::Application.routes.draw do
   match 'logout', :controller => 'users', :action => 'logout'
   
   match '/twitter_register', :controller => 'users', :action => 'twitter_register'
-  match '/facebook_register', :controller => 'users', :action => 'facebook_register'
   match '/twitter_oauth', :controller => 'users', :action => 'twitter_oauth'
-  match '/facebook_oauth', :controller => 'users', :action => 'facebook_oauth'
+  match '/facebook_id', :controller => 'users', :action => 'facebook_id'
 
   match '/admin', :controller => 'home', :action => 'admin'
   

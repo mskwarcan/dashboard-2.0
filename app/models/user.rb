@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   
   def facebook_authd?(user)
     @user = User.first(:conditions => {:username => user.username})
-    if @user.facebook_authenticated == true
+    if @user.fb_authenticated == true
       return true
     end
   end
@@ -52,11 +52,11 @@ class User < ActiveRecord::Base
   def self.facebook(user)
     @user = user
 
-   	FacebookOAuth::Client.new(
-         :application_id => '185181124851176',
-         :application_secret => '9ebcc080254926b191aaba84023743f8',
-         :token => @user.facebook_token
-    )
+   	FBGraph::Client.new(
+   	:client_id => '185181124851176',
+   	:secret_id =>'9ebcc080254926b191aaba84023743f8'
+   	)
+
  end 
   
 end
