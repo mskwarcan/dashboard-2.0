@@ -53,6 +53,9 @@ GEM
       oauth2
       rest-client
       rest-client
+    garb (0.9.1)
+      activesupport (>= 2.2.0)
+      crack (>= 0.1.6)
     hashie (1.0.0)
     i18n (0.5.0)
     jquery-rails (0.2.7)
@@ -127,6 +130,7 @@ PLATFORMS
 
 DEPENDENCIES
   fbgraph
+  garb
   jquery-rails (>= 0.2.6)
   linkedin
   rails (= 3.0.4)
