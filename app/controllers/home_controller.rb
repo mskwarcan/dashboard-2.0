@@ -13,6 +13,6 @@ class HomeController < ApplicationController
   
   def admin
     @user = session[:user]
-    @users = User.all
+    @users = User.all(:conditions => ["username != admin"], :order => "client ASC")
   end
 end
