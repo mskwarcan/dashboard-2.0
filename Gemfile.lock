@@ -53,9 +53,6 @@ GEM
       oauth2
       rest-client
       rest-client
-    garb (0.9.1)
-      activesupport (>= 2.2.0)
-      crack (>= 0.1.6)
     gattica (0.4.3)
       hpricot (>= 0.6.164)
     hashie (1.0.0)
@@ -133,7 +130,6 @@ PLATFORMS
 
 DEPENDENCIES
   fbgraph
-  garb
   gattica
   jquery-rails (>= 0.2.6)
   linkedin

@@ -1,4 +1,4 @@
-<% if @user.facebook_authd?(@user) %>
+<% if @user.google_authd?(@user) %>
 	<h2 class="notop">Your Google Analytics</h2>
 	<h3>This Month</h3>
 	<% gs = User.google %>
@@ -10,19 +10,19 @@
 
 	<% results = gs.get({:start_date => lastMonth, :end_date => currentMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']}) %>
 	<p>
-	<b>Page Views: <% results.points.first.metrics.first[:pageviews] %></b><br />
-	<b>Visits: <% results.points.first.metrics.first[:visits] %></b><br />
-	<b>New Visits: <% results.points.first.metrics.first[:newVisits] %></b><br />
-	<b>Avg. Time on Site: <% results.points.first.metrics.first[:avgTimeOnSite] %></b>
+	<b>Page Views:</b> <%= results.points.first.metrics.first[:pageviews] %><br />
+	<b>Visits:</b> <%= results.points.first.metrics.fourth[:visits] %><br />
+	<b>New Visits:</b> <%= results.points.first.metrics.third[:newVisits] %><br />
+	<b>Avg. Time on Site:</b> <%= results.points.first.metrics.second[:avgTimeOnSite] %> seconds
 	</p>
 	
 	<% results = gs.get({:start_date => twoMonths, :end_date => lastMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']}) %>
 	<h3>Last Month</h3>
 	<p>
-	<b>Page Views: <% results.points.first.metrics.first[:pageviews] %></b><br />
-	<b>Visits: <% results.points.first.metrics.first[:visits] %></b><br />
-	<b>New Visits: <% results.points.first.metrics.first[:newVisits] %></b><br />
-	<b>Avg. Time on Site: <% results.points.first.metrics.first[:avgTimeOnSite] %></b>
+	<b>Page Views</b>: <%= results.points.first.metrics.first[:pageviews] %><br />
+	<b>Visits:</b> <%= results.points.first.metrics.fourth[:visits] %><br />
+	<b>New Visits:</b> <%= results.points.first.metrics.third[:newVisits] %><br />
+	<b>Avg. Time on Site:</b> <%= results.points.first.metrics.second[:avgTimeOnSite] %> seconds
 	</p>
 	
 <% else %>

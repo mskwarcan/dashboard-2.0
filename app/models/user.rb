@@ -15,9 +15,9 @@ class User < ActiveRecord::Base
     end
   end
   
-  def linkedin_authd?(user)
+  def google_authd?(user)
     @user = User.first(:conditions => {:username => user.username})
-    if @user.linkedin_authenticated == true
+    if @user.analytics_authenticated == true
       return true
     end
   end

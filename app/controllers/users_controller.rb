@@ -154,12 +154,12 @@ class UsersController < ApplicationController
      redirect_to "/"
    end
    
-   def analtyics
+   def analytics
      @user = User.first(:conditions => {:username => params[:user]})
      session[:client] = @user
      
      @user.analytics_authenticated = true
-     @user.analtyics = params[:id]
+     @user.analytics = params[:id]
      @user.save
      
      redirect_to "/"
