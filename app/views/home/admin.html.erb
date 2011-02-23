@@ -16,7 +16,7 @@
 					<td><%= user.client %></td>	
 			    <td><%= user.username %></td>
 					<td><%= user.email %></td>
-			    <td><% if user.fb_authenticated == true %><% user.facebook_token %><% else %><a href="#" class="add">Add Page ID</a>
+			    <td><% if user.fb_authenticated == true %><%= user.facebook_token %><% else %><a href="#" class="add">Add Page ID</a>
 						<form id="facebook_<%= user.username %>" class="facebook" action="/facebook_id">
 							<input type="hidden" value="<%= user.username %>" name="user">
 							<input type="text" value="" name="id">
