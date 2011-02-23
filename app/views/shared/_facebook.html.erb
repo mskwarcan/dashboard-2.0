@@ -2,13 +2,14 @@
 	<h2 class="notop">Your Facebook</h2>
 	<% client = User.facebook %>
 	<% page = client.selection.page(@user.facebook_token) %>
-	<img class="twitter" src="<%= page.picture %>" />
-	<h3><%= page.info!["name"] %></h3>
+	<img class="book" src="<%= page.picture %>" />
+	<h3 class="nobot facebook"><%= page.info!["name"] %></h3>
+
 	Likes: <%= page.info!["likes"] %><br />
 	<b>New Likes this Month:</b> <%= page.info!["likes"] - @user.facebook_monthly_count %>
 	<% feed = page.feed.limit(15).info!["data"] %>
 	<h3 class="nobot">Your Wall</h3>
-	<ul class="tweets">
+	<ul class="facebook">
 	<% feed.each do | feed |%>
 		<li class="clearfix"><img class="twitter" src="<%= client.selection.user(feed["from"]["id"]).picture %>" /> <b><a target="_blank" href="<%= client.selection.user(feed["from"]["id"]).info!["link"] %>"><%= feed["from"]["name"] %></a></b><br />
 		<p class="message"><%= feed["message"] %></p>
