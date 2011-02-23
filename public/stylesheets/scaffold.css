@@ -188,7 +188,7 @@ h1.header
   width:230px;
 }
 
-.login form p, form.new_user  p { position:relative }
+.login form p, form.new_user  p, form.edit_user p { position:relative }
 
 .login label, .new_user label { 
   position:absolute; 
@@ -251,7 +251,7 @@ table#users tr:nth-child(2n)
   background:#f4f4f4;
 }
 
-form.facebook
+form.facebook, form.analytics
 {
   display:none;
 }

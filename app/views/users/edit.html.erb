@@ -1,11 +1,43 @@
 <div class="container clearfix">
-	<div class="wide_col">
 		<h2>Edit <%= @user.client%></h2>
 
-		<%= render 'form' %>
-	</div>
-	
-	<%= render :partial => "/shared/admin_subnav" %>
+		<%= form_for(@user) do |f| %>
+		  <% if @user.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+		      <ul>
+		      <% @user.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+
+		  <div class="field">
+		    <p><%= f.label :username %><br />
+		    <%= f.text_field :username, :class => "required text" %></p>
+		  </div>
+		  <div class="field">
+		    <p><%= f.label :client %><br />
+		    <%= f.text_field :client, :class => "required text" %></p>
+		  </div>
+		  <div class="field">
+		    <p><%= f.label :password %><br />
+		    <%= f.password_field :password, :class => "required text" %></p>
+		  </div>
+		  <div class="field">
+		    <p><label for="verify">Verify Password</label><br />
+		    <input type="password" id="verify" name="verify" size="30" class="required text"></p>
+		  </div>
+		  <div class="field">
+		    <p><%= f.label :email %><br />
+		    <%= f.text_field :email, :class => "required email text" %>
+		  </div>
+		  <div class="actions">
+		    <%= f.submit :class => "submit" %>
+		  </div>
+		<% end %>
 
 </div>
 

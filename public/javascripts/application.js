@@ -13,12 +13,27 @@ $(document).ready(function(){
     }
   });
   
-  
+  $(".edit_user").validate({
+    rules: {
+      password: "required",
+      verify: {
+        equalTo: "#user_password"
+      }
+    }
+  });
   
   $('.add').click(function() {
     $(this).fadeOut('fast', function() {
         // Animation complete.
         $(this).siblings('form.facebook').fadeIn('fast');
+      });
+    return false;
+  });
+  
+  $('.google').click(function() {
+    $(this).fadeOut('fast', function() {
+        // Animation complete.
+        $(this).siblings('form.analytics').fadeIn('fast');
       });
     return false;
   });

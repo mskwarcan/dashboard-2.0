@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   require 'linkedin'
   require 'fbgraph'
   require 'twitter'
+  require 'gattica'
   
   before_filter :is_admin, :except => [:show, :logout, :authenticate]
   before_filter :current_user, :only => :show
@@ -151,5 +152,14 @@ class UsersController < ApplicationController
      @user.save
      
      redirect_to "/"
+   end
+   
+   def analtyics
+     @user = User.first(:conditions => {:username => params[:user]})
+     session[:client] = @user
+     
+     @user.analytics_authenticated = true
+     @user.analtyics = params[:title]
+     @user.save
    end
 end

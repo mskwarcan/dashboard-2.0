@@ -10,22 +10,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110222194754) do
+ActiveRecord::Schema.define(:version => 20110222230739) do
 
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.string   "client"
-    t.string   "password"
-    t.string   "twitter_token"
-    t.string   "twitter_secret"
-    t.string   "facebook_token"
-    t.boolean  "fb_authenticated",       :default => false
-    t.boolean  "twitter_authenticated",  :default => false
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "twitter_monthly_count"
-    t.integer  "facebook_monthly_count"
+    t.string    "username"
+    t.string    "client"
+    t.string    "password"
+    t.string    "twitter_token"
+    t.string    "twitter_secret"
+    t.string    "facebook_token"
+    t.boolean   "fb_authenticated",        :default => false
+    t.boolean   "twitter_authenticated",   :default => false
+    t.string    "email"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "twitter_monthly_count"
+    t.integer   "facebook_monthly_count"
+    t.boolean   "analytics_authenticated", :default => false
+    t.string    "analytics"
   end
 
 end
