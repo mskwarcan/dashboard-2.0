@@ -1,0 +1,31 @@
+<% if @user.facebook_authd?(@user) %>
+	<h2 class="notop">Your Google Analytics</h2>
+	<h3>This Month</h3>
+	<% gs = User.google %>
+	<% gs.profile_id = @user.analytics %>
+
+	<% currentMonth = Time.now.strftime('%Y-%m-01') %>
+	<% lastMonth = 1.month.ago.strftime("%Y-%m-01") %>
+	<% twoMonths = 2.month.ago.strftime("%Y-%m-01") %>
+
+	<% results = gs.get({:start_date => lastMonth, :end_date => currentMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']}) %>
+	<p>
+	<b>Page Views: <% results.points.first.metrics.first[:pageviews] %></b><br />
+	<b>Visits: <% results.points.first.metrics.first[:visits] %></b><br />
+	<b>New Visits: <% results.points.first.metrics.first[:newVisits] %></b><br />
+	<b>Avg. Time on Site: <% results.points.first.metrics.first[:avgTimeOnSite] %></b>
+	</p>
+	
+	<% results = gs.get({:start_date => twoMonths, :end_date => lastMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']}) %>
+	<h3>Last Month</h3>
+	<p>
+	<b>Page Views: <% results.points.first.metrics.first[:pageviews] %></b><br />
+	<b>Visits: <% results.points.first.metrics.first[:visits] %></b><br />
+	<b>New Visits: <% results.points.first.metrics.first[:newVisits] %></b><br />
+	<b>Avg. Time on Site: <% results.points.first.metrics.first[:avgTimeOnSite] %></b>
+	</p>
+	
+<% else %>
+	<h3>Get Your Google Analytics!</h3>
+	<p>Please contact <a href="mailto:steph@balcomagency.com">Steph</a> at The Balcom Agency in order to get your Google Analytics.</p>
+<% end %>

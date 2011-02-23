@@ -108,7 +108,7 @@ class UsersController < ApplicationController
     session[:client] = @user
     
     #Set client up
-    client = User.facebook(@user)
+    client = User.facebook
     
     @user.facebook_token = params[:id]
     @user.fb_authenticated = true
@@ -159,7 +159,9 @@ class UsersController < ApplicationController
      session[:client] = @user
      
      @user.analytics_authenticated = true
-     @user.analtyics = params[:title]
+     @user.analtyics = params[:id]
      @user.save
+     
+     redirect_to "/"
    end
 end

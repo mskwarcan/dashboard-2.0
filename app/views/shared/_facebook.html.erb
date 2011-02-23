@@ -1,6 +1,6 @@
 <% if @user.facebook_authd?(@user) %>
 	<h2 class="notop">Your Facebook</h2>
-	<% client = User.facebook(@user) %>
+	<% client = User.facebook %>
 	<% page = client.selection.page(@user.facebook_token) %>
 	<img class="twitter" src="<%= page.picture %>" />
 	<h3><%= page.info!["name"] %></h3>

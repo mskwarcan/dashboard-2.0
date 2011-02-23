@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     )
   end
   
-  def self.facebook(user)
+  def self.facebook
 
    	FBGraph::Client.new(
    	:client_id => '185181124851176',
@@ -58,6 +58,6 @@ class User < ActiveRecord::Base
  end
   
   def self.google
-    Garb::Session.login('mskwarca@purdue.edu','777lucky') 
+    Gattica.new({:email => 'mskwarca@purdue.edu', :password => '777lucky'})
   end
 end

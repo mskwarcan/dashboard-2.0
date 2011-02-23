@@ -30,10 +30,10 @@
 								<input type="submit" value="Register">
 							</form>
 							<% end %></td>
-							<td><% if user.analytics_authenticated == true %><%= user.analytics %><% else %><a href="#" class="google">Add Analytics Title</a>
+							<td><% if user.analytics_authenticated == true %><%= user.analytics %><% else %><a href="#" class="google">Add Analytics ID</a>
 								<form id="analytics_<%= user.username %>" class="analytics" action="/analytics">
 									<input type="hidden" value="<%= user.username %>" name="user">
-									<input type="text" value="" name="title">
+									<input type="text" value="" name="id">
 									<input type="submit" value="Add">
 								</form>
 							<% end %></td>
