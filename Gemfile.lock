@@ -32,6 +32,7 @@ GEM
     arel (2.0.8)
     builder (2.1.2)
     crack (0.1.8)
+    dalli (1.0.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     faraday (0.5.5)
@@ -129,6 +130,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dalli
   fbgraph
   gattica
   jquery-rails (>= 0.2.6)
