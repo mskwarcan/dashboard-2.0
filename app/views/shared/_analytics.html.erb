@@ -1,6 +1,6 @@
 <% if @user.google_authd?(@user) %>
-	<h2 class="notop">Your Google Analytics</h2>
-	<h3>This Month</h3>
+	<img class="logo" src="/images/google.png" />
+	<h3><%= Time.now.strftime("%B") %> Current Stats</h3>
 	<% gs = User.google %>
 	<% gs.profile_id = @user.analytics %>
 
@@ -17,7 +17,7 @@
 	</p>
 	
 	<% results = gs.get({:start_date => twoMonths, :end_date => lastMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']}) %>
-	<h3>Last Month</h3>
+	<h3><%= 1.month.ago.strftime("%B") %> Total Stats</h3>
 	<p>
 	<b>Page Views</b>: <%= results.points.first.metrics.first[:pageviews] %><br />
 	<b>Visits:</b> <%= results.points.first.metrics.fourth[:visits] %><br />

@@ -1,4 +1,5 @@
 <div class="container clearfix">
+	<div class="side_spacing">
 		<h2>Edit <%= @user.client%></h2>
 
 		<%= form_for(@user) do |f| %>
@@ -34,10 +35,18 @@
 		    <p><%= f.label :email %><br />
 		    <%= f.text_field :email, :class => "required email text" %>
 		  </div>
+		  <div class="field">
+		    <p><%= f.label :facebook_token, "Facebook Page ID" %><br />
+		    <%= f.text_field :facebook_token, :class => "text" %>
+		  </div>
+		  <div class="field">
+		    <p><%= f.label :analytics, "Analytics ID" %><br />
+		    <%= f.text_field :analytics, :class => "text" %>
+		  </div>
 		  <div class="actions">
 		    <%= f.submit :class => "submit" %>
 		  </div>
 		<% end %>
-
+		</div>
 </div>
 

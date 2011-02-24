@@ -18,6 +18,11 @@ h3
   font-size:18px;
 }
 
+.noMargin
+{
+  margin:0;
+}
+
 .nobot
 {
   margin-bottom:0;
@@ -43,6 +48,16 @@ a
 .cleft
 {
   clear:left;
+}
+
+.right
+{
+  float:right;
+}
+
+.left
+{
+  float:left;
 }
 
 div.field, div.actions {
@@ -134,7 +149,7 @@ h1.header
 {
   background:url('/images/header.png');
   width:940px;
-  height:120px;
+  height:115px;
   text-indent:-9009px;
   margin:0 0 20px 0;
 }
@@ -147,17 +162,22 @@ h1.header
   border-radius:10px;
 }
 
+.side_spacing
+{
+  padding:15px;
+}
+
 .col1
 {
-  width:275px;
-  padding:10px;
+  width:280px;
+  padding:10px 15px;
   float:left;
 }
 
 .col2
 {
   width:280px;
-  padding:10px 10px 0;
+  padding:10px 15px 0;
   float:left;
   background:#f0f0f0;
   border-left:#dfdfdf solid 1px;
@@ -166,9 +186,9 @@ h1.header
 
 .col3
 {
-  width:275px;
+  width:280px;
   float:left;
-  padding:10px 10px;
+  padding:10px 15px;
 }
 
 .login
@@ -244,9 +264,21 @@ label.error
 }
 
 /* Admin */
-table#users td
+
+table#users
 {
-  padding:5px;
+  width:940px;
+}
+
+table#users td, table#users th
+{
+  padding:8px 5px;
+  text-align:left;
+}
+
+table#users td img
+{
+  border:none;
 }
 
 table#users tr:nth-child(2n)
@@ -267,10 +299,82 @@ h1.client
   margin-right:15px;
 }
 
+.logo
+{
+  margin-bottom:10px;
+}
+
 a.logout
 {
   display:inline-block;
   margin-top:10px;
+}
+
+h2.date
+{
+  float:right;
+  margin:5px 4px 0 0;
+}
+
+.number
+{
+  font-size:14px;
+}
+
+.count
+{
+  -moz-border-radius:10px;
+  border-radius:10px;
+  padding:0px 0 0 15px;
+  font-size:20px;
+  clear:left;
+  margin:8px 0;
+  font-family: "myriad-pro-1","myriad-pro-2",sans-serif;
+  height:48px;
+  border:1px #646464 solid;
+}
+
+.count .label
+{
+  display:inline-block;
+  padding-top:10px;
+}
+
+.divider
+{
+	-moz-border-radius-topright:10px;
+  border-top-right-radius: 10px; 
+  -moz-border-radius-bottomright:10px;
+  border-bottom-right-radius:10px;
+  display:inline-block;
+  margin:0 0 -15px;
+  padding:10px 15px 10px 15px;
+  height:28px;
+  float:right;
+  color:#fff;
+  background:url('/images/count.png');
+}
+
+.plus
+{
+  border:1px #0b8308 solid;
+}
+
+.plus .divider
+{
+  background:url('/images/plus.png');
+  border-left:1px #0b8308 solid;
+}
+
+.negative
+{
+  border:1px #820808 solid;
+}
+
+.negative .divider
+{
+  border-left:1px #820808 solid;
+  background:url('/images/negative.png');
 }
 
 /* Twitter */
@@ -278,7 +382,7 @@ img.twitter
 {
   float:left;
   border:4px solid #ddd;
-  margin:0 6px 6px 0;
+  margin:0 6px 10px 0;
   width:48px;
 }
 
@@ -293,14 +397,24 @@ ul.tweets
   list-style:none;
   margin:0;
   padding:0;
-  margin-left:-10px;
+  margin-left:-15px;
 }
 
 ul.tweets li
 {
   padding:10px;
-  width:100%;
+  width:290px;
   border-bottom:1px solid #DADADA;
+}
+
+ul.tweets li .status
+{
+  margin-left:49px;
+}
+
+ul.tweets li .twitter
+{
+  width:35px;
 }
 
 ul.tweets li:nth-child(2n)
@@ -319,8 +433,9 @@ img.book
 {
   float:left;
   border:4px solid #dcdcdc;
-  margin:0 6px 6px 0;
+  margin:0 6px 10px 0;
   width:48px;
+  clear:left;
 }
 
 ul.facebook
@@ -328,14 +443,19 @@ ul.facebook
   list-style:none;
   margin:0;
   padding:0;
-  margin-left:-10px;
+  margin-left:-15px;
 }
 
 ul.facebook li
 {
   padding:10px;
-  width:280px;
+  width:290px;
   border-bottom:1px solid #DADADA;
+}
+
+ul.facebook li .status
+{
+  margin-left:62px;
 }
 
 ul.facebook li:nth-child(2n)

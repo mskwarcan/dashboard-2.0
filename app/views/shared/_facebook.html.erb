@@ -1,22 +1,28 @@
 <% if @user.facebook_authd?(@user) %>
-	<h2 class="notop">Your Facebook</h2>
+	<img class="logo" src="/images/facebook.png" />
 	<% client = User.facebook %>
 	<% page = client.selection.page(@user.facebook_token) %>
+	<div>
 	<img class="book" src="<%= page.picture %>" />
-	<h3 class="nobot facebook"><%= page.info!["name"] %></h3>
+	<h3 class="noMargin facebook"><%= page.info!["name"] %></h3>
 
-	Likes: <%= page.info!["likes"] %><br />
-	<b>New Likes this Month:</b> <%= page.info!["likes"] - @user.facebook_monthly_count %>
-	<% feed = page.feed.limit(15).info!["data"] %>
+	<span class="number">Likes: <%= page.info!["likes"] %></span>
+	</div>
+	<% count = page.info!["likes"] - @user.facebook_monthly_count %>
+	<div class="count <% if count > 0 %>plus<% elsif count < 0 %>negative<% end %>"><span class="label">Likes this Month</span> <span class="divider"> <%= count %></span></div>
+	<% feed = page.feed.limit(10).info!["data"] %>
 	<h3 class="nobot">Your Wall</h3>
 	<ul class="facebook">
 	<% feed.each do | feed |%>
-		<li class="clearfix"><img class="twitter" src="<%= client.selection.user(feed["from"]["id"]).picture %>" /> <b><a target="_blank" href="<%= client.selection.user(feed["from"]["id"]).info!["link"] %>"><%= feed["from"]["name"] %></a></b><br />
+		<li class="clearfix"><img class="twitter" src="<%= client.selection.user(feed["from"]["id"]).picture %>" /> 
+		<div class="status">
+			<b><a target="_blank" href="<%= client.selection.user(feed["from"]["id"]).info!["link"] %>"><%= feed["from"]["name"] %></a></b><br />
 		<p class="message"><%= feed["message"] %></p>
 		<% if feed["picture"] %>
 			<img class="facebook" src="<%= feed["picture"] %>" />
 			<a href="<%= feed["link"] %>"><%= feed["name"] %></a><br />
 			<p class="description"><%= feed["description"] %></p>
+			</div>
 		<% end %>
 		</li>
 	<% end %>

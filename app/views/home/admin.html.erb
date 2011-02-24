@@ -1,7 +1,7 @@
 <div class="container clearfix">
 		<table id="users" cellspacing=0>
 			<tr>
-		    <th>Client</th>
+		    <th width="150">Client</th>
 				<th>Username</th>
 				<th>Email</th>
 		    <th>Facebook</th>
@@ -37,9 +37,9 @@
 									<input type="submit" value="Add">
 								</form>
 							<% end %></td>
-			    <td><%= link_to 'Show', user %></td>
-			    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-			    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+			    <td><%= link_to image_tag('/images/eye.png'), user %></td>
+			    <td><%= link_to image_tag('/images/edit.png'), edit_user_path(user) %></td>
+			    <td><%= link_to image_tag('/images/delete.png'), user, :confirm => 'Are you sure?', :method => :delete %></td>
 			  </tr>
 			<% end %>
 		</table>
