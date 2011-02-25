@@ -22,5 +22,7 @@ Dashboard::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+  
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:6698d399cabe477a2ff4d043585ee64d@filefish.redistogo.com:9454/' 
 end
 

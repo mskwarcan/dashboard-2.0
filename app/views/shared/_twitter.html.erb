@@ -14,7 +14,7 @@
 <ul class="tweets">
 <% tweets.each do | tweet |%>
 	<li class="clearfix"><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> 
-	<div class="status">
+	<div class="statu">
 		<b><a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a></b><br />
 	<%= tweet["text"] %>
 	</div>

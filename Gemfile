@@ -37,3 +37,7 @@ gem 'linkedin'
 gem 'jquery-rails', '>= 0.2.6'
 gem 'gattica'
 gem 'dalli'
+gem 'redis'
+gem 'SystemTimer'
+gem 'delayed_job'
+
