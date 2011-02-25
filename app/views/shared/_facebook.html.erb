@@ -1,22 +1,20 @@
-<% if @user.facebook_authd?(@user) %>
+<% if @update %>
 	<img class="logo" src="/images/facebook.png" />
-	<% client = User.facebook %>
-	<% page = client.selection.page(@user.facebook_token) %>
 	<div>
-	<img class="book" src="<%= page.picture %>" />
-	<h3 class="noMargin facebook"><%= page.info!["name"] %></h3>
+	<img class="book" src="<%= @update.face_pic %>" />
+	<h3 class="noMargin facebook"><%= @update.face_name %></h3>
 
-	<span class="number">Likes: <%= page.info!["likes"] %></span>
+	<span class="number">Likes: <%= @update.likes %></span>
 	</div>
-	<% count = page.info!["likes"] - @user.facebook_monthly_count %>
-	<div class="count <% if count > 0 %>plus<% elsif count < 0 %>negative<% end %>"><span class="label">Likes this Month</span> <span class="divider"> <%= count %></span></div>
-	<% feed = page.feed.limit(10).info!["data"] %>
+	<div class="count <% if @update.new_likes > 0 %>plus<% elsif @update.new_likes < 0 %>negative<% end %>"><span class="label">Likes this Month</span> <span class="divider"> <%= @update.new_likes %></span></div>
+	<% feed = ActiveSupport::JSON.decode(@update.feed) %>
 	<h3 class="nobot">Your Wall</h3>
 	<ul class="facebook">
 	<% feed.each do | feed |%>
-		<li class="clearfix"><img class="twitter" src="<%= client.selection.user(feed["from"]["id"]).picture %>" /> 
+		<% status = Feed.first(:conditions => {:feed_id => feed["id"]})%>
+		<li class="clearfix"><img class="twitter" src="<%= status.picture %>" /> 
 		<div class="status">
-			<b><a target="_blank" href="<%= client.selection.user(feed["from"]["id"]).info!["link"] %>"><%= feed["from"]["name"] %></a></b><br />
+			<b><a target="_blank" href="<%= status.link %>"><%= feed["from"]["name"] %></a></b><br />
 		<p class="message"><%= feed["message"] %></p>
 		<% if feed["picture"] %>
 			<img class="facebook" src="<%= feed["picture"] %>" />

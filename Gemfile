@@ -40,4 +40,5 @@ gem 'dalli'
 gem 'redis'
 gem 'SystemTimer'
 gem 'delayed_job'
+gem 'heroku'
 

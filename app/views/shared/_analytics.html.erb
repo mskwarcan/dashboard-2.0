@@ -1,28 +1,22 @@
-<% if @user.google_authd?(@user) %>
+<% if @update %>
 	<img class="logo" src="/images/google.png" />
 	<h3><%= Time.now.strftime("%B") %> Current Stats</h3>
-	<% gs = User.google %>
-	<% gs.profile_id = @user.analytics %>
-
-	<% currentMonth = Time.now.strftime('%Y-%m-01') %>
-	<% lastMonth = 1.month.ago.strftime("%Y-%m-01") %>
-	<% twoMonths = 2.month.ago.strftime("%Y-%m-01") %>
-
-	<% results = gs.get({:start_date => lastMonth, :end_date => currentMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']}) %>
+	
+	<% results = ActiveSupport::JSON.decode(@update.results) %>
 	<p>
-	<b>Page Views:</b> <%= results.points.first.metrics.first[:pageviews] %><br />
-	<b>Visits:</b> <%= results.points.first.metrics.fourth[:visits] %><br />
-	<b>New Visits:</b> <%= results.points.first.metrics.third[:newVisits] %><br />
-	<b>Avg. Time on Site:</b> <%= results.points.first.metrics.second[:avgTimeOnSite] %> seconds
+	<b>Page Views:</b> <%= results.first["pageviews"] %><br />
+	<b>Visits:</b> <%= results.fourth["visits"] %><br />
+	<b>New Visits:</b> <%= results.third["newVisits"] %><br />
+	<b>Avg. Time on Site:</b> <%= results.second["avgTimeOnSite"] %> seconds
 	</p>
 	
-	<% results = gs.get({:start_date => twoMonths, :end_date => lastMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']}) %>
+	<% results = ActiveSupport::JSON.decode(@update.last_month) %>
 	<h3><%= 1.month.ago.strftime("%B") %> Total Stats</h3>
 	<p>
-	<b>Page Views</b>: <%= results.points.first.metrics.first[:pageviews] %><br />
-	<b>Visits:</b> <%= results.points.first.metrics.fourth[:visits] %><br />
-	<b>New Visits:</b> <%= results.points.first.metrics.third[:newVisits] %><br />
-	<b>Avg. Time on Site:</b> <%= results.points.first.metrics.second[:avgTimeOnSite] %> seconds
+	<b>Page Views</b>: <%= results.first["pageviews"] %><br />
+	<b>Visits:</b> <%= results.fourth["visits"] %><br />
+	<b>New Visits:</b> <%= results.third["newVisits"] %><br />
+	<b>Avg. Time on Site:</b> <%= results.second["avgTimeOnSite"] %> seconds
 	</p>
 	
 <% else %>
