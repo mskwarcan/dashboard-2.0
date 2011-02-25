@@ -177,7 +177,7 @@ h1.header
 .col2
 {
   width:280px;
-  padding:10px 15px 0;
+  padding:10px 15px;
   float:left;
   background:#f0f0f0;
   border-left:#dfdfdf solid 1px;
@@ -414,6 +414,11 @@ ul.tweets li
   border-bottom:1px solid #DADADA;
 }
 
+ul.tweets li:last-child
+{
+  border:none;
+}
+
 ul.tweets li .status
 {
   margin-left:49px;
@@ -458,6 +463,11 @@ ul.facebook li
   padding:10px;
   width:290px;
   border-bottom:1px solid #DADADA;
+}
+
+ul.facebook li:last-child
+{
+  border:none;
 }
 
 ul.facebook li .status

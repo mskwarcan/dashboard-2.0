@@ -1,4 +1,4 @@
-<%= if @user.google_authd?(@user) %>
+<% if @user.google_authd?(@user) %>
 	<% if @update %>
 		<img class="logo" src="/images/google.png" />
 		<h3><%= Time.now.strftime("%B") %> Current Stats</h3>
