@@ -1,4 +1,4 @@
-class Tweet < Struct.new(:user, :update) 
+class Tweet < Struct.new(:user, :update, :heroku) 
   def perform
     @update = Update.first(:conditions => {:id => update.id})
     

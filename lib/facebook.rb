@@ -1,4 +1,4 @@
-class Facebook < Struct.new(:user, :update) 
+class Facebook < Struct.new(:user, :update, :heroku) 
   def perform
     @update = Update.first(:conditions => {:id => update.id})
     

@@ -12,15 +12,15 @@ task :cron => :environment do
     heroku.set_workers(ENV["APP_NAME"], 1)
     
     if user.twitter_authd?(user)
-      Delayed::Job.enqueue Tweet.new(user, @update)
+      Delayed::Job.enqueue Tweet.new(user, @update, heroku)
     end
 
     if user.facebook_authd?(user)
-      Delayed::Job.enqueue Facebook.new(user, @update)
+      Delayed::Job.enqueue Facebook.new(user, @update, heroku)
     end
     
     if user.google_authd?(user)
-      Delayed::Job.enqueue Google.new(user, @update)
+      Delayed::Job.enqueue Google.new(user, @update, heroku)
     end
     
     @update.save
