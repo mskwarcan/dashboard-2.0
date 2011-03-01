@@ -15,14 +15,20 @@ task :cron => :environment do
     
     if user.twitter_authd?(user)
       Delayed::Job.enqueue Tweet.new(user, @update, heroku)
+    else  
+      @update.tweet_done = true
     end
 
     if user.facebook_authd?(user)
       Delayed::Job.enqueue Facebook.new(user, @update, heroku)
+    else
+      @update.face_done = true
     end
     
     if user.google_authd?(user)
       Delayed::Job.enqueue Google.new(user, @update, heroku)
+    else
+      @update.google_done = true
     end
     
     @update.save

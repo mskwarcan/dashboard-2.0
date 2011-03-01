@@ -1,4 +1,4 @@
-<% @update = Update.last(:conditions => {:user_id => @user.id}) %>
+<% @update = Update.last(:conditions => {:user_id => @user.id, :tweet_done => true, :face_done => true, :google_done => true}) %>
 <h2 class="date">Updated: <%= @update.updated_at.strftime("%B %d, %Y at %I:%M%p") %></h2>
 
 <h1 class="client"><%= @user.client %></h1>

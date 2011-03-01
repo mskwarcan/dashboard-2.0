@@ -12,6 +12,8 @@ class Facebook < Struct.new(:user, :update, :heroku)
       @update.likes = page.info!["likes"]
       @update.new_likes = page.info!["likes"] - user.facebook_monthly_count
       @update.feed = ActiveSupport::JSON.encode(page.feed.limit(10).info!["data"])
+      
+      @update.google_done = true
     
       @update.save
       

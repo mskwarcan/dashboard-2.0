@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225231116) do
+ActiveRecord::Schema.define(:version => 20110301232947) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -33,23 +33,8 @@ ActiveRecord::Schema.define(:version => 20110225231116) do
     t.string "link"
   end
 
-  create_table "updates", :force => true do |t|
-    t.string   "twit_pic"
-    t.string   "twit_name"
-    t.integer  "followers"
-    t.integer  "new_followers"
-    t.text     "tweets"
-    t.string   "face_pic"
-    t.string   "face_name"
-    t.integer  "likes"
-    t.integer  "new_likes"
-    t.text     "feed"
-    t.text     "results"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "last_month"
-    t.integer  "user_id"
-  end
+# Could not dump table "updates" because of following StandardError
+#   Unknown type 'booloean' for column 'finished'
 
   create_table "users", :force => true do |t|
     t.string    "username"

@@ -16,6 +16,8 @@ class Google < Struct.new(:user, :update, :heroku)
       last = gs.get({:start_date => lastMonth, :end_date => currentMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits']})
       @update.last_month = ActiveSupport::JSON.encode(last.points.first.metrics)
     
+      @update.google_done = true
+    
       @update.save
     
     rescue
