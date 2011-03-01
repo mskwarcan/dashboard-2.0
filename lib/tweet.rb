@@ -13,7 +13,7 @@ class Tweet < Struct.new(:user, :update, :heroku)
     
       @update.save
       
-      if Time.now.day == 1
+      if Time.now.day == 1 && Time.now.hour < 3
         user.twitter_monthly_count = client.info["followers_count"]
         user.save
       end

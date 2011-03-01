@@ -15,11 +15,8 @@ class Facebook < Struct.new(:user, :update, :heroku)
     
       @update.save
       
-      puts Time.now.day
-      
-      if Time.now.day == 1
+      if Time.now.day == 1 && Time.now.hour < 3
         user.facebook_monthly_count = facebook.selection.page(user.facebook_token).info!["likes"]
-        puts facebook.selection.page(user.facebook_token).info!["likes"]
         user.save
       end
     
