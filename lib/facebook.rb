@@ -14,6 +14,11 @@ class Facebook < Struct.new(:user, :update, :heroku)
       @update.feed = ActiveSupport::JSON.encode(page.feed.limit(10).info!["data"])
     
       @update.save
+      
+      if Time.now.day == 1
+        user.facebook_monthly_count = facebook.selection.page(user.facebook_token).info!["likes"]
+        user.save
+      end
     
       page.feed.limit(10).info!["data"].each do |feed|
         status = Feed.new

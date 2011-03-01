@@ -12,6 +12,11 @@ class Tweet < Struct.new(:user, :update, :heroku)
       @update.tweets = ActiveSupport::JSON.encode(client.user_timeline())
     
       @update.save
+      
+      if Time.now.day == 1
+        user.twitter_monthly_count = client.info["followers_count"]
+        user.save
+      end
     
     rescue
       return
