@@ -27,5 +27,3 @@ class Google < Struct.new(:user, :update, :heroku)
     end
   end    
 end
-
-results = gs.get({ :start_date => '2011-01-01',:end_date => '2011-02-01',:metrics => 'pageviews')
