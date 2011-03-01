@@ -21,6 +21,7 @@ module Dashboard
     require './lib/tweet.rb'
     require './lib/facebook.rb'
     require './lib/google.rb'
+    require './lib/reset.rb'
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
