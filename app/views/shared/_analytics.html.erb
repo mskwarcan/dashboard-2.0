@@ -1,7 +1,7 @@
 <% if @user.google_authd?(@user) %>
 	<% if @update %>
 		<img class="logo" src="/images/google.png" />
-		<h3><%= Time.now.strftime("%B") %> Current Stats</h3>
+		<h3 class="noMargin"><%= Time.now.strftime("%B") %> Current Stats</h3>
 	
 		<% results = ActiveSupport::JSON.decode(@update.results) %>
 		<table class="data" cellspacing=0>
@@ -64,10 +64,10 @@
 			</tr>
 			<tr>
 				<td>Goal Completions</td>
-				<td><%= results_last.fifth["goalCompletionsAll"] %> sec</td>
-				<td><%= results_two.fifth["goalCompletionsAll"] %> sec</td>
+				<td><%= results_last.fifth["goalCompletionsAll"] %></td>
+				<td><%= results_two.fifth["goalCompletionsAll"] %></td>
 				<% avgTimeOnSite = results_last.fifth["goalCompletionsAll"] - results_two.fifth["goalCompletionsAll"]%>
-				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
+				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %></td>
 			</tr>
 		</table>
 	<% else %>
