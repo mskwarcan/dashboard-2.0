@@ -156,10 +156,19 @@ class UsersController < ApplicationController
    
    def analytics
      @user = User.first(:conditions => {:username => params[:user]})
-     session[:client] = @user
      
      @user.analytics_authenticated = true
      @user.analytics = params[:id]
+     @user.save
+     
+     redirect_to "/"
+   end
+   
+   def mailchimp
+     @user = User.first(:conditions => {:username => params[:user]})
+     
+     @user.mailchimp_authenticated = true
+     @user.mailchimp = params[:id]
      @user.save
      
      redirect_to "/"

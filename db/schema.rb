@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110301232947) do
+ActiveRecord::Schema.define(:version => 20110302181854) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20110301232947) do
     t.integer   "facebook_monthly_count"
     t.boolean   "analytics_authenticated", :default => false
     t.string    "analytics"
+    t.string    "mailchimp"
+    t.boolean   "mailchimp_authenticated", :default => false
   end
 
 end

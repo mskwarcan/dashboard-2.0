@@ -2,11 +2,10 @@
 		<table id="users" cellspacing=0>
 			<tr>
 		    <th width="150">Client</th>
-				<th>Username</th>
-				<th>Email</th>
 		    <th>Facebook</th>
 		    <th>Twitter</th>
 				<th>Analytics</th>
+				<th>Mailchimp</th>
 		    <th></th>
 		    <th></th>
 		    <th></th>
@@ -14,8 +13,6 @@
 			<% @users.each do |user| %>
 			  <tr>
 					<td><%= user.client %></td>	
-			    <td><%= user.username %></td>
-					<td><%= user.email %></td>
 			    <td><% if user.fb_authenticated == true %><%= user.facebook_token %><% else %><a href="#" class="add">Add Page ID</a>
 						<form id="facebook_<%= user.username %>" class="facebook" action="/facebook_id">
 							<input type="hidden" value="<%= user.username %>" name="user">
@@ -36,6 +33,14 @@
 									<input type="text" value="" name="id">
 									<input type="submit" value="Add">
 								</form>
+							<% end %></td>
+							<td><% if user.mailchimp_authenticated == true %>Yes
+									<% else %><a href="#" class="mail">Add MailChimp API Key</a> <a href="http://admin.mailchimp.com/account/api">Get a Key</a>
+									<form id="mailchimp_<%= user.username %>" class="chimp" action="/mailchimp">
+										<input type="hidden" value="<%= user.username %>" name="user">
+										<input type="text" value="" name="id">
+										<input type="submit" value="Add">
+									</form>
 							<% end %></td>
 			    <td><%= link_to image_tag('/images/eye.png'), user %></td>
 			    <td><%= link_to image_tag('/images/edit.png'), edit_user_path(user) %></td>

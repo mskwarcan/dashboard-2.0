@@ -498,6 +498,22 @@ p.description
   font-size:11px;
 }
 
+/* Google */
+table.data tr:nth-child(2n)
+{
+  background:#fff;
+}
+
+.up
+{
+  color:#27bb23;
+}
+
+.down
+{
+  color:#cf2727;
+}
+
 /* Footer */
 p.footer
 {
