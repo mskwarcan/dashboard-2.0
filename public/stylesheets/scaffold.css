@@ -349,8 +349,8 @@ h2.date
 
 .divider
 {
-	-moz-border-radius-topright:10px;
-  border-top-right-radius: 10px; 
+	-moz-border-radius-topright:9px;
+  border-top-right-radius: 9px; 
   -moz-border-radius-bottomright:10px;
   border-bottom-right-radius:10px;
   display:inline-block;

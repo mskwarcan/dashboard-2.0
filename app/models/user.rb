@@ -29,6 +29,13 @@ class User < ActiveRecord::Base
     end
   end
   
+  def mailchimp_authd?(user)
+    @user = User.first(:conditions => {:username => user.username})
+    if @user.mailchimp_authenticated == true
+      return true
+    end
+  end
+  
   def self.admin?(user)
     @user = user
     

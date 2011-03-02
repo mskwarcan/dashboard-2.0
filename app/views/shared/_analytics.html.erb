@@ -1,10 +1,13 @@
 <% if @user.google_authd?(@user) %>
 	<% if @update %>
 		<img class="logo" src="/images/google.png" />
-		<h3 class="noMargin"><%= Time.now.strftime("%B") %> Current Stats</h3>
+		
 	
 		<% results = ActiveSupport::JSON.decode(@update.results) %>
 		<table class="data" cellspacing=0>
+			<tr>
+				<td colspan="2"><h3 class="noMargin"><%= Time.now.strftime("%B") %> Current Stats</h3></td>
+			</tr>
 		<tr>
 			<td><h3 class="noMargin">Goals Completions</h3></td> <td><%= results.fifth["goalCompletionsAll"] %></td>
 		</tr>
@@ -26,8 +29,10 @@
 		<% results_last = ActiveSupport::JSON.decode(@update.last_month) %>
 		<% results_two = ActiveSupport::JSON.decode(@update.two_months) %>
 		
-		<h3 class="nobot"><%= 2.month.ago.strftime("%B") %>-<%= 1.month.ago.strftime("%B") %> Comparison</h3>
 		<table class="data" cellspacing=0>
+			<tr>
+				<td colspan="4"><h3 class="nobot"><%= 2.month.ago.strftime("%B") %>-<%= 1.month.ago.strftime("%B") %> Comparison</h3></td>
+			</tr>
 			<tr>
 				<td></th>
 				<td><%= 1.month.ago.strftime("%B") %></td>
