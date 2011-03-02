@@ -6,9 +6,19 @@
 		<% growth = h.list_growth_history(list_id) %>
 	<div>
 		<h3 class="noMargin"><%= h.lists.first.second.first["name"] %></h3>
-		<span class="number">Subscribers: <%= h.lists.first.second.first["stats"]["member_count"].to_i %></span>
 	</div>
-	
+	<table class="data" cellspacing=0>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
 	<div class="count <% if growth.last["optins"].to_i > 0 %>plus<% end %>"><span class="label">Subscribers this Month</span> <span class="divider"> <%= growth.last["optins"].to_i %></span></div>
 	
 	<% else %>
