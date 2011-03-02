@@ -1,12 +1,12 @@
 <% if @user.mailchimp_authd?(@user) %>
 	<% if @update %>
 		<img class="logo" src="/images/mailchimp.png" />
-		<% h = Hominid::API.new(@user.mailchimp) %>
-		<% list_id = h.lists.first.second.first["id"] %>
-		<% growth = h.list_growth_history(list_id) %>
 	<div>
-		<h3 class="noMargin"><%= h.lists.first.second.first["name"] %></h3>
+		<h3 class="noMargin"><%= @update.chimp_name %></h3>
 	</div>
+	
+	<% growth = ActiveSupport::JSON.decode(@update.growth) %>
+	
 	<table class="data" cellspacing=0>
 		<tr>
 			<td colspan="3"><h3 class="noMargin">Growth</h3></td>
@@ -43,8 +43,8 @@
 		</tr>
 	</table>
 	
-	<% campaign = h.campaigns["data"].first %>
-	<% stats = h.campaign_stats(h.campaigns["data"].first["id"])%>
+	<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
+	<% stats = ActiveSupport::JSON.decode(@update.stats) %>
 	<table class="data" cellspacing=0>
 		<tr>
 			<td colspan="3"><h3 class="noMargin">Most Recent Campaign</h3></td>

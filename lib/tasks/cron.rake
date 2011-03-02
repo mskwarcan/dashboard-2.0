@@ -31,6 +31,12 @@ task :cron => :environment do
       @update.google_done = true
     end
     
+    if @user.mailchimp_authd?(@user)
+      Delayed::Job.enqueue Mailchimp.new(user, @update, heroku)
+    else
+      @update.chimp_done = true
+    end
+    
     @update.save
         
   end
