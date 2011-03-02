@@ -35,8 +35,9 @@
 								</form>
 							<% end %></td>
 							<td><% if user.mailchimp_authenticated == true %>Yes
-									<% else %><a href="#" class="mail">Add MailChimp API Key</a> <a href="http://admin.mailchimp.com/account/api">Get a Key</a>
+									<% else %><a href="#" class="mail">Add MailChimp API Key</a>
 									<form id="mailchimp_<%= user.username %>" class="chimp" action="/mailchimp">
+										<a href="http://admin.mailchimp.com/account/api" target="_blank">Get a Key</a>
 										<input type="hidden" value="<%= user.username %>" name="user">
 										<input type="text" value="" name="id">
 										<input type="submit" value="Add">

@@ -293,7 +293,7 @@ table#users tr:nth-child(2n)
   background:#f4f4f4;
 }
 
-form.facebook, form.analytics
+form.facebook, form.analytics, form.chimp
 {
   display:none;
 }
@@ -502,6 +502,30 @@ p.description
 table.data tr:nth-child(2n)
 {
   background:#fff;
+}
+
+table.data tr:nth-child(2n) td
+{
+  border-bottom:1px solid #DADADA;
+  border-top:1px solid #DADADA;
+}
+
+table.data
+{
+  width:310px;
+  margin:10px 0;
+  left:-15px;
+  position:relative;
+}
+
+table.data td
+{
+  padding:5px;
+}
+
+table.data tr td:first-child
+{
+  padding-left:15px;
 }
 
 .up

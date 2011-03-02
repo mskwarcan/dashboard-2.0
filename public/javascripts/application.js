@@ -38,4 +38,12 @@ $(document).ready(function(){
     return false;
   });
   
+  $('.mail').click(function() {
+    $(this).fadeOut('fast', function() {
+        // Animation complete.
+        $(this).siblings('form.chimp').fadeIn('fast');
+      });
+    return false;
+  });
+  
 });
