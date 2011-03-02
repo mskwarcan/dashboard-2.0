@@ -1,5 +1,5 @@
 <% if @user.facebook_authd?(@user) %>
-	<% if @update %>
+	<% if @update.face_name %>
 		<img class="logo" src="/images/facebook.png" />
 		<div>
 		<img class="book" src="<%= @update.face_pic %>" />
@@ -21,8 +21,8 @@
 				<img class="facebook" src="<%= feed["picture"] %>" />
 				<a href="<%= feed["link"] %>"><%= feed["name"] %></a><br />
 				<p class="description"><%= feed["description"] %></p>
-				</di>
 			<% end %>
+			</div>
 			</li>
 		<% end %>
 		</ul>
