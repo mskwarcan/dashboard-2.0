@@ -1,0 +1,21 @@
+<% if @user.mailchimp_authd?(@user) %>
+	<% if @update %>
+		<img class="logo" src="/images/mailchimp.png" />
+		<% h = Hominid::API.new(@user.mailchimp) %>
+		<% list_id = h.lists.first.second.first["id"] %>
+		<% growth = h.list_growth_history(list_id) %>
+	<div>
+		<h3 class="noMargin"><%= h.lists.first.second.first["name"] %></h3>
+		<span class="number">Subscribers: <%= h.lists.first.second.first["stats"]["member_count"].to_i %></span>
+	</div>
+	
+	<div class="count <% if growth.last["optins"].to_i > 0 %>plus<% end %>"><span class="label">Subscribers this Month</span> <span class="divider"> <%= growth.last["optins"].to_i %></span></div>
+	
+	<% else %>
+			<h2>Sorry! Your information is not ready yet.</h2>
+			<p>Information is gathered once every hour and your app hasn't gathered any data yet.</p>
+	<% end %>
+<% else %>
+	<h3>Get Your MailChimp Information!</h3>
+	<p>Please contact <a href="mailto:steph@balcomagency.com">Steph</a> at The Balcom Agency in order to get your Mail Chimp Information.</p>
+<% end %>
