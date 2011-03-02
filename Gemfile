@@ -41,4 +41,5 @@ gem 'redis'
 gem 'SystemTimer'
 gem 'delayed_job'
 gem 'heroku'
+gem 'hominid'
 
