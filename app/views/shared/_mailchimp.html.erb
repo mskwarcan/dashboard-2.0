@@ -9,17 +9,68 @@
 	</div>
 	<table class="data" cellspacing=0>
 		<tr>
-			<td></td>
-			<td></td>
+			<td colspan="3"><h3 class="noMargin">Growth</h3></td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Month</td>
+			<td>Members</td>
+			<td>New Members</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td><h3 class="noMargin"><%= Time.parse(growth.last["month"] + '-01').strftime("%B") %></h3></td>
+			<td><h3 class="noMargin"><%= growth.last["existing"] %></h3></td>
+			<td><h3 class="noMargin"><%= growth.last["optins"] %></h3></td>
+		</tr>
+		<tr>
+			<td><%= Time.parse(growth[-2]["month"] + '-01').strftime("%B") %></td>
+			<td><%= growth[-2]["existing"] %></td>
+			<td><%= growth[-2]["optins"] %></td>
+		</tr>
+		<tr>
+			<td><%= Time.parse(growth[-3]["month"] + '-01').strftime("%B") %></td>
+			<td><%= growth[-3]["existing"] %></td>
+			<td><%= growth[-3]["optins"] %></td>
+		</tr>
+		<tr>
+			<td><%= Time.parse(growth[-4]["month"] + '-01').strftime("%B") %></td>
+			<td><%= growth[-4]["existing"] %></td>
+			<td><%= growth[-4]["optins"] %></td>
+		</tr>
+		<tr>
+			<td><%= Time.parse(growth[-5]["month"] + '-01').strftime("%B") %></td>
+			<td><%= growth[-5]["existing"] %></td>
+			<td><%= growth[-5]["optins"] %></td>
 		</tr>
 	</table>
-	<div class="count <% if growth.last["optins"].to_i > 0 %>plus<% end %>"><span class="label">Subscribers this Month</span> <span class="divider"> <%= growth.last["optins"].to_i %></span></div>
+	
+	<% campaign = h.campaigns["data"].first %>
+	<% stats = h.campaign_stats(h.campaigns["data"].first["id"])%>
+	<table class="data" cellspacing=0>
+		<tr>
+			<td colspan="3"><h3 class="noMargin">Most Recent Campaign</h3></td>
+		</tr>
+		<tr>
+			<td>Sent at</td>
+			<td colspan="2"><%= Time.parse(campaign["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+		</tr>
+		<tr>
+			<td>Messages Sent</td>
+			<td colspan="2"><%= stats["emails_sent"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Messages Opened</td>
+			<td><%= stats["unique_opens"].to_i %></td>
+			<td><%= sprintf("%.2f", stats["unique_opens"]/stats["emails_sent"]*100) %>%</td>
+		</tr>
+		<tr>
+			<td>Messages Clicked</td>
+			<td colspan="2"><%= stats["users_who_clicked"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Click Rate</td>
+			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
+		</tr>
+	</table>
 	
 	<% else %>
 			<h2>Sorry! Your information is not ready yet.</h2>
