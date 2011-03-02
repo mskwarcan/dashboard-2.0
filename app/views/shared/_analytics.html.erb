@@ -24,25 +24,25 @@
 				<td>Page Views</td>
 				<td><%= results_last.first["pageviews"] %></td>
 				<td><%= results_two.first["pageviews"] %></td>
-				<td class="<% if results_last.second["pageviews"] >=  results_two.second["pageviews"] %> up<% else %>down<% end %>"><%= results_last.second["pageviews"] - results_two.second["pageviews"] %></td>
+				<td class="<% if results_last.second["pageviews"] >  results_two.second["pageviews"] %> up<% else %>down<% end %>"><%= results_last.second["pageviews"] - results_two.second["pageviews"] %></td>
 			</tr>
 			<tr>
 				<td>Visits</td>
 				<td><%= results_last.fourth["visits"] %></td>
 				<td><%= results_two.fourth["visits"] %></td>
-				<td class="<% if results_last.second["visits"] >=  results_two.second["visits"] %> up<% else %>down<% end %>"><%= results_last.second["visits"] - results_two.second["visits"] %></td>
+				<td class="<% if results_last.second["visits"] >  results_two.second["visits"] %> up<% else %>down<% end %>"><%= results_last.second["visits"] - results_two.second["visits"] %></td>
 			</tr>
 			<tr>
 				<td>New Visits</td>
 				<td><%= results_last.third["newVisits"] %></td>
 				<td><%= results_two.third["newVisits"] %></td>
-				<td class="<% if results_last.second["newVisits"] >=  results_two.second["newVisits"] %> up<% else %>down<% end %>"><%= results_last.second["newVisits"] - results_two.second["newVisits"] %></td>
+				<td class="<% if results_last.second["newVisits"] >  results_two.second["newVisits"] %> up<% else %>down<% end %>"><%= results_last.second["newVisits"] - results_two.second["newVisits"] %></td>
 			</tr>
 			<tr>
 				<td>Avg. Time on Site</td>
 				<td><%= results_last.second["avgTimeOnSite"] %></td>
 				<td><%= results_two.second["avgTimeOnSite"] %></td>
-				<td class="<% if results_last.second["avgTimeOnSite"] >=  results_two.second["avgTimeOnSite"] %> up<% else %>down<% end %>"><%= results_last.second["avgTimeOnSite"] - results_two.second["avgTimeOnSite"] %></td>
+				<td class="<% if results_last.second["avgTimeOnSite"] >  results_two.second["avgTimeOnSite"] %> up<% else %>down<% end %>"><%= results_last.second["avgTimeOnSite"] - results_two.second["avgTimeOnSite"] %></td>
 			</tr>
 		</table>
 	<% else %>
