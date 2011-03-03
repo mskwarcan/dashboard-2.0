@@ -107,7 +107,7 @@ $(document).ready(function(){
   });
   
   $('a.google_link').click(function() {
-    if($('div.twitter').is(':visible'))
+    if($('div.google').is(':visible'))
     {
       return false;
     } else  {

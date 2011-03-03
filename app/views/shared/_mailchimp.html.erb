@@ -46,7 +46,7 @@
 	
 	<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
 	<% stats = ActiveSupport::JSON.decode(@update.stats) %>
-	<div class="col3">
+
 	<table class="data" cellspacing=0>
 		<tr>
 			<td colspan="3"><h3 class="noMargin bold">Most Recent Campaign</h3></td>
@@ -73,6 +73,17 @@
 			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 		</tr>
 	</table>
+	
+	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
+	
+	<div class="col3">
+		<h3 class="noMargin">Chimp Chatter</h3>
+		<ul class="chatter">
+			<% chatter.each do |chat| %>
+				<li><%= chat["message"]%></li>
+			<% end %>
+		</ul>	
+	
 	</div>
 	<% else %>
 	<div class="col2">

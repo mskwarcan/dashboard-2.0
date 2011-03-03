@@ -3,7 +3,7 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
     begin
       @update = Update.first(:conditions => {:id => update.id})
     
-      h = Hominid::API.new(c0cd15ae0bfefc6891e1c0df3793d2de-us1)
+      h = Hominid::API.new(user.mailchimp)
       
       list_id = h.lists.first.second.first["id"]
       @update.chimp_name = h.lists.first.second.first["name"]
