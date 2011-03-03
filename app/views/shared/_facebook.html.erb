@@ -1,5 +1,5 @@
-<% if @user.facebook_authd?(@user) %>
 	<% if @update.face_name %>
+	<div class="col2">
 		<img class="logo" src="/images/facebook.png" />
 		<div>
 		<img class="book" src="<%= @update.face_pic %>" />
@@ -8,6 +8,9 @@
 		<span class="number">Likes: <%= @update.likes %></span>
 		</div>
 		<div class="count <% if @update.new_likes > 0 %>plus<% elsif @update.new_likes < 0 %>negative<% end %>"><span class="label">Likes this Month</span> <span class="divider"> <%= @update.new_likes %></span></div>
+	</div>
+	
+	<div class="col3">
 		<% feed = ActiveSupport::JSON.decode(@update.feed) %>
 		<h3 class="nobot">Your Wall</h3>
 		<ul class="facebook">
@@ -26,11 +29,10 @@
 			</li>
 		<% end %>
 		</ul>
+	</div>
 		<% else %>
+		<div class="col2">
 				<h2>Sorry! Your information is not ready yet.</h2>
 				<p>Information is gathered once every hour and your app hasn't gathered any data yet.</p>
+		</div>
 	<% end %>
-<% else %>
-	<h3>Register Your account on Facebook!</h3>
-	<p>Please contact <a href="mailto:steph@balcomagency.com">Steph</a> at The Balcom Agency in order to get your facebook account set up.</p>
-<% end %>

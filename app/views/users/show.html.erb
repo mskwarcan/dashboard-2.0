@@ -1,20 +1,18 @@
 <% @update = Update.last(:conditions => {:user_id => @user.id, :tweet_done => true, :face_done => true, :google_done => true, :chimp_done => true}) %>
-<h2 class="date">Updated: <%= @update.updated_at.strftime("%B %d, %Y at %I:%M%p") %></h2>
+<ul class="tabs">
+	<li><a  class="active overview" href="JavaScript:void(0);">Overview</a></li>
+	<li><a class="details" href="JavaScript:void(0);">Detail View</a></li>
+	<li><a href="/logout">Logout</a></li>
+</ul>
 
 <h1 class="client"><%= @user.client %></h1>
-<a class="logout" href="/logout">Logout</a>
+<span class="update">Updated: <%= @update.updated_at.strftime("%B %d, %Y at %I:%M%p") %></span>
 <div class="container clearfix">
-	<div class="col1">
-			<%= render :partial => "/shared/twitter" %>
+	<div class="overview">
+		<%= render :partial => "/shared/overview" %>
 	</div>
-	<div class="col2">
-			<%= render :partial => "/shared/facebook" %>
-	</div>
-
-	<div class="col3">
-			<%= render :partial => "/shared/analytics" %>
-			<br />
-			<%= render :partial => "/shared/mailchimp" %>
+	<div class="details">
+		<%= render :partial => "/shared/details" %>
 	</div>
 </div>
 

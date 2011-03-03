@@ -1,30 +1,32 @@
-<% if @user.twitter_authd?(@user)%>
-	<% if @update.twit_name %>
-	<img class="logo" src="/images/twitter.png" />
-	<div>
-		<img class="twitter" src="<%= @update.twit_pic %>" />
-		<h3 class="noMargin"><%= @update.twit_name %></h3>
-		<span class="number">Followers: <%= @update.followers %></span>
+<% if @update.twit_name %>
+	<div class="col2">
+			<img class="logo" src="/images/twitter.png" />
+			<div>
+				<img class="twitter" src="<%= @update.twit_pic %>" />
+				<h3 class="noMargin"><%= @update.twit_name %></h3>
+				<span class="number">Followers: <%= @update.followers %></span>
+			</div>
+				<div class="count <% if @update.new_followers > 0 %>plus<% elsif @update.new_followers < 0 %>negative<% end %>"><span class="label">Followers this Month</span> <span class="divider"> <%= @update.new_followers %></span></div>
 	</div>
-		<div class="count <% if @update.new_followers > 0 %>plus<% elsif @update.new_followers < 0 %>negative<% end %>"><span class="label">Followers this Month</span> <span class="divider"> <%= @update.new_followers %></span></div>
 
-	<h3 class="nobot">Your Recent Tweets</h3>	
-	<% tweets = ActiveSupport::JSON.decode(@update.tweets) %>
-	<ul class="tweets">
-	<% tweets.each do | tweet |%>
-		<li class="clearfix"><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> 
-		<div class="status">
-			<b><a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a></b><br />
-		<%= tweet["text"] %>
-		</div>
-		</li>
-	<% end %>
-	</ul>
-	<% else %>
+	<div class="col3">
+			<h3 class="nobot">Your Recent Tweets</h3>	
+			<% tweets = ActiveSupport::JSON.decode(@update.tweets) %>
+			<ul class="tweets">
+			<% tweets.each do | tweet |%>
+				<li class="clearfix"><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> 
+				<div class="status">
+					<b><a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a></b><br />
+				<%= tweet["text"] %>
+				</div>
+				</li>
+			<% end %>
+			</ul>
+	</div>
+<% else %>
+	<div class="col2">
 			<h2>Sorry! Your information is not ready yet.</h2>
 			<p>Information is gathered once every hour and your app hasn't gathered any data yet.</p>
-	<% end %>
-<% else %>
-	<h3>Register Your account on Twitter!</h3>
-	<p>Please contact <a href="mailto:steph@balcomagency.com">Steph</a> at The Balcom Agency in order to get your twitter account set up.</p>
+	</div>
 <% end %>
+

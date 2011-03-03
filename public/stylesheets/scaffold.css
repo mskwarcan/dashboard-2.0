@@ -156,10 +156,12 @@ h1.header
 
 .container
 {
-  background:#fafafa;
+  background:#fafafa url('/images/container_bg.png') repeat-y;
   border:2px #cbc9c9 solid;
   -moz-border-radius:10px;
   border-radius:10px;
+  min-width:930px;
+  min-height:600px;
 }
 
 .side_spacing
@@ -176,17 +178,14 @@ h1.header
 
 .col2
 {
-  width:280px;
+  width:281px;
   padding:10px 15px;
   float:left;
-  background:#f0f0f0;
-  border-left:#dfdfdf solid 1px;
-  border-right:#dfdfdf solid 1px;
 }
 
 .col3
 {
-  width:280px;
+  width:279px;
   float:left;
   padding:10px 15px;
 }
@@ -301,9 +300,58 @@ form.facebook, form.analytics, form.chimp
 /* Show */
 h1.client
 {
-  margin:0 0 5px 0;
-  float:left;
-  margin-right:15px;
+  margin:0;
+}
+
+.update
+{
+  margin-bottom:5px;
+  display:inline-block;
+}
+
+ul.tabs
+{
+  margin:25px 10px 0;
+  padding:0;
+  list-style:none;
+  float:right;
+}
+
+ul.tabs li
+{
+    float:left;
+    margin:0 2px;
+}
+
+ul.tabs li a
+{
+  display:inline-block;
+  padding:5px 8px;
+  border:2px #cbc9c9 solid;
+  border-bottom:none;
+  -moz-border-radius-topright:5px;
+  border-top-right-radius: 5px; 
+  -moz-border-radius-topleft:5px;
+  border-top-left-radius:5px;
+  font-weight:bold;
+  background:#fafafa;
+}
+
+ul.tabs li a.active
+{
+  background:#7d00bb;
+  color:#fff;
+}
+
+ul.tabs li a:hover
+{
+  background:#7d00bb;
+  color:#fff;
+}
+
+.details
+{
+  display:none;
 }
 
 .logo
@@ -351,8 +399,8 @@ h2.date
 {
 	-moz-border-radius-topright:9px;
   border-top-right-radius: 9px; 
-  -moz-border-radius-bottomright:10px;
-  border-bottom-right-radius:10px;
+  -moz-border-radius-bottomright:9px;
+  border-bottom-right-radius:9px;
   display:inline-block;
   margin:0 0 -15px;
   padding:10px 15px 10px 15px;
@@ -384,6 +432,43 @@ h2.date
   background:url('/images/negative.png');
 }
 
+/* Detail View */
+
+ul.menu
+{
+  padding:0;
+  margin:0;
+  list-style:none;
+  margin-left:-15px;
+}
+
+ul.menu li:first-child
+{
+  border-top:1px solid #DADADA;
+}
+
+ul.menu li
+{
+  padding:10px;
+  width:289px;
+  border-bottom:1px solid #DADADA;
+}
+
+ul.menu li:nth-child(2n -1)
+{
+  background:#fff;
+}
+
+div.detail
+{
+  display:none;
+}
+
+div.detail.active
+{
+  display:block;
+}
+
 /* Twitter */
 img.twitter
 {
@@ -410,7 +495,7 @@ ul.tweets
 ul.tweets li
 {
   padding:10px;
-  width:290px;
+  width:289px;
   border-bottom:1px solid #DADADA;
 }
 
@@ -461,7 +546,7 @@ ul.facebook
 ul.facebook li
 {
   padding:10px;
-  width:290px;
+  width:289px;
   border-bottom:1px solid #DADADA;
 }
 
@@ -504,6 +589,11 @@ table.data tr:nth-child(2n)
   background:#fff;
 }
 
+.col2 table.data tr:nth-child(2n)
+{
+  background:#f6f6f5;
+}
+
 table.data tr:nth-child(2n) td
 {
   border-bottom:1px solid #DADADA;
@@ -516,6 +606,11 @@ table.data
   margin:10px 0;
   left:-15px;
   position:relative;
+}
+
+.col3 table.data
+{
+  width:309px;
 }
 
 table.data td
