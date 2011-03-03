@@ -1,0 +1,15 @@
+<h3 class="notop">Your Applications</h3>
+<ul class="menu">
+	<% if @user.twitter_authd?(@user)%>
+		<li><a href="#" class="twitter_link">Twitter</a></li>
+	<% end %>
+	<% if @user.facebook_authd?(@user)%>
+		<li><a href="#" class="facebook_link">Facebook</a></li>
+	<% end %>
+	<% if @user.google_authd?(@user)%>
+		<li><a href="#" class="google_link">Google Analytics</a></li>
+	<% end %>
+	<% if @user.mailchimp_authd?(@user)%>
+		<li><a href="#" class="mailchimp_link">Mail Chimp</a></li>
+	<% end %>
+</ul>

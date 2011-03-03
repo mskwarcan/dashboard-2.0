@@ -1,0 +1,85 @@
+<% if @user.google_authd?(@user) %>
+	<% if @update.results %>
+		<img class="logo" src="/images/google.png" />
+		
+	
+		<% results = ActiveSupport::JSON.decode(@update.results) %>
+		<table class="data" cellspacing=0>
+			<tr>
+				<td colspan="2"><h3 class="noMargin"><%= Time.now.strftime("%B") %> Current Stats</h3></td>
+			</tr>
+		<tr>
+			<td><h3 class="noMargin">Goal Completions</h3></td> <td><%= results.fifth["goalCompletionsAll"] %></td>
+		</tr>
+		<tr>	
+			<td><h3 class="noMargin">Visits:</h3></td> <td><%= results.fourth["visits"] %></td>
+		</tr>
+		<tr>	
+			<td><h3 class="noMargin">Page Views:</h3></td> <td><%= results.first["pageviews"] %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">New Visits:</h3></td> <td><%= results.third["newVisits"] %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Avg. Time on Site:</h3></td> <td><%= results.second["avgTimeOnSite"] %> seconds</td>
+		</tr>
+		</table>
+
+	
+		<% results_last = ActiveSupport::JSON.decode(@update.last_month) %>
+		<% results_two = ActiveSupport::JSON.decode(@update.two_months) %>
+		
+		<table class="data" cellspacing=0>
+			<tr>
+				<td colspan="4"><h3 class="noMargin"><%= 2.month.ago.strftime("%B") %>-<%= 1.month.ago.strftime("%B") %> Comparison</h3></td>
+			</tr>
+			<tr>
+				<td></th>
+				<td><%= 1.month.ago.strftime("%B") %></td>
+				<td><%= 2.month.ago.strftime("%B") %></td>
+				<td>Difference</td>
+			</tr>
+			<tr>
+				<td>Page Views</td>
+				<td><%= results_last.first["pageviews"] %></td>
+				<td><%= results_two.first["pageviews"] %></td>
+				<% pageviews = results_last.first["pageviews"] - results_two.first["pageviews"] %>
+				<td class="<% if pageviews > 0 %> up<% else %>down<% end %>"><%= pageviews %></td>
+			</tr>
+			<tr>
+				<td>Visits</td>
+				<td><%= results_last.fourth["visits"] %></td>
+				<td><%= results_two.fourth["visits"] %></td>
+				<% visits = results_last.fourth["visits"] - results_two.fourth["visits"]%>
+				<td class="<% if visits > 0 %> up<% else %>down<% end %>"><%= visits %></td>
+			</tr>
+			<tr>
+				<td>New Visits</td>
+				<td><%= results_last.third["newVisits"] %></td>
+				<td><%= results_two.third["newVisits"] %></td>
+				<% newVisits = results_last.third["newVisits"] - results_two.third["newVisits"]%>
+				<td class="<% if newVisits > 0 %> up<% else %>down<% end %>"><%= newVisits %></td>
+			</tr>
+			<tr>
+				<td>Avg. Time on Site</td>
+				<td><%= results_last.second["avgTimeOnSite"] %> sec</td>
+				<td><%= results_two.second["avgTimeOnSite"] %> sec</td>
+				<% avgTimeOnSite = results_last.second["avgTimeOnSite"] - results_two.second["avgTimeOnSite"]%>
+				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
+			</tr>
+			<tr>
+				<td>Goal Completions</td>
+				<td><%= results_last.fifth["goalCompletionsAll"] %></td>
+				<td><%= results_two.fifth["goalCompletionsAll"] %></td>
+				<% avgTimeOnSite = results_last.fifth["goalCompletionsAll"] - results_two.fifth["goalCompletionsAll"]%>
+				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %></td>
+			</tr>
+		</table>
+	<% else %>
+			<h2>Sorry! Your information is not ready yet.</h2>
+			<p>Information is gathered once every hour and your app hasn't gathered any data yet.</p>
+	<% end %>
+<% else %>
+	<h3>Get Your Google Analytics!</h3>
+	<p>Please contact <a href="mailto:steph@balcomagency.com">Steph</a> at The Balcom Agency in order to get your Google Analytics.</p>
+<% end %>
