@@ -1,4 +1,4 @@
-	<% if @update.chimp_name? %>
+	<% if @update.chimp_done %>
 	<div class="col2">
 		<img class="logo" src="/images/mailchimp.png" />
 	<div>
@@ -9,7 +9,7 @@
 	
 	<table class="data" cellspacing=0>
 		<tr>
-			<td colspan="3"><h3 class="noMargin">Growth</h3></td>
+			<td colspan="3"><h3 class="noMargin bold">Growth</h3></td>
 		</tr>
 		<tr>
 			<td>Month</td>
@@ -42,7 +42,6 @@
 			<td><%= growth[-5]["optins"] %></td>
 		</tr>
 	</table>
-	</div>
 	
 	<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
 	<% stats = ActiveSupport::JSON.decode(@update.stats) %>
@@ -73,14 +72,15 @@
 			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 		</tr>
 	</table>
-	
+		</div>
 	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
 	
 	<div class="col3">
-		<h3 class="noMargin">Chimp Chatter</h3>
+		<h3 class="noMargin bold">Chimp Chatter</h3>
 		<ul class="chatter">
 			<% chatter.each do |chat| %>
-				<li><%= chat["message"]%></li>
+				<li><%= Time.parse(chat["update_time"]).strftime("%b %d, %Y at %I:%M%p") %>
+				<p class="<% if chat["type"] == 'lists:new-subscriber' %>up<% elsif chat["type"] == 'lists:unsubscribes' %>down<% end %>"><%= chat["message"]%></p></li>
 			<% end %>
 		</ul>	
 	

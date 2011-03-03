@@ -494,7 +494,7 @@ img.twitter
   clear:left;
 }
 
-ul.tweets
+ul.tweets, ul.chatter
 {
   list-style:none;
   margin:0;
@@ -502,7 +502,7 @@ ul.tweets
   margin-left:-15px;
 }
 
-ul.tweets li
+ul.tweets li, ul.chatter li
 {
   padding:10px;
   width:289px;
@@ -641,6 +641,12 @@ table.data tr td:first-child
 .down
 {
   color:#cf2727;
+}
+
+/* mailchimp */
+.chatter p
+{
+  margin-top:5px;
 }
 
 /* Footer */

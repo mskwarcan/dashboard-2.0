@@ -15,18 +15,26 @@
 	</div>
 </div>
 
-<div class="twitter detail">
-	<%= render :partial => "/shared/twitter" %>
-</div>
+<% if @user.twitter_authd?(@user) %>
+	<div class="twitter detail">
+		<%= render :partial => "/shared/twitter" %>
+	</div>
+<% end %>
 
-<div class="facebook detail">
-	<%= render :partial => "/shared/facebook" %>
-</div>
+<% if @user.facebook_authd?(@user) %>
+	<div class="facebook detail">
+		<%= render :partial => "/shared/facebook" %>
+	</div>
+<% end %>
 
-<div class="google detail">
-	<%= render :partial => "/shared/analytics" %>
-</div>
+<% if @user.google_authd?(@user) %>
+	<div class="google detail">
+		<%= render :partial => "/shared/analytics" %>
+	</div>
+<% end %>
 
-<div class="mailchimp detail">
-	<%= render :partial => "/shared/mailchimp" %>
-</div>
+<% if @user.mailchimp_authd?(@user) %>
+	<div class="mailchimp detail">
+		<%= render :partial => "/shared/mailchimp" %>
+	</div>
+<% end %>
