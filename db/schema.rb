@@ -10,19 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110302181854) do
+ActiveRecord::Schema.define(:version => 20110303225245) do
 
   create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "priority",   :default => 0
+    t.integer   "attempts",   :default => 0
+    t.text      "handler"
+    t.text      "last_error"
+    t.timestamp "run_at"
+    t.timestamp "locked_at"
+    t.timestamp "failed_at"
+    t.string    "locked_by"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -33,8 +33,33 @@ ActiveRecord::Schema.define(:version => 20110302181854) do
     t.string "link"
   end
 
-# Could not dump table "updates" because of following StandardError
-#   Unknown type 'booloean' for column 'finished'
+  create_table "updates", :force => true do |t|
+    t.string    "twit_pic"
+    t.string    "twit_name"
+    t.integer   "followers"
+    t.integer   "new_followers"
+    t.text      "tweets"
+    t.string    "face_pic"
+    t.string    "face_name"
+    t.integer   "likes"
+    t.integer   "new_likes"
+    t.text      "feed"
+    t.text      "results"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.text      "last_month"
+    t.integer   "user_id"
+    t.boolean   "tweet_done",    :default => false
+    t.boolean   "face_done",     :default => false
+    t.boolean   "google_done",   :default => false
+    t.text      "two_months"
+    t.string    "chimp_name"
+    t.text      "growth"
+    t.text      "campaign"
+    t.text      "stats"
+    t.boolean   "chimp_done",    :default => false
+    t.text      "chatter"
+  end
 
   create_table "users", :force => true do |t|
     t.string    "username"

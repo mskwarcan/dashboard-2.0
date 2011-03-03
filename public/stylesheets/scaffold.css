@@ -18,6 +18,11 @@ h3
   font-size:18px;
 }
 
+.bold
+{
+  color:#515151;
+}
+
 .noMargin
 {
   margin:0;
@@ -156,10 +161,15 @@ h1.header
 
 .container
 {
-  background:#fafafa url('/images/container_bg.png') repeat-y;
+  background:#fafafa;
   border:2px #cbc9c9 solid;
   -moz-border-radius:10px;
   border-radius:10px;
+}
+
+.container.show
+{
+  background:#fafafa url('/images/container_bg.png') repeat-y;
   min-width:930px;
   min-height:600px;
 }

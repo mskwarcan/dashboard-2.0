@@ -5,7 +5,7 @@
 		<% results = ActiveSupport::JSON.decode(@update.results) %>
 		<table class="data" cellspacing=0>
 			<tr>
-				<td colspan="2"><h3 class="noMargin"><%= Time.now.strftime("%B") %> Current Stats</h3></td>
+				<td colspan="2"><h3 class="noMargin bold"><%= Time.now.strftime("%B") %> Current Stats</h3></td>
 			</tr>
 		<tr>
 			<td><h3 class="noMargin">Goal Completions</h3></td> <td><%= results.fifth["goalCompletionsAll"] %></td>
@@ -30,7 +30,7 @@
 	<div class="col3">
 		<table class="data" cellspacing=0>
 			<tr>
-				<td colspan="4"><h3 class="noMargin"><%= 2.month.ago.strftime("%B") %>-<%= 1.month.ago.strftime("%B") %> Comparison</h3></td>
+				<td colspan="4"><h3 class="noMargin bold"><%= 2.month.ago.strftime("%B") %>-<%= 1.month.ago.strftime("%B") %> Comparison</h3></td>
 			</tr>
 			<tr>
 				<td></th>

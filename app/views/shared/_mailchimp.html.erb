@@ -2,7 +2,7 @@
 	<div class="col2">
 		<img class="logo" src="/images/mailchimp.png" />
 	<div>
-		<h3 class="noMargin"><%= @update.chimp_name %></h3>
+		<h3 class="noMargin bold"><%= @update.chimp_name %></h3>
 	</div>
 	
 	<% growth = ActiveSupport::JSON.decode(@update.growth) %>
@@ -49,7 +49,7 @@
 	<div class="col3">
 	<table class="data" cellspacing=0>
 		<tr>
-			<td colspan="3"><h3 class="noMargin">Most Recent Campaign</h3></td>
+			<td colspan="3"><h3 class="noMargin bold">Most Recent Campaign</h3></td>
 		</tr>
 		<tr>
 			<td>Sent at</td>
