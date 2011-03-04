@@ -50,8 +50,12 @@
 			<td colspan="3"><h3 class="noMargin bold">Most Recent Campaign</h3></td>
 		</tr>
 		<tr>
+			<td>Name</td>
+			<td colspan="2"><%= campaign.first["title"] %></td>
+		</tr>
+		<tr>
 			<td>Sent at</td>
-			<td colspan="2"><%= Time.parse(campaign["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+			<td colspan="2"><%= Time.parse(campaign.first["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
 		</tr>
 		<tr>
 			<td>Messages Sent</td>
