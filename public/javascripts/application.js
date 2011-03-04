@@ -83,6 +83,12 @@ $(document).ready(function(){
     } else  {
       $('div.detail.active').fadeOut('fast', function() {
           // Animation complete.
+          $('img.side_logo.active').fadeOut('fast', function() {
+            $('img.twitter_logo').fadeIn('fast', function() {
+              $('img.side_logo.active').removeClass('active');
+              $('img.twitter_logo').addClass('active');
+            });
+          });
           $('div.twitter').fadeIn('fast');
           $('div.detail').removeClass('active');
           $('div.twitter').addClass('active');
@@ -98,6 +104,12 @@ $(document).ready(function(){
     } else  {
       $('div.detail.active').fadeOut('fast', function() {
           // Animation complete.
+          $('img.side_logo.active').fadeOut('fast', function() {
+            $('img.face_logo').fadeIn('fast', function() {
+              $('img.side_logo.active').removeClass('active');
+              $('img.face_logo').addClass('active');
+            });
+          });
           $('div.facebook').fadeIn('fast');
           $('div.detail').removeClass('active');
           $('div.facebook').addClass('active');
@@ -113,6 +125,12 @@ $(document).ready(function(){
     } else  {
       $('div.detail.active').fadeOut('fast', function() {
           // Animation complete.
+          $('img.side_logo.active').fadeOut('fast', function() {
+            $('img.google_logo').fadeIn('fast', function() {
+              $('img.side_logo.active').removeClass('active');
+              $('img.google_logo').addClass('active');
+            });
+          });
           $('div.google').fadeIn('fast');
           $('div.detail').removeClass('active');
           $('div.google').addClass('active');
@@ -128,6 +146,12 @@ $(document).ready(function(){
     } else  {
       $('div.detail.active').fadeOut('fast', function() {
           // Animation complete.
+          $('img.side_logo.active').fadeOut('fast', function() {
+            $('img.mail_logo').fadeIn('fast', function() {
+              $('img.side_logo.active').removeClass('active');
+              $('img.mail_logo').addClass('active');
+            });
+          });
           $('div.mailchimp').fadeIn('fast');
           $('div.detail').removeClass('active');
           $('div.mailchimp').addClass('active');

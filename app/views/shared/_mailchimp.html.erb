@@ -1,60 +1,9 @@
 	<% if @update.chimp_done %>
 	<div class="col2">
-		<img class="logo" src="/images/mailchimp.png" />
+		
 	<div>
 		<h3 class="noMargin bold"><%= @update.chimp_name %></h3>
 	</div>
-	
-	<% growth = ActiveSupport::JSON.decode(@update.growth) %>
-	
-	<table class="data" cellspacing=0>
-		<tr>
-			<td colspan="3"><h3 class="noMargin bold">Growth</h3></td>
-		</tr>
-		<tr>
-			<td>Month</td>
-			<td>Members</td>
-			<td>New Members</td>
-		</tr>
-		<tr>
-			<td><h3 class="noMargin"><%= Time.parse(growth.last["month"] + '-01').strftime("%B") %></h3></td>
-			<td><h3 class="noMargin"><%= growth.last["existing"] %></h3></td>
-			<td><h3 class="noMargin"><%= growth.last["optins"] %></h3></td>
-		</tr>
-		<tr>
-			<td><%= Time.parse(growth[-2]["month"] + '-01').strftime("%B") %></td>
-			<td><%= growth[-2]["existing"] %></td>
-			<td><%= growth[-2]["optins"] %></td>
-		</tr>
-		<tr>
-			<td><%= Time.parse(growth[-3]["month"] + '-01').strftime("%B") %></td>
-			<td><%= growth[-3]["existing"] %></td>
-			<td><%= growth[-3]["optins"] %></td>
-		</tr>
-		<tr>
-			<td><%= Time.parse(growth[-4]["month"] + '-01').strftime("%B") %></td>
-			<td><%= growth[-4]["existing"] %></td>
-			<td><%= growth[-4]["optins"] %></td>
-		</tr>
-		<tr>
-			<td><%= Time.parse(growth[-5]["month"] + '-01').strftime("%B") %></td>
-			<td><%= growth[-5]["existing"] %></td>
-			<td><%= growth[-5]["optins"] %></td>
-		</tr>
-	</table>
-	
-	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
-	
-	<h3 class="noMargin bold">Chimp Chatter</h3>
-	<ul class="chatter">
-		<% chatter[0..4].each do |chat| %>
-			<li><%= Time.parse(chat["update_time"]).strftime("%b %d, %Y at %I:%M%p") %>
-			<p class="<% if chat["type"] == 'lists:new-subscriber' %>up<% elsif chat["type"] == 'lists:unsubscribes' %>down<% end %>"><%= chat["message"]%></p></li>
-		<% end %>
-	</ul>
-		</div>
-	
-	<div class="col3">
 		<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats) %>
 
@@ -148,6 +97,96 @@
 				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 			</tr>
 		</table>
+	
+	
+	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
+	
+	<h3 class="bold chimp">Chimp Chatter</h3>
+	<ul class="chatter">
+		<% chatter[0..4].each do |chat| %>
+			<li><%= Time.parse(chat["update_time"]).strftime("%b %d, %Y at %I:%M%p") %>
+			<p class="<% if chat["type"] == 'lists:new-subscriber' %>up<% elsif chat["type"] == 'lists:unsubscribes' %>down<% end %>"><%= chat["message"]%></p></li>
+		<% end %>
+	</ul>
+		</div>
+	
+	<div class="col3">
+		
+		<% growth = ActiveSupport::JSON.decode(@update.growth) %>
+		<% open_rate = ActiveSupport::JSON.decode(@update.top_open) %>
+		<% click_rate = ActiveSupport::JSON.decode(@update.top_click) %>
+		
+		<h3 class="noMargin bold">Growth</h3>
+		<table class="data" cellspacing=0>
+			<tr>
+				<td>Month</td>
+				<td>Members</td>
+				<td>New Members</td>
+			</tr>
+			<tr>
+				<td><h3 class="noMargin"><%= Time.parse(growth.last["month"] + '-01').strftime("%B") %></h3></td>
+				<td><h3 class="noMargin"><%= growth.last["existing"] %></h3></td>
+				<td><h3 class="noMargin"><%= growth.last["optins"] %></h3></td>
+			</tr>
+			<tr>
+				<td><%= Time.parse(growth[-2]["month"] + '-01').strftime("%B") %></td>
+				<td><%= growth[-2]["existing"] %></td>
+				<td><%= growth[-2]["optins"] %></td>
+			</tr>
+			<tr>
+				<td><%= Time.parse(growth[-3]["month"] + '-01').strftime("%B") %></td>
+				<td><%= growth[-3]["existing"] %></td>
+				<td><%= growth[-3]["optins"] %></td>
+			</tr>
+			<tr>
+				<td><%= Time.parse(growth[-4]["month"] + '-01').strftime("%B") %></td>
+				<td><%= growth[-4]["existing"] %></td>
+				<td><%= growth[-4]["optins"] %></td>
+			</tr>
+			<tr>
+				<td><%= Time.parse(growth[-5]["month"] + '-01').strftime("%B") %></td>
+				<td><%= growth[-5]["existing"] %></td>
+				<td><%= growth[-5]["optins"] %></td>
+			</tr>
+		</table>
+		
+		<table class="data" cellspacing=0>
+			<tr>
+				<td colspan="3"><h3 class="noMargin bold">Top 5 Opened Rates Campaigns</h3></td>
+			</tr>
+			<tr>
+				<td width="140">Campaign</td>
+				<td>Open Rate</td>
+				<td>Opened</td>
+			</tr>
+		<% open_rate[0..4].each do |rate|%>
+			<tr>
+				<td><%= rate["name"] %></td>
+				<td><%= rate["rate"] %>%</td>
+				<td><%= rate["opened"] %></td>
+			</tr>
+		<% end %>
+
+		</table>
+		
+			<table class="data" cellspacing=0>
+				<tr>
+					<td colspan="3"><h3 class="noMargin bold">Top 5 Click Rates Campaigns</h3></td>
+				</tr>
+				<tr>
+					<td width="140">Campaign</td>
+					<td>Open Rate</td>
+					<td>CLicks</td>
+				</tr>
+			<% click_rate[0..4].each do |rate|%>
+				<tr>
+					<td><%= rate["name"] %></td>
+					<td><%= rate["rate"] %>%</td>
+					<td><%= rate["clicks"].to_i %></td>
+				</tr>
+			<% end %>
+
+			</table>
 	</div>
 	<% else %>
 	<div class="col2">

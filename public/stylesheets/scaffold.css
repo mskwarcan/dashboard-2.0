@@ -365,7 +365,7 @@ ul.tabs li a:hover
   display:none;
 }
 
-.logo
+.logo, .side_logo
 {
   margin-bottom:10px;
 }
@@ -480,6 +480,12 @@ div.detail.active
   display:block;
 }
 
+.side_logo
+{
+  display:none;
+  padding:15px 0;
+}
+
 /* Twitter */
 img.twitter
 {
@@ -495,7 +501,7 @@ img.twitter
   clear:left;
 }
 
-ul.tweets, ul.chatter
+ul.tweets
 {
   list-style:none;
   margin:0;
@@ -503,7 +509,7 @@ ul.tweets, ul.chatter
   margin-left:-15px;
 }
 
-ul.tweets li, ul.chatter li
+ul.tweets li
 {
   padding:10px;
   width:289px;
@@ -648,6 +654,26 @@ table.data tr td:first-child
 .chatter p
 {
   margin-top:5px;
+}
+
+ ul.chatter
+{
+  list-style:none;
+  margin:0;
+  padding:0;
+  margin-left:-15px;
+}
+
+ul.chatter li
+{
+  padding:10px 15px;
+  width:279px;
+  border-top:1px solid #DADADA;
+}
+
+h3.chimp
+{
+  margin:7px 0;
 }
 
 /* Footer */
