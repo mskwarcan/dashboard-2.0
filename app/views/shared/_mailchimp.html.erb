@@ -43,6 +43,8 @@
 		</tr>
 	</table>
 	
+	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
+	
 	<h3 class="noMargin bold">Chimp Chatter</h3>
 	<ul class="chatter">
 		<% chatter[0..4].each do |chat| %>
@@ -51,7 +53,6 @@
 		<% end %>
 	</ul>
 		</div>
-	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
 	
 	<div class="col3">
 		<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
