@@ -3,7 +3,7 @@ task :cron => :environment do
   @users = User.all(:conditions => ["username != 'admin'"], :order => "client ASC")
   
   heroku = Heroku::Client.new(ENV["HEROKU_EMAIL"], ENV["HEROKU_PASS"])
-  heroku.set_workers(ENV["APP_NAME"], 1)
+  heroku.set_workers(ENV["APP_NAME"], 3)
   
   @users.each do |user|
     
