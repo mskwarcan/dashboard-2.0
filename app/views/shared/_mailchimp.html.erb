@@ -54,7 +54,7 @@
 	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
 	
 	<div class="col3">
-		<% campaign = ActiveSupport::JSON.decode(@update.campaign.first) %>
+		<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats) %>
 
 		<table class="data" cellspacing=0>
@@ -63,11 +63,11 @@
 			</tr>
 			<tr>
 				<td>Name</td>
-				<td colspan="2"><%= campaign["title"] %></td>
+				<td colspan="2"><%= campaign.first["title"] %></td>
 			</tr>
 			<tr>
 				<td>Sent at</td>
-				<td colspan="2"><%= Time.parse(campaign"create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+				<td colspan="2"><%= Time.parse(campaign.first["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
 			</tr>
 			<tr>
 				<td>Messages Sent</td>
@@ -87,18 +87,17 @@
 				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 			</tr>
 		</table>
-		
-		<% campaign = ActiveSupport::JSON.decode(@update.campaign.second) %>
+
 		<% stats = ActiveSupport::JSON.decode(@update.stats2) %>
 
 		<table class="data" cellspacing=0>
 			<tr>
 				<td>Name</td>
-				<td colspan="2"><%= campaign["title"] %></td>
+				<td colspan="2"><%= campaign.second["title"] %></td>
 			</tr>
 			<tr>
 				<td>Sent at</td>
-				<td colspan="2"><%= Time.parse(campaign["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+				<td colspan="2"><%= Time.parse(campaign.second["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
 			</tr>
 			<tr>
 				<td>Messages Sent</td>
@@ -119,17 +118,16 @@
 			</tr>
 		</table>
 		
-		<% campaign = ActiveSupport::JSON.decode(@update.campaign.third) %>
-		<% stats = ActiveSupport::JSON.decode(@update.stats) %>
+		<% stats = ActiveSupport::JSON.decode(@update.stats3) %>
 
 		<table class="data" cellspacing=0>
 			<tr>
 				<td>Name</td>
-				<td colspan="2"><%= campaign["title"] %></td>
+				<td colspan="2"><%= campaign.third["title"] %></td>
 			</tr>
 			<tr>
 				<td>Sent at</td>
-				<td colspan="2"><%= Time.parse(campaign["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+				<td colspan="2"><%= Time.parse(campaign.third["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
 			</tr>
 			<tr>
 				<td>Messages Sent</td>
