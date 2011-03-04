@@ -43,47 +43,112 @@
 		</tr>
 	</table>
 	
-	<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
-	<% stats = ActiveSupport::JSON.decode(@update.stats) %>
-
-	<table class="data" cellspacing=0>
-		<tr>
-			<td colspan="3"><h3 class="noMargin bold">Most Recent Campaign</h3></td>
-		</tr>
-		<tr>
-			<td>Sent at</td>
-			<td colspan="2"><%= Time.parse(campaign["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
-		</tr>
-		<tr>
-			<td>Messages Sent</td>
-			<td colspan="2"><%= stats["emails_sent"].to_i %></td>
-		</tr>
-		<tr>
-			<td>Messages Opened</td>
-			<td><%= stats["unique_opens"].to_i %></td>
-			<td><%= sprintf("%.2f", stats["unique_opens"]/stats["emails_sent"]*100) %>%</td>
-		</tr>
-		<tr>
-			<td>Messages Clicked</td>
-			<td colspan="2"><%= stats["users_who_clicked"].to_i %></td>
-		</tr>
-		<tr>
-			<td>Click Rate</td>
-			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
-		</tr>
-	</table>
+	<h3 class="noMargin bold">Chimp Chatter</h3>
+	<ul class="chatter">
+		<% chatter[0..4].each do |chat| %>
+			<li><%= Time.parse(chat["update_time"]).strftime("%b %d, %Y at %I:%M%p") %>
+			<p class="<% if chat["type"] == 'lists:new-subscriber' %>up<% elsif chat["type"] == 'lists:unsubscribes' %>down<% end %>"><%= chat["message"]%></p></li>
+		<% end %>
+	</ul>
 		</div>
 	<% chatter = ActiveSupport::JSON.decode(@update.chatter) %>
 	
 	<div class="col3">
-		<h3 class="noMargin bold">Chimp Chatter</h3>
-		<ul class="chatter">
-			<% chatter.each do |chat| %>
-				<li><%= Time.parse(chat["update_time"]).strftime("%b %d, %Y at %I:%M%p") %>
-				<p class="<% if chat["type"] == 'lists:new-subscriber' %>up<% elsif chat["type"] == 'lists:unsubscribes' %>down<% end %>"><%= chat["message"]%></p></li>
-			<% end %>
-		</ul>	
-	
+		<% campaign = ActiveSupport::JSON.decode(@update.campaign.first) %>
+		<% stats = ActiveSupport::JSON.decode(@update.stats) %>
+
+		<table class="data" cellspacing=0>
+			<tr>
+				<td colspan="3"><h3 class="noMargin bold">Most Recent Campaigns</h3></td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td colspan="2"><%= campaign["title"] %></td>
+			</tr>
+			<tr>
+				<td>Sent at</td>
+				<td colspan="2"><%= Time.parse(campaign"create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+			</tr>
+			<tr>
+				<td>Messages Sent</td>
+				<td colspan="2"><%= stats["emails_sent"].to_i %></td>
+			</tr>
+			<tr>
+				<td>Messages Opened</td>
+				<td><%= stats["unique_opens"].to_i %></td>
+				<td><%= sprintf("%.2f", stats["unique_opens"]/stats["emails_sent"]*100) %>%</td>
+			</tr>
+			<tr>
+				<td>Messages Clicked</td>
+				<td colspan="2"><%= stats["users_who_clicked"].to_i %></td>
+			</tr>
+			<tr>
+				<td>Click Rate</td>
+				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
+			</tr>
+		</table>
+		
+		<% campaign = ActiveSupport::JSON.decode(@update.campaign.second) %>
+		<% stats = ActiveSupport::JSON.decode(@update.stats2) %>
+
+		<table class="data" cellspacing=0>
+			<tr>
+				<td>Name</td>
+				<td colspan="2"><%= campaign["title"] %></td>
+			</tr>
+			<tr>
+				<td>Sent at</td>
+				<td colspan="2"><%= Time.parse(campaign["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+			</tr>
+			<tr>
+				<td>Messages Sent</td>
+				<td colspan="2"><%= stats["emails_sent"].to_i %></td>
+			</tr>
+			<tr>
+				<td>Messages Opened</td>
+				<td><%= stats["unique_opens"].to_i %></td>
+				<td><%= sprintf("%.2f", stats["unique_opens"]/stats["emails_sent"]*100) %>%</td>
+			</tr>
+			<tr>
+				<td>Messages Clicked</td>
+				<td colspan="2"><%= stats["users_who_clicked"].to_i %></td>
+			</tr>
+			<tr>
+				<td>Click Rate</td>
+				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
+			</tr>
+		</table>
+		
+		<% campaign = ActiveSupport::JSON.decode(@update.campaign.third) %>
+		<% stats = ActiveSupport::JSON.decode(@update.stats) %>
+
+		<table class="data" cellspacing=0>
+			<tr>
+				<td>Name</td>
+				<td colspan="2"><%= campaign["title"] %></td>
+			</tr>
+			<tr>
+				<td>Sent at</td>
+				<td colspan="2"><%= Time.parse(campaign["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+			</tr>
+			<tr>
+				<td>Messages Sent</td>
+				<td colspan="2"><%= stats["emails_sent"].to_i %></td>
+			</tr>
+			<tr>
+				<td>Messages Opened</td>
+				<td><%= stats["unique_opens"].to_i %></td>
+				<td><%= sprintf("%.2f", stats["unique_opens"]/stats["emails_sent"]*100) %>%</td>
+			</tr>
+			<tr>
+				<td>Messages Clicked</td>
+				<td colspan="2"><%= stats["users_who_clicked"].to_i %></td>
+			</tr>
+			<tr>
+				<td>Click Rate</td>
+				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
+			</tr>
+		</table>
 	</div>
 	<% else %>
 	<div class="col2">
