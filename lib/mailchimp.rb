@@ -17,7 +17,7 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       click_rate = []
       open_rate = []
       
-      campaigns = h.campaigns["data"]
+      campaigns = h.campaigns(filters ={}, start= 0, limit = 1000)["data"]
       
       campaigns.each do |campaign|
         opened = h.campaign_stats(campaign["id"])["unique_opens"]
