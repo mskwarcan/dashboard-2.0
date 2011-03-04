@@ -8,7 +8,7 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       list_id = h.lists.first.second.first["id"]
       @update.chimp_name = h.lists.first.second.first["name"]
       @update.growth = ActiveSupport::JSON.encode(h.list_growth_history(list_id))
-      @update.campaign = ActiveSupport::JSON.encode(h.campaigns(filters ={}, start= 0, limit = 1000)["data"])
+      @update.campaign = ActiveSupport::JSON.encode(h.campaigns["data"])
       @update.stats = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].first["id"]))
       @update.stats2 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].second["id"]))
       @update.stats3 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].third["id"]))
