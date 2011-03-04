@@ -27,8 +27,10 @@ class Google < Struct.new(:user, :update, :heroku)
       return
     end
     
-    if Delayed::Job.count == 1
-      heroku.set_workers(ENV["APP_NAME"], 0)
+    if ENV["RAILS_ENV"] == 'production'
+      if Delayed::Job.count == 1
+        heroku.set_workers(ENV["APP_NAME"], 0)
+      end
     end
   end    
 end
