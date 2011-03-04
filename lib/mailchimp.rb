@@ -17,7 +17,7 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       click_rate = []
       open_rate = []
       
-      campaigns = h.campaigns(filters ={}, start= 0, limit = 1000)["data"]
+      campaigns = h.campaigns(filters ={}, start= 0, limit = 100)["data"]
       
       campaigns.each do |campaign|
         opened = h.campaign_stats(campaign["id"])["unique_opens"]
@@ -30,8 +30,8 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
         click_rate << {:rate => click, :name => campaign["title"], :clicks => clicks}
       end
       
-      open_rate.sort! { |a,b| a[:rate] <=> b[:rate] }
-      click_rate.sort! { |a,b| a[:rate] <=> b[:rate] }
+      open_rate.sort! { |a,b| b[:rate] <=> a[:rate] }
+      click_rate.sort! { |a,b| b[:rate] <=> a[:rate] }
       
       @update.top_open = ActiveSupport::JSON.encode(open_rate)
       @update.top_click = ActiveSupport::JSON.encode(click_rate)
