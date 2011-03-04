@@ -8,7 +8,7 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       list_id = h.lists.first.second.first["id"]
       @update.chimp_name = h.lists.first.second.first["name"]
       @update.growth = ActiveSupport::JSON.encode(h.list_growth_history(list_id))
-      @update.campaign = ActiveSupport::JSON.encode(h.campaigns(filters ={}, start= 0, limit = 1000))
+      @update.campaign = ActiveSupport::JSON.encode(h.campaigns(filters ={}, start= 0, limit = 1000)["data"])
       @update.stats = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].first["id"]))
       @update.stats2 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].second["id"]))
       @update.stats3 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].third["id"]))
@@ -17,7 +17,7 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       click_rate = []
       open_rate = []
       
-      h.campaigns(filters ={}, start= 0, limit = 1000).each do |campaign|
+      h.campaigns(filters ={}, start= 0, limit = 1000)["data"].each do |campaign|
         opened = h.campaign_stats(campaign["id"])["unique_opens"]
         total = h.campaign_stats(campaign["id"])["emails_sent"]
         clicks = h.campaign_stats(campaign["id"])["users_who_clicked"]
