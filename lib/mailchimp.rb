@@ -32,8 +32,8 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
         end
       end
       
-      open_rate.sort! { |a,b| a[:rate] <=> b[:rate] }
-      click_rate.sort! { |a,b| a[:rate] <=> b[:rate] }
+      open_rate.sort! { |a,b| b[:rate] <=> a[:rate] }
+      click_rate.sort! { |a,b| b[:rate] <=> a[:rate] }
       
       @update.top_open = ActiveSupport::JSON.encode(open_rate)
       @update.top_click = ActiveSupport::JSON.encode(click_rate)
