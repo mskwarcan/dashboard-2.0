@@ -8,28 +8,28 @@
 				<td colspan="2"><h3 class="noMargin bold"><%= Time.now.strftime("%B") %> Current Stats</h3></td>
 			</tr>
 		<tr>
-			<td><h3 class="noMargin">Goal Completions</h3></td> <td><%= results.fifth["goalCompletionsAll"] %></td>
+			<td><h3 class="noMargin">Goal Completions</h3></td> <td><%= results[5]["goalCompletionsAll"] %></td>
 		</tr>
 		<tr>	
-			<td><h3 class="noMargin">Visits</h3></td> <td><%= results.fourth["visits"] %></td>
+			<td><h3 class="noMargin">Visits</h3></td> <td><%= results[4]["visits"] %></td>
 		</tr>
 		<tr>	
-			<td><h3 class="noMargin">Page Views</h3></td> <td><%= results.first["pageviews"] %></td>
+			<td><h3 class="noMargin">Page Views</h3></td> <td><%= results[1]["pageviews"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">New Visits</h3></td> <td><%= results.third["newVisits"] %></td>
+			<td><h3 class="noMargin">New Visits</h3></td> <td><%= results[3]["newVisits"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">Avg. Time on Site</h3></td> <td><%= results.second["avgTimeOnSite"] %> seconds</td>
+			<td><h3 class="noMargin">Avg. Time on Site</h3></td> <td><%= results[2]["avgTimeOnSite"] %> seconds</td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin"></h3>Impressions</td> <td><%= results.sixth["impressions"] %></td>
+			<td><h3 class="noMargin"></h3>Impressions</td> <td><%= results[6]["impressions"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">Ad Clicks</h3></td> <td><%= results.seventh["adClicks"] %></td>
+			<td><h3 class="noMargin">Ad Clicks</h3></td> <td><%= results[7]["adClicks"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">Click Through Rate</h3></td> <td><%= sprintf("%.2f", results.seventh["adClicks"]/results.sixth["impressions"]*100) %>%</td>
+			<td><h3 class="noMargin">Click Through Rate</h3></td> <td><%= sprintf("%.2f", results[7]["adClicks"]/results[6]["impressions"]*100) %>%</td>
 		</tr>
 		</table>
 	</div>
@@ -44,48 +44,48 @@
 			</tr>
 			<tr>
 				<td>Goal Completions</td>
-				<td><%= results_last.fifth["goalCompletionsAll"] %></td>
-				<% avgTimeOnSite = results_last.fifth["goalCompletionsAll"] - results_two.fifth["goalCompletionsAll"]%>
+				<td><%= results_last[5]["goalCompletionsAll"] %></td>
+				<% avgTimeOnSite = results_last[5]["goalCompletionsAll"] - results_two[5]["goalCompletionsAll"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %></td>
 			</tr>
 			<tr>
 				<td>Page Views</td>
-				<td><%= results_last.first["pageviews"] %></td>
-				<% pageviews = results_last.first["pageviews"] - results_two.first["pageviews"] %>
+				<td><%= results_last[1]["pageviews"] %></td>
+				<% pageviews = results_last[1]["pageviews"] - results_two[1]["pageviews"] %>
 				<td class="<% if pageviews > 0 %> up<% else %>down<% end %>"><%= pageviews %></td>
 			</tr>
 			<tr>
 				<td>Visits</td>
-				<td><%= results_last.fourth["visits"] %></td>
-				<% visits = results_last.fourth["visits"] - results_two.fourth["visits"]%>
+				<td><%= results_last[4]["visits"] %></td>
+				<% visits = results_last[4]["visits"] - results_two[4]["visits"]%>
 				<td class="<% if visits > 0 %> up<% else %>down<% end %>"><%= visits %></td>
 			</tr>
 			<tr>
 				<td>New Visits</td>
-				<td><%= results_last.third["newVisits"] %></td>
-				<% newVisits = results_last.third["newVisits"] - results_two.third["newVisits"]%>
+				<td><%= results_last[3]["newVisits"] %></td>
+				<% newVisits = results_last[3]["newVisits"] - results_two[3]["newVisits"]%>
 				<td class="<% if newVisits > 0 %> up<% else %>down<% end %>"><%= newVisits %></td>
 			</tr>
 			<tr>
 				<td>Avg. Time on Site</td>
-				<td><%= results_last.second["avgTimeOnSite"] %> sec</td>
-				<% avgTimeOnSite = results_last.second["avgTimeOnSite"] - results_two.second["avgTimeOnSite"]%>
+				<td><%= results_last[2]["avgTimeOnSite"] %> sec</td>
+				<% avgTimeOnSite = results_last[2]["avgTimeOnSite"] - results_two[2]["avgTimeOnSite"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
 			<tr>
 				<td>Impressions</td>
-				<td><%= results_last.sixth["impressions"] %></td>
-				<% impressions = results_last.second["impressions"] - results_two.second["impressions"]%>
+				<td><%= results_last[6]["impressions"] %></td>
+				<% impressions = results_last[6]["impressions"] - results_two[6]["impressions"]%>
 				<td class="<% if impressions > 0 %> up<% else %>down<% end %>"><%= impressions %></td>
 			</tr>
 				<td>Ad Clicks</td>
-				<td><%= results_last.second["adClicks"] %></td>
-				<% clicks = results_last.second["adClicks"] - results_two.second["adClicks"]%>
+				<td><%= results_last[7]["adClicks"] %></td>
+				<% clicks = results_last[7]["adClicks"] - results_two[7]["adClicks"]%>
 				<td class="<% if clicks > 0 %> up<% else %>down<% end %>"><%= clicks %></td>
 			</tr>
 				<td>Click Through Rate</td>
-				<td><%= sprintf("%.2f", results_last.seventh["adClicks"]/results_two.sixth["impressions"]*100) %>%</td>
-				<% ctr = sprintf("%.2f", results_last.seventh["adClicks"]/results_two.sixth["impressions"]*100) - sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100)%>
+				<td><%= sprintf("%.2f", results_last[7]["adClicks"]/results_two[6]["impressions"]*100) %>%</td>
+				<% ctr = sprintf("%.2f", results_last[7]["adClicks"]/results_two[6]["impressions"]*100) - sprintf("%.2f", results_two[7]["adClicks"]/results_three[6]["impressions"]*100)%>
 				<td class="<% if ctr > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
 			</tr>
 		</table>
@@ -97,47 +97,47 @@
 			<tr>
 				<td>Goal Completions</td>
 				<td><%= results_two.fifth["goalCompletionsAll"] %></td>
-				<% avgTimeOnSite = results_two.fifth["goalCompletionsAll"] - results_three.fifth["goalCompletionsAll"]%>
+				<% avgTimeOnSite = results_two[5]["goalCompletionsAll"] - results_three[5]["goalCompletionsAll"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %></td>
 			</tr>
 			<tr>
 				<td>Page Views</td>
-				<td><%= results_two.first["pageviews"] %></td>
-				<% pageviews = results_two.first["pageviews"] - results_three.first["pageviews"] %>
+				<td><%= results_two[1]["pageviews"] %></td>
+				<% pageviews = results_two[1]["pageviews"] - results_three[1]["pageviews"] %>
 				<td class="<% if pageviews > 0 %> up<% else %>down<% end %>"><%= pageviews %></td>
 			</tr>
 			<tr>
 				<td>Visits</td>
-				<td><%= results_two.fourth["visits"] %></td>
-				<% visits = results_two.fourth["visits"] - results_three.fourth["visits"]%>
+				<td><%= results_two[4]["visits"] %></td>
+				<% visits = results_two[4]["visits"] - results_three[4]["visits"]%>
 				<td class="<% if visits > 0 %> up<% else %>down<% end %>"><%= visits %></td>
 			</tr>
 			<tr>
 				<td>New Visits</td>
-				<td><%= results_two.third["newVisits"] %></td>
-				<% newVisits = results_two.third["newVisits"] - results_three.third["newVisits"]%>
+				<td><%= results_two[3]["newVisits"] %></td>
+				<% newVisits = results_two[3]["newVisits"] - results_three[3]["newVisits"]%>
 				<td class="<% if newVisits > 0 %> up<% else %>down<% end %>"><%= newVisits %></td>
 			</tr>
 			<tr>
 				<td>Avg. Time on Site</td>
-				<td><%= results_two.second["avgTimeOnSite"] %> sec</td>
-				<% avgTimeOnSite = results_two.second["avgTimeOnSite"] - results_three.second["avgTimeOnSite"]%>
+				<td><%= results_two[2]["avgTimeOnSite"] %> sec</td>
+				<% avgTimeOnSite = results_two[2]["avgTimeOnSite"] - results_three[2]["avgTimeOnSite"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
 			<tr>
 				<td>Impressions</td>
-				<td><%= results_two.sixth["impressions"] %></td>
-				<% impressions = results_two.second["impressions"] - results_three.second["impressions"]%>
+				<td><%= results_two[6]["impressions"] %></td>
+				<% impressions = results_two[6]["impressions"] - results_three[6]["impressions"]%>
 				<td class="<% if impressions > 0 %> up<% else %>down<% end %>"><%= impressions %></td>
 			</tr>
 				<td>Ad Clicks</td>
-				<td><%= results_two.second["adClicks"] %></td>
-				<% clicks = results_two.second["adClicks"] - results_three.second["adClicks"]%>
+				<td><%= results_two[7]["adClicks"] %></td>
+				<% clicks = results_two[7]["adClicks"] - results_three[7]["adClicks"]%>
 				<td class="<% if clicks > 0 %> up<% else %>down<% end %>"><%= clicks %></td>
 			</tr>
 				<td>Click Through Rate</td>
-				<td><%= sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100) %>%</td>
-				<% ctr = sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100) - sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100)%>
+				<td><%= sprintf("%.2f", results_two[7]["adClicks"]/results_three[6]["impressions"]*100) %>%</td>
+				<% ctr = sprintf("%.2f", results_two[7]["adClicks"]/results_three[6]["impressions"]*100) - sprintf("%.2f", results_two[7]["adClicks"]/results_three[6]["impressions"]*100)%>
 				<td class="<% if ctr > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
 			</tr>
 		</table>
