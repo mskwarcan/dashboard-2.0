@@ -89,10 +89,13 @@ $(document).ready(function(){
               $('img.twitter_logo').addClass('active');
             });
           });
+
           $('div.twitter').fadeIn('fast');
           $('div.detail').removeClass('active');
           $('div.twitter').addClass('active');
         });
+        $('ul.menu a').removeClass('active');
+        $(this).addClass('active');
     }
     return false;
   });
@@ -114,6 +117,8 @@ $(document).ready(function(){
           $('div.detail').removeClass('active');
           $('div.facebook').addClass('active');
         });
+        $('ul.menu a').removeClass('active');
+        $(this).addClass('active');
     }
     return false;
   });
@@ -131,10 +136,12 @@ $(document).ready(function(){
               $('img.google_logo').addClass('active');
             });
           });
-          $('div.google').fadeIn('fast');
+          $('ul.menu a').removeClass('acitve');
           $('div.detail').removeClass('active');
           $('div.google').addClass('active');
         });
+        $('ul.menu a').removeClass('active');
+        $(this).addClass('active');
     }
     return false;
   });
@@ -152,10 +159,12 @@ $(document).ready(function(){
               $('img.mail_logo').addClass('active');
             });
           });
-          $('div.mailchimp').fadeIn('fast');
+          $('ul.menu a').removeClass('acitve');
           $('div.detail').removeClass('active');
           $('div.mailchimp').addClass('active');
         });
+        $('ul.menu a').removeClass('active');
+        $(this).addClass('active');
     }
     return false;
   });

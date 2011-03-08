@@ -460,9 +460,23 @@ ul.menu li:first-child
 
 ul.menu li
 {
-  padding:10px;
-  width:289px;
+  width:309px;
   border-bottom:1px solid #DADADA;
+}
+
+ul.menu li a
+{
+  width:289px;
+  display:inline-block;
+  padding:10px;
+  outline:none;
+}
+
+ul.menu li a.active
+{
+  background:#7d00bb;
+  color:#fff;
+  font-weight:bold;
 }
 
 ul.menu li:nth-child(2n -1)
@@ -477,7 +491,7 @@ div.detail
 
 div.detail.active
 {
-  display:block;
+  display:block !important;
 }
 
 .side_logo
