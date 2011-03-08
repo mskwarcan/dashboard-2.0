@@ -11,16 +11,25 @@
 			<td><h3 class="noMargin">Goal Completions</h3></td> <td><%= results.fifth["goalCompletionsAll"] %></td>
 		</tr>
 		<tr>	
-			<td><h3 class="noMargin">Visits:</h3></td> <td><%= results.fourth["visits"] %></td>
+			<td><h3 class="noMargin">Visits</h3></td> <td><%= results.fourth["visits"] %></td>
 		</tr>
 		<tr>	
-			<td><h3 class="noMargin">Page Views:</h3></td> <td><%= results.first["pageviews"] %></td>
+			<td><h3 class="noMargin">Page Views</h3></td> <td><%= results.first["pageviews"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">New Visits:</h3></td> <td><%= results.third["newVisits"] %></td>
+			<td><h3 class="noMargin">New Visits</h3></td> <td><%= results.third["newVisits"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">Avg. Time on Site:</h3></td> <td><%= results.second["avgTimeOnSite"] %> seconds</td>
+			<td><h3 class="noMargin">Avg. Time on Site</h3></td> <td><%= results.second["avgTimeOnSite"] %> seconds</td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin"></h3>Impressions</td> <td><%= results.sixth["impressions"] %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Ad Clicks</h3></td> <td><%= results.seventh["adClicks"] %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Click Through Rate</h3></td> <td><%= sprintf("%.2f", results.seventh["adClicks"]/results.sixth["impressions"]*100) %>%</td>
 		</tr>
 		</table>
 	</div>
@@ -28,15 +37,10 @@
 		<% results_last = ActiveSupport::JSON.decode(@update.last_month) %>
 		<% results_two = ActiveSupport::JSON.decode(@update.two_months) %>
 		<% results_three = ActiveSupport::JSON.decode(@update.three_months) %>
-	<div class="col3">
+
 		<table class="data" cellspacing=0>
 			<tr>
-				<td colspan="4"><h3 class="noMargin bold"><%= 1.month.ago.strftime("%B") %> Total Stats</h3></td>
-			</tr>
-			<tr>
-				<td></th>
-				<td><%= 1.month.ago.strftime("%B") %></td>
-				<td>Difference from Previous Month</td>
+				<td colspan="4"><h3 class="noMargin bold"><%= 1.month.ago.strftime("%B") %>-<%= 2.month.ago.strftime("%B") %> Comparision</h3></td>
 			</tr>
 			<tr>
 				<td>Goal Completions</td>
@@ -68,16 +72,27 @@
 				<% avgTimeOnSite = results_last.second["avgTimeOnSite"] - results_two.second["avgTimeOnSite"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
+			<tr>
+				<td>Impressions</td>
+				<td><%= results_last.sixth["impressions"] %></td>
+				<% impressions = results_last.second["impressions"] - results_two.second["impressions"]%>
+				<td class="<% if impressions > 0 %> up<% else %>down<% end %>"><%= impressions %></td>
+			</tr>
+				<td>Ad Clicks</td>
+				<td><%= results_last.second["adClicks"] %></td>
+				<% clicks = results_last.second["adClicks"] - results_two.second["adClicks"]%>
+				<td class="<% if clicks > 0 %> up<% else %>down<% end %>"><%= clicks %></td>
+			</tr>
+				<td>Click Through Rate</td>
+				<td><%= sprintf("%.2f", results_last.seventh["adClicks"]/results_two.sixth["impressions"]*100) %>%</td>
+				<% ctr = sprintf("%.2f", results_last.seventh["adClicks"]/results_two.sixth["impressions"]*100) - sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100)%>
+				<td class="<% if ctr > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
+			</tr>
 		</table>
 		
 		<table class="data" cellspacing=0>
 			<tr>
-				<td colspan="4"><h3 class="noMargin bold"><%= 2.month.ago.strftime("%B") %> Total Stats</h3></td>
-			</tr>
-			<tr>
-				<td></th>
-				<td><%= 2.month.ago.strftime("%B") %></td>
-				<td>Difference from Previous Month</td>
+				<td colspan="4"><h3 class="noMargin bold"><%= 2.month.ago.strftime("%B") %>-<%= 3.month.ago.strftime("%B") %> Comparision</h3></td>
 			</tr>
 			<tr>
 				<td>Goal Completions</td>
@@ -109,7 +124,24 @@
 				<% avgTimeOnSite = results_two.second["avgTimeOnSite"] - results_three.second["avgTimeOnSite"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
+			<tr>
+				<td>Impressions</td>
+				<td><%= results_two.sixth["impressions"] %></td>
+				<% impressions = results_two.second["impressions"] - results_three.second["impressions"]%>
+				<td class="<% if impressions > 0 %> up<% else %>down<% end %>"><%= impressions %></td>
+			</tr>
+				<td>Ad Clicks</td>
+				<td><%= results_two.second["adClicks"] %></td>
+				<% clicks = results_two.second["adClicks"] - results_three.second["adClicks"]%>
+				<td class="<% if clicks > 0 %> up<% else %>down<% end %>"><%= clicks %></td>
+			</tr>
+				<td>Click Through Rate</td>
+				<td><%= sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100) %>%</td>
+				<% ctr = sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100) - sprintf("%.2f", results_two.seventh["adClicks"]/results_three.sixth["impressions"]*100)%>
+				<td class="<% if ctr > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
+			</tr>
 		</table>
+	<div class="col3">
 	</div>
 	<% else %>
 	<div class="col2">
