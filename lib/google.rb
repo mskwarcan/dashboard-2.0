@@ -19,7 +19,7 @@ class Google < Struct.new(:user, :update, :heroku)
       @update.last_month = ActiveSupport::JSON.encode(last.points.first.metrics)
       two_months = gs.get({:start_date => monthTwo, :end_date => lastMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits', 'goalCompletionsAll']})
       @update.two_months = ActiveSupport::JSON.encode(two_months.points.first.metrics)
-      three_months = gs.get({:start_date => monthThree, :end_date => lastTwo, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits', 'goalCompletionsAll']})
+      three_months = gs.get({:start_date => monthThree, :end_date => monthTwo, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits', 'goalCompletionsAll']})
       @update.three_months = ActiveSupport::JSON.encode(three_months.points.first.metrics)
     
       @update.google_done = true
