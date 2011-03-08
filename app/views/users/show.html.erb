@@ -6,7 +6,9 @@
 </ul>
 
 <h1 class="client"><%= @user.client %></h1>
-<span class="update">Updated: <%= @update.updated_at.strftime("%B %d, %Y at %I:%M%p") %></span>
+<% if @update %>
+	<span class="update">Updated: <%= @update.updated_at.strftime("%B %d, %Y at %I:%M%p") %></span>
+<% end %>
 <div class="container clearfix show">
 	<div class="overview">
 		<%= render :partial => "/shared/overview" %>
