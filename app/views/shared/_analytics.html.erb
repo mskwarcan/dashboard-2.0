@@ -22,22 +22,24 @@
 		<tr>
 			<td><h3 class="noMargin">Avg. Time on Site</h3></td> <td><%= results[1]["avgTimeOnSite"] %> seconds</td>
 		</tr>
+		<% if results[5]["impressions"] %>
 		<tr>
-			<td><h3 class="noMargin"></h3>Impressions</td> <td><%= results[5]["impressions"] %></td>
+			<td><h3 class="noMargin">Impressions</h3></td> <td><%= results[5]["impressions"] %></td>
 		</tr>
 		<tr>
 			<td><h3 class="noMargin">Ad Clicks</h3></td> <td><%= results[6]["adClicks"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">Click Through Rate</h3></td> <td><%= sprintf("%.2f", results[6]["adClicks"]/results[5]["impressions"]*100) %>%</td>
+			<td><h3 class="noMargin">Click Through Rate</h3></td> <td><%= sprintf("%.2f", results[6]["adClicks"].to_f/results[5]["impressions"]*100) %>%</td>
 		</tr>
+		<% end %>
 		</table>
 	</div>
 	
 		<% results_last = ActiveSupport::JSON.decode(@update.last_month) %>
 		<% results_two = ActiveSupport::JSON.decode(@update.two_months) %>
 		<% results_three = ActiveSupport::JSON.decode(@update.three_months) %>
-
+	<div class="col3">
 		<table class="data" cellspacing=0>
 			<tr>
 				<td colspan="4"><h3 class="noMargin bold"><%= 1.month.ago.strftime("%B") %>-<%= 2.month.ago.strftime("%B") %> Comparision</h3></td>
@@ -84,9 +86,9 @@
 				<td class="<% if clicks > 0 %> up<% else %>down<% end %>"><%= clicks %></td>
 			</tr>
 				<td>Click Through Rate</td>
-				<td><%= sprintf("%.2f", results_last[6]["adClicks"]/results_two[5]["impressions"]*100) %>%</td>
-				<% ctr = sprintf("%.2f", results_last[6]["adClicks"]/results_two[5]["impressions"]*100) - sprintf("%.2f", results_two[6]["adClicks"]/results_three[5]["impressions"]*100)%>
-				<td class="<% if ctr > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
+				<td><%= sprintf("%.2f", results_last[6]["adClicks"].to_f/results_last[5]["impressions"]*100) %>%</td>
+				<% ctr = sprintf("%.2f", (results_last[6]["adClicks"].to_f/results_last[5]["impressions"] - results_two[6]["adClicks"].to_f/results_two[5]["impressions"])*100)%>
+				<td class="<% if ctr.to_f > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
 			</tr>
 		</table>
 		
@@ -136,12 +138,11 @@
 				<td class="<% if clicks > 0 %> up<% else %>down<% end %>"><%= clicks %></td>
 			</tr>
 				<td>Click Through Rate</td>
-				<td><%= sprintf("%.2f", results_two[6]["adClicks"]/results_three[5]["impressions"]*100) %>%</td>
-				<% ctr = sprintf("%.2f", results_two[6]["adClicks"]/results_three[5]["impressions"]*100) - sprintf("%.2f", results_two[6]["adClicks"]/results_three[5]["impressions"]*100)%>
-				<td class="<% if ctr > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
+				<td><%= sprintf("%.2f", results_two[6]["adClicks"].to_f/results_two[5]["impressions"]*100) %>%</td>
+				<% ctr = sprintf("%.2f", (results_two[6]["adClicks"].to_f/results_two[5]["impressions"] - results_three[6]["adClicks"].to_f/results_three[5]["impressions"])*100)%>
+				<td class="<% if ctr.to_f > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
 			</tr>
 		</table>
-	<div class="col3">
 	</div>
 	<% else %>
 	<div class="col2">

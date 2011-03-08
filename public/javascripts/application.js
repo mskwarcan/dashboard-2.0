@@ -30,7 +30,7 @@ $(document).ready(function(){
     return false;
   });
   
-  $('.google').click(function() {
+  $('a.google').click(function() {
     $(this).fadeOut('fast', function() {
         // Animation complete.
         $(this).siblings('form.analytics').fadeIn('fast');
