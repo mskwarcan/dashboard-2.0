@@ -8,19 +8,17 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       list_id = h.lists.first.second.first["id"]
       @update.chimp_name = h.lists.first.second.first["name"]
       @update.growth = ActiveSupport::JSON.encode(h.list_growth_history(list_id))
-      @update.campaign = ActiveSupport::JSON.encode(h.campaigns["data"])
-      @update.stats = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].first["id"]))
-      @update.stats2 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].second["id"]))
-      @update.stats3 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns["data"].third["id"]))
+      @update.campaign = ActiveSupport::JSON.encode(h.campaigns(filters ={:status => "sent"}, start= 0)["data"])
+      @update.stats = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].first["id"]))
+      @update.stats2 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].second["id"]))
+      @update.stats3 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
       @update.chatter = ActiveSupport::JSON.encode(h.chimp_chatter)
-      
       click_rate = []
       open_rate = []
       
-      campaigns = h.campaigns(filters ={}, start= 0, limit = 100)["data"]
+      campaigns = h.campaigns(filters ={:status => "sent"}, start= 0, limit = 100)["data"]
       
       campaigns.each do |campaign|
-        if campaign["status"] == "sent"
           opened = h.campaign_stats(campaign["id"])["unique_opens"]
           total = h.campaign_stats(campaign["id"])["emails_sent"]
           clicks = h.campaign_stats(campaign["id"])["users_who_clicked"]
@@ -29,7 +27,6 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
         
           open_rate << {:rate => open, :name => campaign["title"], :opened => opened}
           click_rate << {:rate => click, :name => campaign["title"], :clicks => clicks}
-        end
       end
       
       open_rate.sort! { |a,b| b[:rate] <=> a[:rate] }
@@ -45,10 +42,12 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
     rescue
       return
     end
+    
     if ENV["RAILS_ENV"] == 'production'
       if Delayed::Job.count == 1
         heroku.set_workers(ENV["APP_NAME"], 0)
       end
     end
+    
   end    
 end

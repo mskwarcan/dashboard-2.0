@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110303225245) do
+ActiveRecord::Schema.define(:version => 20110308163117) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer   "priority",   :default => 0
@@ -59,6 +59,11 @@ ActiveRecord::Schema.define(:version => 20110303225245) do
     t.text      "stats"
     t.boolean   "chimp_done",    :default => false
     t.text      "chatter"
+    t.text      "stats2"
+    t.text      "stats3"
+    t.text      "top_open"
+    t.text      "top_click"
+    t.text      "three_months"
   end
 
   create_table "users", :force => true do |t|
