@@ -136,17 +136,17 @@
 			<tr>
 				<td><%= Time.parse(growth[-3]["month"] + '-01').strftime("%B") %></td>
 				<td><%= growth[-3]["existing"] %></td>
-				<td><%= growth[-3]["optins"].to_i + growth[-2]["imports"].to_i %></td>
+				<td><%= growth[-3]["optins"].to_i + growth[-3]["imports"].to_i %></td>
 			</tr>
 			<tr>
 				<td><%= Time.parse(growth[-4]["month"] + '-01').strftime("%B") %></td>
 				<td><%= growth[-4]["existing"] %></td>
-				<td><%= growth[-4]["optins"].to_i + growth[-2]["imports"].to_i %></td>
+				<td><%= growth[-4]["optins"].to_i + growth[-4]["imports"].to_i %></td>
 			</tr>
 			<tr>
 				<td><%= Time.parse(growth[-5]["month"] + '-01').strftime("%B") %></td>
 				<td><%= growth[-5]["existing"] %></td>
-				<td><%= growth[-5]["optins"].to_i + growth[-2]["imports"].to_i %></td>
+				<td><%= growth[-5]["optins"].to_i + growth[-5]["imports"].to_i %></td>
 			</tr>
 		</table>
 		
