@@ -27,51 +27,87 @@
 	
 		<% results_last = ActiveSupport::JSON.decode(@update.last_month) %>
 		<% results_two = ActiveSupport::JSON.decode(@update.two_months) %>
+		<% results_three = ActiveSupport::JSON.decode(@update.three_months) %>
 	<div class="col3">
 		<table class="data" cellspacing=0>
 			<tr>
-				<td colspan="4"><h3 class="noMargin bold"><%= 2.month.ago.strftime("%B") %>-<%= 1.month.ago.strftime("%B") %> Comparison</h3></td>
+				<td colspan="4"><h3 class="noMargin bold"><%= 1.month.ago.strftime("%B") %> Total Stats</h3></td>
 			</tr>
 			<tr>
 				<td></th>
 				<td><%= 1.month.ago.strftime("%B") %></td>
-				<td><%= 2.month.ago.strftime("%B") %></td>
-				<td>Difference</td>
+				<td>Difference from Previous Month</td>
+			</tr>
+			<tr>
+				<td>Goal Completions</td>
+				<td><%= results_last.fifth["goalCompletionsAll"] %></td>
+				<% avgTimeOnSite = results_last.fifth["goalCompletionsAll"] - results_two.fifth["goalCompletionsAll"]%>
+				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %></td>
 			</tr>
 			<tr>
 				<td>Page Views</td>
 				<td><%= results_last.first["pageviews"] %></td>
-				<td><%= results_two.first["pageviews"] %></td>
 				<% pageviews = results_last.first["pageviews"] - results_two.first["pageviews"] %>
 				<td class="<% if pageviews > 0 %> up<% else %>down<% end %>"><%= pageviews %></td>
 			</tr>
 			<tr>
 				<td>Visits</td>
 				<td><%= results_last.fourth["visits"] %></td>
-				<td><%= results_two.fourth["visits"] %></td>
 				<% visits = results_last.fourth["visits"] - results_two.fourth["visits"]%>
 				<td class="<% if visits > 0 %> up<% else %>down<% end %>"><%= visits %></td>
 			</tr>
 			<tr>
 				<td>New Visits</td>
 				<td><%= results_last.third["newVisits"] %></td>
-				<td><%= results_two.third["newVisits"] %></td>
 				<% newVisits = results_last.third["newVisits"] - results_two.third["newVisits"]%>
 				<td class="<% if newVisits > 0 %> up<% else %>down<% end %>"><%= newVisits %></td>
 			</tr>
 			<tr>
 				<td>Avg. Time on Site</td>
 				<td><%= results_last.second["avgTimeOnSite"] %> sec</td>
-				<td><%= results_two.second["avgTimeOnSite"] %> sec</td>
 				<% avgTimeOnSite = results_last.second["avgTimeOnSite"] - results_two.second["avgTimeOnSite"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
+		</table>
+		
+		<table class="data" cellspacing=0>
+			<tr>
+				<td colspan="4"><h3 class="noMargin bold"><%= 2.month.ago.strftime("%B") %> Total Stats</h3></td>
+			</tr>
+			<tr>
+				<td></th>
+				<td><%= 2.month.ago.strftime("%B") %></td>
+				<td>Difference from Previous Month</td>
+			</tr>
 			<tr>
 				<td>Goal Completions</td>
-				<td><%= results_last.fifth["goalCompletionsAll"] %></td>
 				<td><%= results_two.fifth["goalCompletionsAll"] %></td>
-				<% avgTimeOnSite = results_last.fifth["goalCompletionsAll"] - results_two.fifth["goalCompletionsAll"]%>
+				<% avgTimeOnSite = results_two.fifth["goalCompletionsAll"] - results_three.fifth["goalCompletionsAll"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %></td>
+			</tr>
+			<tr>
+				<td>Page Views</td>
+				<td><%= results_two.first["pageviews"] %></td>
+				<% pageviews = results_two.first["pageviews"] - results_three.first["pageviews"] %>
+				<td class="<% if pageviews > 0 %> up<% else %>down<% end %>"><%= pageviews %></td>
+			</tr>
+			<tr>
+				<td>Visits</td>
+				<td><%= results_two.fourth["visits"] %></td>
+				<% visits = results_two.fourth["visits"] - results_three.fourth["visits"]%>
+				<td class="<% if visits > 0 %> up<% else %>down<% end %>"><%= visits %></td>
+			</tr>
+			<tr>
+				<td>New Visits</td>
+				<td><%= results_two.third["newVisits"] %></td>
+				<% newVisits = results_two.third["newVisits"] - results_three.third["newVisits"]%>
+				<td class="<% if newVisits > 0 %> up<% else %>down<% end %>"><%= newVisits %></td>
+			</tr>
+			<tr>
+				<td>Avg. Time on Site</td>
+				<td><%= results_two.second["avgTimeOnSite"] %> sec</td>
+				<% avgTimeOnSite = results_two.second["avgTimeOnSite"] - results_three.second["avgTimeOnSite"]%>
+				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
 		</table>
 	</div>

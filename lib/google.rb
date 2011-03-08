@@ -10,6 +10,7 @@ class Google < Struct.new(:user, :update, :heroku)
       currentMonth = Time.now.strftime('%Y-%m-01')
     	lastMonth = 1.month.ago.strftime("%Y-%m-01")
     	monthTwo = 2.month.ago.strftime("%Y-%m-01")
+    	monthThree = 3.month.ago.strftime("%Y-%m-01")
     	nextMonth = 1.month.from_now.strftime("%Y-%m-01")
     
       current = gs.get({:start_date => currentMonth, :end_date => nextMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits', 'goalCompletionsAll']})
@@ -18,6 +19,8 @@ class Google < Struct.new(:user, :update, :heroku)
       @update.last_month = ActiveSupport::JSON.encode(last.points.first.metrics)
       two_months = gs.get({:start_date => monthTwo, :end_date => lastMonth, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits', 'goalCompletionsAll']})
       @update.two_months = ActiveSupport::JSON.encode(two_months.points.first.metrics)
+      three_months = gs.get({:start_date => monthThree, :end_date => lastTwo, :metrics => ['pageviews','avgTimeOnSite','newVisits','visits', 'goalCompletionsAll']})
+      @update.three_months = ActiveSupport::JSON.encode(three_months.points.first.metrics)
     
       @update.google_done = true
     
