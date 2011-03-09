@@ -11,7 +11,7 @@ class Facebook < Struct.new(:user, :update, :heroku)
       @update.face_name = page.info!["name"]
       @update.likes = page.info!["likes"]
       @update.new_likes = page.info!["likes"] - user.facebook_monthly_count
-      @update.feed = ActiveSupport::JSON.encode(page.statuses.limit(10).info!["data"])
+      @update.feed = ActiveSupport::JSON.encode(page.posts.limit(10).info!["data"])
       
       @update.face_done = true
     
@@ -22,7 +22,7 @@ class Facebook < Struct.new(:user, :update, :heroku)
         user.save
       end
     
-      page.statuses.limit(10).info!["data"].each do |feed|
+      page.posts.limit(10).info!["data"].each do |feed|
         status = Feed.new
         status.feed_id = feed["id"]
         status.picture = facebook.selection.user(feed["from"]["id"]).picture
