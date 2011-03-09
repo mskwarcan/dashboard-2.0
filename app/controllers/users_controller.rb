@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   require 'twitter'
   require 'gattica'
   
-  before_filter :is_admin, :except => [:show, :logout, :authenticate]
+  before_filter :is_admin, :except => [:show, :logout, :authenticate, :forgot]
   before_filter :current_user, :only => :show
 
   # GET /users/1
@@ -100,6 +100,18 @@ class UsersController < ApplicationController
         format.html { redirect_to "/" }
         format.xml  { head :ok }
       end
+    end
+  end
+  
+  def forgot
+    @user = User.first(:conditions => {:username => params[:username]})
+    
+    Forgot.forgot_password(@user).deliver
+    
+    flash[:success] = "Your password has been sent"
+    respond_to do |format|
+      format.html { redirect_to "/forgot"}
+      format.xml  { head :ok }
     end
   end
   

@@ -113,6 +113,15 @@ div.field, div.actions {
   background:#f4a6a6;
 }
 
+.success_message
+{
+  padding:5px;
+  margin:0 0 10px 0;
+  border:1px solid #1e691b;
+  color:#1e691b;
+  background:#a2e89e;
+}
+
 /* Structure */
 .wrapper
 {

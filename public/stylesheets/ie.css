@@ -1,0 +1,15 @@
+.bold
+{
+  font-weight:bold;
+}
+
+table.data tr td
+{
+  border-bottom:1px solid #DADADA;
+}
+
+input.text
+{
+  padding-top:10px;
+  height:25px;
+}

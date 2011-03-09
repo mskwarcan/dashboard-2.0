@@ -4,6 +4,8 @@ Dashboard::Application.routes.draw do
   root :to => "home#index"
   
   match 'login' => 'users#authenticate'
+  match 'forgot', :controller => 'home', :action => 'forgot'
+  match 'forgot_password', :controller => 'users', :action => 'forgot'
   match 'logout', :controller => 'users', :action => 'logout'
   
   match '/twitter_register', :controller => 'users', :action => 'twitter_register'

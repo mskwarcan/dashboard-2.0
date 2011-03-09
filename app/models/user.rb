@@ -1,3 +1,5 @@
+require 'digest/sha2'
+
 class User < ActiveRecord::Base
   validates :username,  :presence => true,
                         :length => { :minimum => 5},

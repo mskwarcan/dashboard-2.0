@@ -17,4 +17,8 @@ class HomeController < ApplicationController
     @user = session[:user]
     @users = User.all(:conditions => ["username != 'admin'"], :order => "client ASC")
   end
+  
+  def forgot
+    
+  end
 end
