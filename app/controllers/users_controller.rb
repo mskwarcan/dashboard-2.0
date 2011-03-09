@@ -107,11 +107,18 @@ class UsersController < ApplicationController
     @user = User.first(:conditions => {:username => params[:username]})
     
     Forgot.forgot_password(@user).deliver
-    
-    flash[:success] = "Your password has been sent"
-    respond_to do |format|
-      format.html { redirect_to "/forgot"}
-      format.xml  { head :ok }
+    if @user
+      flash[:success] = "Your password has been sent"
+      respond_to do |format|
+        format.html { redirect_to "/forgot"}
+        format.xml  { head :ok }
+      end
+    else
+      flash[:error] = "That user doesn't exist"
+      respond_to do |format|
+        format.html { redirect_to "/forgot"}
+        format.xml  { head :ok }
+      end
     end
   end
   
