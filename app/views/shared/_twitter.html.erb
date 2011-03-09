@@ -12,9 +12,9 @@
 	<div class="col3">
 			<h3 class="nobot">Your Recent Tweets</h3>	
 			<% tweets = ActiveSupport::JSON.decode(@update.tweets) %>
-			<ul class="tweets">
+			<ul class="tweets clearfix">
 			<% tweets.each do | tweet |%>
-				<li class="clearfix"><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> 
+				<li><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> 
 				<div class="status">
 					<b><a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a></b><br />
 				<%= tweet["text"] %>

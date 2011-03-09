@@ -509,6 +509,11 @@ img.twitter
   width:48px;
 }
 
+.col3 img.twitter
+{
+  position:absolute;
+}
+
 .info
 {
   margin:10px;
@@ -527,6 +532,8 @@ ul.tweets li
 {
   padding:10px;
   width:289px;
+  clear:left;
+  min-height:50px;
   border-bottom:1px solid #DADADA;
 }
 
@@ -576,6 +583,8 @@ ul.facebook
 
 ul.facebook li
 {
+  clear:left;
+  min-height:50px;
   padding:10px;
   width:289px;
   border-bottom:1px solid #DADADA;
@@ -593,7 +602,7 @@ ul.facebook li .status
 
 ul.facebook li:nth-child(2n)
 {
-  background:#e6e6e6;
+  background:#fff;
 }
 
 img.facebook

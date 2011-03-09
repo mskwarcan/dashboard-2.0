@@ -13,11 +13,11 @@
 	<div class="col3">
 		<% feed = ActiveSupport::JSON.decode(@update.feed) %>
 		<h3 class="nobot">Your Wall</h3>
-		<ul class="facebook">
+		<ul class="facebook clearfix">
 		<% feed.each do | feed |%>
-			<% status = Feed.first(:conditions => {:feed_id => feed["id"]})%>
-			<li class="clearfix"><img class="twitter" src="<%= status.picture %>" /> 
-			<div class="status">
+			<% status = Feed.first(:conditions => {:feed_id => feed["id"]}) %>
+			<li><img class="twitter" src="<%= status.picture %>" /> 
+			<div class="status clearfix">
 				<b><a target="_blank" href="<%= status.link %>"><%= feed["from"]["name"] %></a></b><br />
 			<p class="message"><%= feed["message"] %></p>
 			<% if feed["picture"] %>
