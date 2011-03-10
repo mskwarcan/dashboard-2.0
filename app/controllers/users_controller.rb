@@ -106,8 +106,8 @@ class UsersController < ApplicationController
   def forgot
     @user = User.first(:conditions => {:username => params[:username]})
     
-    Forgot.forgot_password(@user).deliver
     if @user
+      Forgot.forgot_password(@user).deliver
       flash[:success] = "Your password has been sent"
       respond_to do |format|
         format.html { redirect_to "/forgot"}
