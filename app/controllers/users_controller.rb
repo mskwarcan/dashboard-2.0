@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
-
+    
     respond_to do |format|
       if @user.save
         format.html { redirect_to("/admin", :notice => 'User was successfully created.') }
@@ -56,9 +56,29 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
+    @update = User.new(params[:user]);
+    
+    @update = @user.id
+    
+    if @user.analytics == ""
+      @user.analytics_authenticated = false
+    end
+
+    if @user.facebook_token == ""
+      @user.fb_authenticated = false
+    end
+
+    if @user.mailchimp == ""
+      @user.mailchimp_authenticated = false
+    end
+
+    if @user.twitter_token == ""
+      @user.twitter_authenticated = false
+    end
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(@update)
+        
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else

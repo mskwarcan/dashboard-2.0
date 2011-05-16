@@ -29,7 +29,7 @@
 		  </div>
 		  <div class="field">
 		    <p><label for="verify">Verify Password</label><br />
-		    <input type="password" id="verify" name="verify" size="30" class="required text"></p>
+		    <input type="password" id="verify" name="verify" size="30" class="required text" value="<%= @user.password %>"</p>
 		  </div>
 		  <div class="field">
 		    <p><%= f.label :email %><br />
@@ -38,6 +38,10 @@
 		  <div class="field">
 		    <p><%= f.label :facebook_token, "Facebook Page ID" %><br />
 		    <%= f.text_field :facebook_token, :class => "text" %>
+		  </div>
+		  <div class="field">
+		    <p><%= f.label :twitter_token, "Twitter Token" %><br />
+		    <%= f.text_field :twitter_token, :class => "text" %>
 		  </div>
 		  <div class="field">
 		    <p><%= f.label :analytics, "Analytics ID" %><br />
