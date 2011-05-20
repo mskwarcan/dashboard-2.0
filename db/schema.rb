@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110308163117) do
+ActiveRecord::Schema.define(:version => 20110519200239) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer   "priority",   :default => 0
@@ -49,21 +49,25 @@ ActiveRecord::Schema.define(:version => 20110308163117) do
     t.timestamp "updated_at"
     t.text      "last_month"
     t.integer   "user_id"
-    t.boolean   "tweet_done",    :default => false
-    t.boolean   "face_done",     :default => false
-    t.boolean   "google_done",   :default => false
+    t.boolean   "tweet_done",           :default => false
+    t.boolean   "face_done",            :default => false
+    t.boolean   "google_done",          :default => false
     t.text      "two_months"
     t.string    "chimp_name"
     t.text      "growth"
     t.text      "campaign"
     t.text      "stats"
-    t.boolean   "chimp_done",    :default => false
+    t.boolean   "chimp_done",           :default => false
     t.text      "chatter"
     t.text      "stats2"
     t.text      "stats3"
     t.text      "top_open"
     t.text      "top_click"
     t.text      "three_months"
+    t.text      "adwords"
+    t.text      "last_adwords"
+    t.text      "two_months_adwords"
+    t.text      "three_months_adwords"
   end
 
   create_table "users", :force => true do |t|

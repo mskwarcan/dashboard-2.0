@@ -141,6 +141,7 @@ GEM
       mime-types (>= 1.16)
       oauth (>= 0.3.6)
     tzinfo (0.3.24)
+    youtube_it (0.0.8)
 
 PLATFORMS
   ruby
@@ -155,8 +156,10 @@ DEPENDENCIES
   hominid
   jquery-rails (>= 0.2.6)
   linkedin
+  nokogiri
   rails (= 3.0.4)
   redis
   sqlite3
   twitter
   twitter_oauth
+  youtube_it

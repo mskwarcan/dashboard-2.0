@@ -4,9 +4,12 @@
 		
 	
 		<% results = ActiveSupport::JSON.decode(@update.results) %>
+		<% if @update.adwords %>
+		<% adwords = ActiveSupport::JSON.decode(@update.adwords) %>
+		<% end %>
 		<table class="data" cellspacing=0>
 			<tr>
-				<td colspan="2"><h3 class="noMargin bold"><%= Time.now.strftime("%B") %> Current Stats</h3></td>
+				<td colspan="2"><h3 class="noMargin bold"><%= Time.now.strftime("%B") %> Analytics Stats</h3></td>
 			</tr>
 		<tr>
 			<td><h3 class="noMargin">Goal Completions</h3></td> <td><%= results[4]["goalCompletionsAll"] %></td>
@@ -23,15 +26,30 @@
 		<tr>
 			<td><h3 class="noMargin">Avg. Time on Site</h3></td> <td><%= results[1]["avgTimeOnSite"] %> seconds</td>
 		</tr>
-		<% if results[5]["impressions"] %>
+		<% if @update.adwords %>
 		<tr>
-			<td><h3 class="noMargin">Impressions</h3></td> <td><%= results[5]["impressions"] %></td>
+			<td colspan="2"><h3 class="noMargin bold"><%= Time.now.strftime("%B") %> Adwords Stats</h3></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">Ad Clicks</h3></td> <td><%= results[6]["adClicks"] %></td>
+			<td><h3 class="noMargin">Impressions</h3></td> <td><%= adwords[0]["impressions"] %></td>
 		</tr>
 		<tr>
-			<td><h3 class="noMargin">Click Through Rate</h3></td> <td><%= sprintf("%.2f", results[6]["adClicks"].to_f/results[5]["impressions"]*100) %>%</td>
+			<td><h3 class="noMargin">Ad Clicks</h3></td> <td><%= adwords[1]["adClicks"] %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Click Through Rate</h3></td> <td><%= sprintf("%.2f", adwords[1]["adClicks"].to_f/adwords[0]["impressions"]*100) %>%</td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Cost Per Click</h3></td> <td>$<%= sprintf("%.2f", adwords[5]["adCost"]/adwords[1]["adClicks"].to_f) %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Conversions</h3></td> <td><%= adwords[6]["transactions"] + results[4]["goalCompletionsAll"] %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Cost Per Conversion</h3></td> <td>$<%= sprintf("%.2f", adwords[5]["adCost"]/(adwords[6]["transactions"] + results[4]["goalCompletionsAll"]).to_f) %></td>
+		</tr>
+		<tr>
+			<td><h3 class="noMargin">Cost</h3></td> <td>$<%= adwords[5]["adCost"] %></td>
 		</tr>
 		<% end %>
 		</table>
@@ -39,6 +57,10 @@
 	
 		<% results_last = ActiveSupport::JSON.decode(@update.last_month) %>
 		<% results_two = ActiveSupport::JSON.decode(@update.two_months) %>
+		<% if @update.adwords %>
+		<% adwords_last = ActiveSupport::JSON.decode(@update.last_adwords) %>
+		<% adwords_two = ActiveSupport::JSON.decode(@update.two_months_adwords) %>
+		<% end %>
 		
 		<table class="data" cellspacing=0>
 			<tr>
@@ -85,27 +107,57 @@
 				<% avgTimeOnSite = results_last.second["avgTimeOnSite"] - results_two.second["avgTimeOnSite"]%>
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
+			<% if @update.adwords %>
 			<tr>
 				<td>Impressions</td>
-				<td><%= results_last[5]["impressions"] %></td>
-				<td><%= results_two[5]["impressions"] %></td>
-				<% impressions = results_last[5]["impressions"] - results_two[5]["impressions"] %>
+				<td><%= adwords_last[0]["impressions"] %></td>
+				<td><%= adwords_two[0]["impressions"] %></td>
+				<% impressions = adwords_last[0]["impressions"] - adwords_two[0]["impressions"] %>
 				<td class="<% if impressions > 0 %> up<% else %>down<% end %>"><%= impressions %></td>
 			</tr>
 			<tr>
 				<td>Ad Clicks</td>
-				<td><%= results_last[6]["adClicks"] %></td>
-				<td><%= results_two[6]["adClicks"] %></td>
-				<% clicks = results_last[6]["adClicks"] - results_two[6]["adClicks"] %>
+				<td><%= adwords_last[1]["adClicks"] %></td>
+				<td><%= adwords_two[1]["adClicks"] %></td>
+				<% clicks = adwords_last[1]["adClicks"] - adwords_two[1]["adClicks"] %>
 				<td class="<% if clicks > 0 %> up<% else %>down<% end %>"><%= clicks %></td>
 			</tr>
 			<tr>
 				<td>Click Through Rate</td>
-				<td><%= sprintf("%.2f", results_last[6]["adClicks"].to_f/results_last[5]["impressions"]*100) %>%</td>
-				<td><%= sprintf("%.2f", results_two[6]["adClicks"].to_f/results_two[5]["impressions"]*100) %>%</td>
-				<% ctr = sprintf("%.2f", (results_last[6]["adClicks"].to_f/results_last[5]["impressions"] - results_two[6]["adClicks"].to_f/results_two[5]["impressions"])*100)%>
+				<td><%= sprintf("%.2f", adwords_last[1]["adClicks"].to_f/adwords_last[0]["impressions"]*100) %>%</td>
+				<td><%= sprintf("%.2f", adwords_two[1]["adClicks"].to_f/adwords_two[0]["impressions"]*100) %>%</td>
+				<% ctr = sprintf("%.2f", (adwords_last[1]["adClicks"].to_f/adwords_last[0]["impressions"]*100) -  (adwords_two[1]["adClicks"].to_f/adwords_two[0]["impressions"]*100)) %>
 				<td class="<% if ctr.to_f > 0 %> up<% else %>down<% end %>"><%= ctr %>%</td>
 			</tr>
+			<tr>
+				<td>Cost Per Click</td>
+				<td>$<%= sprintf("%.2f", adwords_last[5]["adCost"]/adwords_last[1]["adClicks"].to_f) %></td>
+				<td>$<%= sprintf("%.2f", adwords_two[5]["adCost"]/adwords_two[1]["adClicks"].to_f) %></td>
+				<% cpc = sprintf("%.2f", (adwords_last[5]["adCost"]/adwords_last[1]["adClicks"].to_f) -  (adwords_two[5]["adCost"]/adwords_two[1]["adClicks"].to_f)) %>
+				<td class="<% if cpc.to_f < 0 %> up<% else %>down<% end %>">$<%= cpc %></td>
+			</tr>
+			<tr>
+				<td>Conversions</td>
+				<td><%= adwords_last[6]["transactions"] + results_last[4]["goalCompletionsAll"] %></td>
+				<td><%= adwords_two[6]["transactions"] + results_two[4]["goalCompletionsAll"] %></td>
+				<% conversions = (adwords_last[6]["transactions"] + results_last[4]["goalCompletionsAll"]) - (adwords_two[6]["transactions"] + results_two[4]["goalCompletionsAll"]) %>
+				<td class="<% if conversions > 0 %> up<% else %>down<% end %>"><%= conversions %></td>
+			</tr>
+			<tr>
+				<td>Cost Per Conversion</td>
+				<td>$<%= sprintf("%.2f", adwords_last[5]["adCost"]/(adwords_last[6]["transactions"] + results_last[4]["goalCompletionsAll"]).to_f) %></td>
+				<td>$<%= sprintf("%.2f", adwords_two[5]["adCost"]/(adwords_two[6]["transactions"] + results_two[4]["goalCompletionsAll"]).to_f) %></td>
+				<% costpc = sprintf("%.2f", (adwords_last[5]["adCost"]/(adwords_last[6]["transactions"] + results_last[4]["goalCompletionsAll"]).to_f) -  adwords_two[5]["adCost"]/(adwords_two[6]["transactions"] + results_two[4]["goalCompletionsAll"]).to_f) %>
+				<td class="<% if costpc.to_f < 0 %> up<% else %>down<% end %>">$<%= costpc %></td>
+			</tr>
+			<tr>
+				<td>Cost</td>
+				<td>$<%= adwords_last[5]["adCost"] %></td>
+				<td>$<%= adwords_two[5]["adCost"] %></td>
+				<% cost = adwords_last[5]["adCost"] - adwords_two[5]["adCost"] %>
+				<td class="<% if cost < 0 %> up<% else %>down<% end %>">$<%= cost %></td>
+			</tr>
+			<% end %>
 		</table>
 	<% else %>
 			<h2>Sorry! Your information is not ready yet.</h2>
