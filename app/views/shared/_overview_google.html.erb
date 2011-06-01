@@ -27,6 +27,7 @@
 			<td><h3 class="noMargin">Avg. Time on Site</h3></td> <td><%= results[1]["avgTimeOnSite"] %> seconds</td>
 		</tr>
 		<% if @update.adwords %>
+		<% if (adwords[0]["impressions"] != 0) %>
 		<tr>
 			<td colspan="2"><h3 class="noMargin bold"><%= Time.now.strftime("%B") %> Adwords Stats</h3></td>
 		</tr>
@@ -51,6 +52,7 @@
 		<tr>
 			<td><h3 class="noMargin">Cost</h3></td> <td>$<%= adwords[5]["adCost"] %></td>
 		</tr>
+		<% end %>
 		<% end %>
 		</table>
 
