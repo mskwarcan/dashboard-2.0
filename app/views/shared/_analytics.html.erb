@@ -103,6 +103,7 @@
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
 			<% if @update.adwords %>
+			<% if (adwords[0]["impressions"] != 0) %>
 			<tr>
 				<td>Impressions</td>
 				<td><%= adwords_last[0]["impressions"] %></td>
@@ -151,6 +152,7 @@
 				<td class="<% if cost < 0 %> up<% else %>down<% end %>">$<%= cost %></td>
 			</tr>
 			<% end %>
+			<% end %>
 		</table>
 		
 		<table class="data" cellspacing=0>
@@ -193,6 +195,7 @@
 				<td class="<% if avgTimeOnSite > 0 %> up<% else %>down<% end %>"><%= avgTimeOnSite %> sec</td>
 			</tr>
 			<% if @update.adwords %>
+			<% if (adwords[0]["impressions"] != 0) %>
 			<tr>
 				<td>Impressions</td>
 				<td><%= adwords_two[0]["impressions"] %></td>
@@ -240,6 +243,7 @@
 				<% cost = adwords_two[5]["adCost"] - adwords_three[5]["adCost"] %>
 				<td class="<% if cost < 0 %> up<% else %>down<% end %>">$<%= cost %></td>
 			</tr>
+			<% end %>
 			<% end %>
 		</table>
 	</div>
