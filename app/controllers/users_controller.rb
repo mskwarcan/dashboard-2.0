@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @update = User.new(params[:user]);
     
-    @update = @user.id
+    @update.id = @user.id
     
     if @user.analytics == ""
       @user.analytics_authenticated = false
