@@ -7,6 +7,7 @@
   <%= javascript_include_tag "jquery.infieldlabel.min.js", "jquery.validate.min.js", "application" %>
   <%= csrf_meta_tag %>
   <%= "<!--[if lte IE 8]>#{stylesheet_link_tag 'ie'}<![endif]-->".html_safe if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+  <link rel="stylesheet" href="/stylesheets/handheld.css" media="handheld, only screen and (max-device-width:480px)"/>
 	<script type="text/javascript" src="http://use.typekit.com/epq8thw.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>

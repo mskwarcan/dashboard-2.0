@@ -1,0 +1,26 @@
+body
+{
+  background:#FAFAFA;
+}
+
+h1.header
+{
+  display:none;
+}
+
+.login
+{
+  height:inherit;
+  width:100%;
+  padding:5px 10px;
+}
+
+.wrapper
+{
+	width:100%;
+}
+
+.container
+{
+  border:none;
+}
