@@ -1,6 +1,7 @@
 body
 {
   background:#FAFAFA;
+  max-width:480px;
 }
 
 h1.header
@@ -28,4 +29,14 @@ h1.header
 .footer
 {
   display:none;
+}
+
+.noMobile
+{
+  display:none;
+}
+
+table#users
+{
+  width:100%;
 }
