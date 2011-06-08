@@ -1,14 +1,9 @@
-html
-{
-  width:320px;
-  height:100%;
-}
-
 body
 {
   background:#FAFAFA;
   width:320px;
   height:100%;
+  overflow:hidden;
 }
 
 h1.header
