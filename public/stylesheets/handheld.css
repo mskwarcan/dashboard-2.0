@@ -1,7 +1,7 @@
 body
 {
   background:#FAFAFA;
-  max-width:480px;
+  width:480px;
 }
 
 h1.header
@@ -18,7 +18,7 @@ h1.header
 
 .wrapper
 {
-	width:100%;
+	width:320px;
 }
 
 .container
@@ -38,5 +38,23 @@ h1.header
 
 table#users
 {
-  width:100%;
+  width:320px;
+}
+
+.topbar
+{
+  padding:0;
+  width:320px;
+}
+
+.topbar ul
+{
+  float:none;
+  text-align:left;
+}
+
+.topbar ul li
+{
+  font-size:12px;
+  margin:0 10px;
 }
