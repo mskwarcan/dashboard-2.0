@@ -95,12 +95,26 @@ ul.tabs
   display:none !important;
 }
 
-.side_logo
+img.side_logo
 {
-  display:none;
+  display:none !important;
 }
 
 .col2, .col3
 {
   float:none;
+}
+
+ul.menu li
+{
+  width:320px;
+  border-bottom:1px solid #DADADA;
+}
+
+ul.menu li a
+{
+  width:300px;
+  display:inline-block;
+  padding:10px;
+  outline:none;
 }
