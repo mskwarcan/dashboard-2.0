@@ -1,9 +1,7 @@
 	<% if @update.chimp_name %>
 	<div class="col2">
 		
-	<div>
-		<h3 class="noMargin bold"><%= @update.chimp_name %></h3>
-	</div>
+		<h3 class="noMargin bold mobile_pad"><%= @update.chimp_name %></h3>
 		<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats) %>
 
@@ -116,7 +114,7 @@
 		<% open_rate = ActiveSupport::JSON.decode(@update.top_open) %>
 		<% click_rate = ActiveSupport::JSON.decode(@update.top_click) %>
 		
-		<h3 class="noMargin bold">Growth</h3>
+		<h3 class="noMargin bold mobile_pad">Growth</h3>
 		<table class="data" cellspacing=0>
 			<tr>
 				<td>Month</td>

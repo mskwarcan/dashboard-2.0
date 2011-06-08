@@ -96,7 +96,7 @@ ul.tabs
   background:none;
 }
 
-.info.active
+.information
 {
   display:none !important;
 }
@@ -139,6 +139,16 @@ table.data, .col3 table.data
 .google .col2, .google .col3, .mailchimp .col2, .mailchimp .col3
 {
   padding:0;
+}
+
+.mailchimp .chimp, ul.chatter
+{
+  padding:0 15px;
+}
+
+.mailchimp .mobile_pad
+{
+  padding-left:15px;
 }
 
 .google.active, .facebook.active, .mailchimp.active, .twitter.active
