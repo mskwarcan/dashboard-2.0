@@ -1,9 +1,7 @@
 body
 {
   background:#FAFAFA;
-  width:320px;
-  height:100%;
-  overflow:hidden;
+  width:100%;
 }
 
 h1.header
@@ -20,8 +18,7 @@ h1.header
 
 .wrapper
 {
-  margin:0;
-	width:320px;
+	width:100%;
 }
 
 .container
@@ -47,7 +44,6 @@ table#users
 .topbar
 {
   padding:0;
-  width:320px;
 }
 
 .topbar ul
