@@ -6,6 +6,7 @@
 		<% if @update.adwords %>
 		<% adwords = ActiveSupport::JSON.decode(@update.adwords) %>
 		<% end %>
+		<div class="clearfix">
 		<table class="data" cellspacing=0>
 			<tr>
 				<td colspan="2"><h3 class="noMargin bold"><%= Time.now.strftime("%B") %> Current Stats</h3></td>
@@ -51,6 +52,7 @@
 		<% end %>
 		<% end %>
 		</table>
+		</div>
 	</div>
 	
 		<% results_last = ActiveSupport::JSON.decode(@update.last_month) %>
@@ -246,7 +248,7 @@
 			<% end %>
 			<% end %>
 		</table>
-	</div>
+		</div>
 	<% else %>
 	<div class="col2">
 			<h2>Sorry! Your information is not ready yet.</h2>

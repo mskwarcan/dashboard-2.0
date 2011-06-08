@@ -64,6 +64,12 @@ h1.client
 {
   font-size:18px;
   margin-bottom:4px;
+  margin-left:5px;
+}
+
+.update
+{
+  margin-left:5px;
 }
 
 ul.tabs
@@ -117,4 +123,19 @@ ul.menu li a
   display:inline-block;
   padding:10px;
   outline:none;
+}
+
+ul.tweets li, ul.facebook li
+{
+  width:300px;
+}
+
+table.data, .col3 table.data
+{
+  width:320px;
+}
+
+.google.active, .facebook.active, .mailchimp.active, .twitter.active
+{
+  display:block !important;
 }
