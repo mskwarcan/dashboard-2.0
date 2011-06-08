@@ -136,7 +136,7 @@ table.data, .col3 table.data
   width:320px;
 }
 
-.google .col2, .google .col3
+.google .col2, .google .col3, .mailchimp .col2, .mailchimp .col3
 {
   padding:0;
 }
