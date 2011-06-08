@@ -57,3 +57,50 @@ table#users
   font-size:12px;
   margin:0 10px;
 }
+
+/* Main View */
+
+h1.client
+{
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+ul.tabs
+{
+  display:none;
+}
+
+.overview
+{
+  display:none;
+}
+
+.details
+{
+  display:block;
+}
+
+.container.show
+{
+  width:100%;
+  min-width:320px;
+  min-height:200px;
+  clear:left;
+  background:none;
+}
+
+.info.active
+{
+  display:none !important;
+}
+
+.side_logo
+{
+  display:none;
+}
+
+.col2, .col3
+{
+  float:none;
+}

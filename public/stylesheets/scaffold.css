@@ -500,7 +500,7 @@ div.detail
 
 div.detail.active
 {
-  display:block !important;
+  display:block;
 }
 
 .side_logo
