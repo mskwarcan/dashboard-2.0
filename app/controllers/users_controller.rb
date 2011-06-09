@@ -167,11 +167,7 @@ class UsersController < ApplicationController
     end
 
     def facebook_oauth
-      client = FacebookOAuth::Client.new(
-          :application_id => '185181124851176',
-          :application_secret => '9ebcc080254926b191aaba84023743f8',
-          :callback => 'http://bdashd.com/facebook_oauth'
-      )
+      client = FacebookOAuth::Client.new(:application_id => '185181124851176',:application_secret => '9ebcc080254926b191aaba84023743f8',:callback => 'http://bdashd.com/facebook_oauth')
 
       session[:token] = client.authorize(:code => params[:code])
 
