@@ -158,8 +158,8 @@ class UsersController < ApplicationController
   
   def facebook_get_token
       client = FacebookOAuth::Client.new(
-          :application_id => '129898603745111',
-          :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+          :application_id => '185181124851176',
+          :application_secret => '9ebcc080254926b191aaba84023743f8',
           :callback => 'http://bdashd.com/facebook_oauth'
       )
 
@@ -168,8 +168,8 @@ class UsersController < ApplicationController
 
     def facebook_oauth
       client = FacebookOAuth::Client.new(
-          :application_id => '129898603745111',
-          :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+          :application_id => '185181124851176',
+          :application_secret => '9ebcc080254926b191aaba84023743f8',
           :callback => 'http://bdashd.com/facebook_oauth'
       )
 
