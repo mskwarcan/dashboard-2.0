@@ -10,6 +10,8 @@ Dashboard::Application.routes.draw do
   
   match '/twitter_register', :controller => 'users', :action => 'twitter_register'
   match '/twitter_oauth', :controller => 'users', :action => 'twitter_oauth'
+  match '/token', :controller => 'users', :action => 'facebook_get_token'
+  match '/facebook_oauth', :controller => 'users', :action => 'facebook_oauth'
   match '/facebook_id', :controller => 'users', :action => 'facebook_id'
   match '/analytics', :controller => 'users', :action => 'analytics'
   match '/mailchimp', :controller => 'users', :action => 'mailchimp'

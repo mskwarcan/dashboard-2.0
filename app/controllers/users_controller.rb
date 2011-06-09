@@ -156,6 +156,28 @@ class UsersController < ApplicationController
     redirect_to "/"
   end
   
+  def facebook_get_token
+      client = FacebookOAuth::Client.new(
+          :application_id => '129898603745111',
+          :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+          :callback => 'http://bdashd.com/facebook_oauth'
+      )
+
+      redirect_to client.authorize_url
+    end
+
+    def facebook_oauth
+      client = FacebookOAuth::Client.new(
+          :application_id => '129898603745111',
+          :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+          :callback => 'http://bdashd.com/facebook_oauth'
+      )
+
+      session[:token] = client.authorize(:code => params[:code])
+
+      redirect_to "/"
+    end
+  
   def twitter_register
     #Get user
     @user = User.first(:conditions => {:username => params[:user]})

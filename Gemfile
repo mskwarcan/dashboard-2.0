@@ -32,6 +32,7 @@ gem 'nokogiri'
 
 gem 'twitter_oauth'
 gem 'fbgraph'
+gem 'facebook_oauth'
 gem 'twitter'
 gem 'linkedin'
 gem 'jquery-rails', '>= 0.2.6'
