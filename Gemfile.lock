@@ -162,6 +162,7 @@ DEPENDENCIES
   jquery-rails (>= 0.2.6)
   linkedin
   nokogiri
+  oauth
   rails (= 3.0.4)
   redis
   sqlite3

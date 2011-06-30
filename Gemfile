@@ -44,4 +44,5 @@ gem 'delayed_job'
 gem 'heroku'
 gem 'youtube_it'
 gem 'hominid'
+gem 'oauth'
 
