@@ -3,8 +3,6 @@ Bdashd::Application.routes.draw do
 
   devise_for :users
 
-  resources :users
-
   root :to => "accounts#index"
 
   # The priority is based upon order of creation:
