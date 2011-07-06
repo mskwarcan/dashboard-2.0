@@ -1,0 +1,35 @@
+<h1>Listing accounts</h1>
+
+<table>
+  <tr>
+    <th>Facebook token</th>
+    <th>Twitter token</th>
+    <th>Twitter secret</th>
+    <th>Twitter monthly count</th>
+    <th>Facebook monthly count</th>
+    <th>Mailchimp api key</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @accounts.each do |account| %>
+  <tr>
+    <td><%= account.facebook_token %></td>
+    <td><%= account.twitter_token %></td>
+    <td><%= account.twitter_secret %></td>
+    <td><%= account.twitter_monthly_count %></td>
+    <td><%= account.facebook_monthly_count %></td>
+    <td><%= account.mailchimp_api_key %></td>
+    <td><%= account.name %></td>
+    <td><%= link_to 'Show', account %></td>
+    <td><%= link_to 'Edit', edit_account_path(account) %></td>
+    <td><%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Account', new_account_path %>

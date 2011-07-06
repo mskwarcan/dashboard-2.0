@@ -1,0 +1,45 @@
+<%= form_for(@account) do |f| %>
+  <% if @account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+      <% @account.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :facebook_token %><br />
+    <%= f.text_field :facebook_token %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter_token %><br />
+    <%= f.text_field :twitter_token %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter_secret %><br />
+    <%= f.text_field :twitter_secret %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter_monthly_count %><br />
+    <%= f.text_field :twitter_monthly_count %>
+  </div>
+  <div class="field">
+    <%= f.label :facebook_monthly_count %><br />
+    <%= f.text_field :facebook_monthly_count %>
+  </div>
+  <div class="field">
+    <%= f.label :mailchimp_api_key %><br />
+    <%= f.text_field :mailchimp_api_key %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

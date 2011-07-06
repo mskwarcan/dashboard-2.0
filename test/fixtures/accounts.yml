@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  facebook_token: MyString
+  twitter_token: MyString
+  twitter_secret: MyString
+  twitter_monthly_count: 1
+  facebook_monthly_count: 1
+  mailchimp_api_key: MyString
+  name: MyString
+
+two:
+  facebook_token: MyString
+  twitter_token: MyString
+  twitter_secret: MyString
+  twitter_monthly_count: 1
+  facebook_monthly_count: 1
+  mailchimp_api_key: MyString
+  name: MyString
