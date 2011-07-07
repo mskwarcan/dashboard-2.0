@@ -2,8 +2,15 @@ Bdashd::Application.routes.draw do
   resources :accounts
 
   devise_for :users
+  
+  devise_scope :user do
+    match "/users/sign_out", :controller => 'devise/sessions', :action => 'destroy'
+  end
 
   root :to => "accounts#index"
+  
+  match '/twitter', :controller => 'accounts', :action => 'twitter_register'
+  match '/twitter_callback', :controller => 'accounts', :action => 'twitter_callback'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

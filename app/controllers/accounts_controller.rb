@@ -1,4 +1,6 @@
 class AccountsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /accounts
   # GET /accounts.xml
   def index
@@ -80,4 +82,41 @@ class AccountsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def twitter_register
+    url = CGI.parse(URI.parse(request.fullpath).query)
+    session[:account_id] = url["id"].first.to_i
+    
+    #Set client up
+    client = Account.twitter
+    
+    callback_url = "http://social-dashboard.heroku.com/twitter_callback"
+    
+    #Request a token and authorize
+    request_token = client.get_request_token(:oauth_callback => callback_url)
+    session[:request_token] = request_token
+    redirect_to request_token.authorize_url
+  end
+  
+  def twitter_callback
+    client = Account.twitter
+
+    # Re-create the request token
+    request_token = OAuth::RequestToken.new(client, session[:request_token].token, session[:request_token].secret)
+
+    # Convert the request token to an access token using the verifier Twitter gave us
+    access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+
+    # Store the token and secret that we need to make API calls
+    
+    account = get_account(session[:account_id])
+    
+    account.twitter_token = @access_token.token
+    account.twitter_secret = @access_token.secret
+    account.save
+
+    # Hand off to our app, which actually uses the API with the above token and secret
+    redirect_to '/'
+    
+   end
 end

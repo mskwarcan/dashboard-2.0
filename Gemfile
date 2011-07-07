@@ -31,3 +31,4 @@ gem 'sqlite3'
 # end
 
 gem 'devise', '1.4.2'
+gem 'oauth', '0.4.5'

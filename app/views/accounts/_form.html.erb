@@ -16,25 +16,14 @@
     <%= f.text_field :facebook_token %>
   </div>
   <div class="field">
-    <%= f.label :twitter_token %><br />
-    <%= f.text_field :twitter_token %>
+    Twitter:<br />
+		<a href="/twitter?id=<%= @account.id %>">Add a Twitter Account</a>
   </div>
   <div class="field">
-    <%= f.label :twitter_secret %><br />
-    <%= f.text_field :twitter_secret %>
-  </div>
-  <div class="field">
-    <%= f.label :twitter_monthly_count %><br />
-    <%= f.text_field :twitter_monthly_count %>
-  </div>
-  <div class="field">
-    <%= f.label :facebook_monthly_count %><br />
-    <%= f.text_field :facebook_monthly_count %>
-  </div>
-  <div class="field">
-    <%= f.label :mailchimp_api_key %><br />
+    <%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
     <%= f.text_field :mailchimp_api_key %>
   </div>
+  <p>If you're not sure what your Mail Chimp API Key is or you don't have one, <a href="http://admin.mailchimp.com/account/api" target="_blank">Get a Key Here.</a>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>

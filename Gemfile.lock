@@ -44,6 +44,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    oauth (0.4.5)
     orm_adapter (0.0.5)
     polyglot (0.3.1)
     rack (1.2.3)
@@ -69,14 +70,15 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.28)
-    warden (1.0.3)
-      rack (>= 1.0.0)
+    tzinfo (0.3.29)
+    warden (1.0.4)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   devise (= 1.4.2)
+  oauth (= 0.4.5)
   rails (= 3.0.5)
   sqlite3
