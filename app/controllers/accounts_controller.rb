@@ -126,7 +126,7 @@ class AccountsController < ApplicationController
      client = Account.google
      
      #Request a token and authorize
-     request_token = client.get_request_token({:oauth_callback => "http://social-dashboard.heroku.com/twitter_callback"}, {:scope => 'https://www.google.com/analytics/feeds'})
+     request_token = client.get_request_token({:oauth_callback => "http://social-dashboard.heroku.com/google_callback"}, {:scope => 'https://www.google.com/analytics/feeds'})
      session[:request_token] = request_token
      redirect_to request_token.authorize_url
    end
@@ -137,7 +137,7 @@ class AccountsController < ApplicationController
      # Re-create the request token
      request_token = OAuth::RequestToken.new(client, session[:request_token].token, session[:request_token].secret)
 
-     # Convert the request token to an access token using the verifier Twitter gave us
+     # Convert the request token to an access token using the verifier Google gave us
      access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
 
      # Store the token and secret that we need to make API calls
