@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   end
   
   private
-  def self.twitter(user)   
+  def self.twitter
     OAuth::Consumer.new("GeeLSFoDBSRUaXRHLSSiQg","cSTcJAPIC3enr7Ew5a4mNopOgb2B6srYrhdMrU8Q", :site => "http://twitter.com") 
   end
 end

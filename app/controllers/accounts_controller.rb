@@ -84,8 +84,7 @@ class AccountsController < ApplicationController
   end
   
   def twitter_register
-    url = CGI.parse(URI.parse(request.fullpath).query)
-    session[:account_id] = url["id"].first.to_i
+    session[:account_id] = params[:id]
     
     #Set client up
     client = Account.twitter
