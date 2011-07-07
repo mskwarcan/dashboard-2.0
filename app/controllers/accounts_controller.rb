@@ -108,7 +108,7 @@ class AccountsController < ApplicationController
 
     # Store the token and secret that we need to make API calls
     
-    account = get_account(session[:account_id])
+    account = Account.get_account(session[:account_id])
     
     account.twitter_token = @access_token.token
     account.twitter_secret = @access_token.secret
