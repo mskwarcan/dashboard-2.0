@@ -110,8 +110,8 @@ class AccountsController < ApplicationController
     
     account = Account.get_account(session[:account_id])
     
-    account.twitter_token = @access_token.token
-    account.twitter_secret = @access_token.secret
+    account.twitter_token = access_token.token
+    account.twitter_secret = access_token.secret
     account.save
 
     # Hand off to our app, which actually uses the API with the above token and secret
