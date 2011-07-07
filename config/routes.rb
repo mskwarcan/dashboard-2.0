@@ -11,6 +11,9 @@ Bdashd::Application.routes.draw do
   
   match '/twitter', :controller => 'accounts', :action => 'twitter_register'
   match '/twitter_callback', :controller => 'accounts', :action => 'twitter_callback'
+  
+  match '/google', :controller => 'accounts', :action => 'google_register'
+  match '/google_callback', :controller => 'accounts', :action => 'google_callback'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

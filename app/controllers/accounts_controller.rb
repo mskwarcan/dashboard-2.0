@@ -113,9 +113,42 @@ class AccountsController < ApplicationController
     account.twitter_token = access_token.token
     account.twitter_secret = access_token.secret
     account.save
-
+    
     # Hand off to our app, which actually uses the API with the above token and secret
     redirect_to '/'
     
+   end
+   
+   def google_register
+     session[:account_id] = params[:id]
+     
+     #Set client up
+     client = Account.google
+     
+     #Request a token and authorize
+     request_token = client.get_request_token({:oauth_callback => "http://social-dashboard.heroku.com/twitter_callback"}, {:scope => 'https://www.google.com/analytics/feeds'})
+     session[:request_token] = request_token
+     redirect_to request_token.authorize_url
+   end
+   
+   def google_callback
+     client = Account.google
+
+     # Re-create the request token
+     request_token = OAuth::RequestToken.new(client, session[:request_token].token, session[:request_token].secret)
+
+     # Convert the request token to an access token using the verifier Twitter gave us
+     access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+
+     # Store the token and secret that we need to make API calls
+
+     account = Account.get_account(session[:account_id])
+
+     account.google_token = access_token.token
+     account.google_secret = access_token.secret
+     account.save
+
+     # Hand off to our app, which actually uses the API with the above token and secret
+     redirect_to '/'
    end
 end
