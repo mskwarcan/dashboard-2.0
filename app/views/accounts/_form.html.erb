@@ -1,3 +1,5 @@
+<% session[:account_id] = @account.id %>
+
 <%= form_for(@account) do |f| %>
   <% if @account.errors.any? %>
     <div id="error_explanation">
@@ -12,16 +14,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :facebook_token %><br />
-    <%= f.text_field :facebook_token %>
+		Facebook:<br />
+		<a href="/https://www.facebook.com/dialog/oauth?client_id=231052250248689&redirect_uri=http://social-dashboard.heroku.com/facebook_callback&scope=manage_pages">Add a Facebook Page</a>
   </div>
   <div class="field">
     Twitter:<br />
-		<a href="/twitter?id=<%= @account.id %>">Add a Twitter Account</a>
+		<a href="/twitter">Add a Twitter Account</a>
   </div>
   <div class="field">
-    Google Analytics and Adwords:<br />
-		<a href="/google?id=<%= @account.id %>">Add Google Analytics/Adwords</a>
+	    Google Analytics and Adwords:<br />
+	<% if @google_profiles %>
+			<select name="account[google_profile_id]">
+				<% @google_profiles.each do |profile|%>
+					<option value="<%= profile[1] %>"><%= profile[0] %></option>
+				<% end %>
+			</select>
+	<% else %>
+		<a href="/google">Add Google Analytics/Adwords</a>
+	<% end %>
   </div>
   <div class="field">
     <%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />

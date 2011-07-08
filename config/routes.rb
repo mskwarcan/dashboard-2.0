@@ -9,6 +9,8 @@ Bdashd::Application.routes.draw do
 
   root :to => "accounts#index"
   
+  match '/facebook_callback', :controller => 'accounts', :action => 'facebook_callback'
+  
   match '/twitter', :controller => 'accounts', :action => 'twitter_register'
   match '/twitter_callback', :controller => 'accounts', :action => 'twitter_callback'
   

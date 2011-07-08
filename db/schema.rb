@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110707194736) do
+ActiveRecord::Schema.define(:version => 20110707215609) do
 
   create_table "accounts", :force => true do |t|
     t.string    "facebook_token"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20110707194736) do
     t.timestamp "updated_at"
     t.string    "google_token"
     t.string    "google_secret"
+    t.string    "google_profile_id"
   end
 
   create_table "accounts_users", :force => true do |t|

@@ -37,6 +37,10 @@ class AccountsController < ApplicationController
   # GET /accounts/1/edit
   def edit
     @account = Account.find(params[:id])
+    
+    if(!@account.google_profile_id && @account.google_token)
+      @google_profiles = @account.get_analytic_profiles
+    end
   end
 
   # POST /accounts
@@ -83,9 +87,15 @@ class AccountsController < ApplicationController
     end
   end
   
-  def twitter_register
-    session[:account_id] = params[:id]
+  def facebook_callback
+    code = request.params["code"]
     
+    access_token = Account.facebook(code)
+    
+    
+  end
+  
+  def twitter_register
     #Set client up
     client = Account.twitter
     
@@ -120,8 +130,6 @@ class AccountsController < ApplicationController
    end
    
    def google_register
-     session[:account_id] = params[:id]
-     
      #Set client up
      client = Account.google
      

@@ -5,8 +5,8 @@
     <th>Facebook token</th>
     <th>Twitter token</th>
     <th>Twitter secret</th>
-    <th>Twitter monthly count</th>
-    <th>Facebook monthly count</th>
+    <th>Google token</th>
+    <th>Google secret</th>
     <th>Mailchimp api key</th>
     <th>Name</th>
     <th></th>
@@ -19,8 +19,8 @@
     <td><%= account.facebook_token %></td>
     <td><%= account.twitter_token %></td>
     <td><%= account.twitter_secret %></td>
-    <td><%= account.twitter_monthly_count %></td>
-    <td><%= account.facebook_monthly_count %></td>
+    <td><%= account.google_token %></td>
+    <td><%= account.google_secret %></td>
     <td><%= account.mailchimp_api_key %></td>
     <td><%= account.name %></td>
     <td><%= link_to 'Show', account %></td>
@@ -33,3 +33,5 @@
 <br />
 
 <%= link_to 'New Account', new_account_path %>
+
+
