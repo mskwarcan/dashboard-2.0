@@ -37,7 +37,7 @@ class Account < ActiveRecord::Base
     app_secret = 'f91517dd3a452f2d82a71dfd5c07c458'
     my_url = 'http://social-dashbord.heroku.com/'
     
-    token_url = "https://graph.facebook.com/oauth/access_token?client_id=" + app_id + "&redirect_uri=" + URI.encode(my_url) + "&client_secret=" + app_secret + "&code=" + @code
+    token_url = "https://graph.facebook.com/oauth/access_token?client_id=" + app_id + "&redirect_uri=" + URI.encode(my_url) + "&client_secret=" + app_secret + "&code=" + code
     
     access_token = open(URI.encode(token_url))
   end
