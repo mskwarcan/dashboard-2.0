@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+  require "open-uri"
+  
   has_many :users
   belongs_to :users
   
@@ -37,7 +39,7 @@ class Account < ActiveRecord::Base
     app_secret = 'f91517dd3a452f2d82a71dfd5c07c458'
     my_url = 'http://social-dashbord.heroku.com/'
     
-    token_url = "https://graph.facebook.com/oauth/access_token?client_id=" + app_id + "&redirect_uri=" + URI.encode(my_url) + "&client_secret=" + app_secret + "&code=" + code
+    token_url = "https://graph.facebook.com/oauth/access_token?client_id=231052250248689&redirect_uri=http://social-dashbord.heroku.com/&client_secret=f91517dd3a452f2d82a71dfd5c07c458&code=" + code
     
     access_token = open(URI.encode(token_url))
   end
