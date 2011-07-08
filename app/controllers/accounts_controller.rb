@@ -110,6 +110,7 @@ class AccountsController < ApplicationController
     account.facebook_token = access_token
     account.save
      
+    redirect_to '/' 
   end
   
   def twitter_register

@@ -34,11 +34,7 @@ class Account < ActiveRecord::Base
     OAuth::Consumer.new('social-dashboard.heroku.com', 'yoPYHCsQwf5D53P7ozcvgCsl', {:site => 'https://www.google.com', :request_token_path => '/accounts/OAuthGetRequestToken', :access_token_path => '/accounts/OAuthGetAccessToken',:authorize_path => '/accounts/OAuthAuthorizeToken'}) 
   end
   
-  def self.facebook(token)
+  def self.facebook(token = nil)
       FBGraph::Client.new(:client_id => '231052250248689', :secret_id => 'f91517dd3a452f2d82a71dfd5c07c458', :token => token)
-  end
-  
-  def self.facebook
-      FBGraph::Client.new(:client_id => '231052250248689', :secret_id => 'f91517dd3a452f2d82a71dfd5c07c458')
   end
 end
