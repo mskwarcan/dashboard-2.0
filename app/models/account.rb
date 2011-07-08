@@ -25,6 +25,19 @@ class Account < ActiveRecord::Base
     return profile_list
   end
   
+  def get_facebook_profiles
+    client = Account.facebook(facebook_token)
+    
+    account_list = []
+    
+    client.selection.me.accounts.info!["data"].each do |account|
+      account_list << [account["name"], account["id"]]
+    end
+    
+    return account_list
+    
+  end
+  
   private
   def self.twitter
     OAuth::Consumer.new("GeeLSFoDBSRUaXRHLSSiQg","cSTcJAPIC3enr7Ew5a4mNopOgb2B6srYrhdMrU8Q", :site => "http://twitter.com") 

@@ -15,7 +15,15 @@
 
   <div class="field">
 		Facebook:<br />
-		<a href="https://www.facebook.com/dialog/oauth?client_id=231052250248689&redirect_uri=http://social-dashboard.heroku.com/facebook_callback&scope=manage_pages">Add a Facebook Page</a>
+		<% if @google_profiles %>
+				<select name="account[facebook_profile_id]">
+					<% @google_profiles.each do |profile|%>
+						<option value="<%= profile[1] %>"><%= profile[0] %></option>
+					<% end %>
+				</select>
+		<% else %>
+			<a href="/facebook">Add a Facebook Page/App</a>
+		<% end %>
   </div>
   <div class="field">
     Twitter:<br />

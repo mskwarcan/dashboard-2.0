@@ -41,6 +41,10 @@ class AccountsController < ApplicationController
     if(!@account.google_profile_id && @account.google_token)
       @google_profiles = @account.get_analytic_profiles
     end
+    
+    if(!@account.facebook_profile_id && @account.facebook_token)
+      @facebook_profiles = @account.get_facebook_profiles
+    end
   end
 
   # POST /accounts
