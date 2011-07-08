@@ -87,14 +87,27 @@ class AccountsController < ApplicationController
     end
   end
   
-  def facebook_callback
-    code = request.params["code"]
+  def facebook_register
+    #Set client up
+    client = Account.facebook
     
-    access_token = Account.facebook(code)
+    callback_url = "http://social-dashboard.heroku.com/facebook_callback"
+    
+    redirect_to client.authorization.authorize_url(:redirect_uri => callback_url , :scope => 'manage_pages')
+  end
+  
+  def facebook_callback
+    #Set client up
+    client = Account.facebook
+    
+    callback_url = "http://social-dashboard.heroku.com/facebook_callback"
+    
+    #Convert the request token to an access token
+    access_token = client.authorization.process_callback(params[:code], :redirect_uri => callback_url)
     
     account = Account.get_account(session[:account_id])
 
-    account.facebook_token = access_token.string
+    account.facebook_token = access_token
     account.save
      
   end

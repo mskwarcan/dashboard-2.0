@@ -32,3 +32,4 @@ gem 'sqlite3'
 
 gem 'devise', '1.4.2'
 gem 'oauth', '0.4.5'
+gem 'fbgraph', '1.8.0'
