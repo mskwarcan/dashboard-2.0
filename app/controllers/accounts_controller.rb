@@ -92,7 +92,11 @@ class AccountsController < ApplicationController
     
     access_token = Account.facebook(code)
     
-    
+    account = Account.get_account(session[:account_id])
+
+    account.facebook_token = access_token.string
+    account.save
+     
   end
   
   def twitter_register
