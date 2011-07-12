@@ -109,7 +109,7 @@ class AccountsController < ApplicationController
     @account.destroy
 
     respond_to do |format|
-      format.html { redirect_to(accounts_url) }
+      format.html { redirect_to("/accounts") }
       format.xml  { head :ok }
     end
   end
