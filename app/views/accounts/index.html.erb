@@ -2,13 +2,12 @@
 
 <table>
   <tr>
-    <th>Facebook token</th>
+	  <th>Name</th>
+    <th>Facebook Page/App</th>
     <th>Twitter token</th>
     <th>Twitter secret</th>
-    <th>Google token</th>
-    <th>Google secret</th>
-    <th>Mailchimp api key</th>
-    <th>Name</th>
+    <th>Google Analytics Profile</th>
+    <th>Mailchimp List</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,13 +15,13 @@
 
 <% @accounts.each do |account| %>
   <tr>
-    <td><%= account.facebook_token %></td>
+	
+    <td><%= account.name %></td>
+    <td><%= Account.get_profile_name(account.facebook_profile_id, "facebook") %></td>
     <td><%= account.twitter_token %></td>
     <td><%= account.twitter_secret %></td>
-    <td><%= account.google_token %></td>
-    <td><%= account.google_secret %></td>
-    <td><%= account.mailchimp_api_key %></td>
-    <td><%= account.name %></td>
+    <td><%= Account.get_profile_name(account.google_profile_id, "google") %></td>
+		<td><%= Account.get_profile_name(account.mailchimp_list_id, "mailchimp") %></td>
     <td><%= link_to 'Show', account %></td>
     <td><%= link_to 'Edit', edit_account_path(account) %></td>
     <td><%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %></td>

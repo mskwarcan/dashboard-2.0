@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110708202532) do
+ActiveRecord::Schema.define(:version => 20110712200221) do
+
+  create_table "account_lists", :force => true do |t|
+    t.string   "account_id"
+    t.string   "profile_id"
+    t.string   "profile_name"
+    t.string   "profile_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "accounts", :force => true do |t|
     t.string    "facebook_token"
@@ -26,11 +35,14 @@ ActiveRecord::Schema.define(:version => 20110708202532) do
     t.string    "google_secret"
     t.string    "google_profile_id"
     t.string    "facebook_profile_id"
+    t.string    "mailchimp_list_id"
+    t.string    "twitter_name"
   end
 
   create_table "accounts_users", :force => true do |t|
     t.string "account_id"
     t.string "user_id"
+    t.string "access"
   end
 
   create_table "users", :force => true do |t|

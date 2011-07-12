@@ -14,41 +14,81 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
 		Facebook:<br />
-		<% if @google_profiles %>
-				<select name="account[facebook_profile_id]">
-					<% @google_profiles.each do |profile|%>
-						<option value="<%= profile[1] %>"><%= profile[0] %></option>
-					<% end %>
-				</select>
+		<% if @account.facebook_profile_id %>
+			Profile ID: <%= @facebook_profile %> <a href="#" class="edit">Change Profile</a>
+			<div class="edit">
+			<select name="account[facebook_profile_id]">
+				<% @facebook_profiles.each do |profile|%>
+					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
+				<% end %>
+			</select>
+		</div>
 		<% else %>
-			<a href="/facebook">Add a Facebook Page/App</a>
+			<% if @account.facebook_profiles %>
+			<select name="account[facebook_profile_id]">
+				<% @facebook_profiles.each do |profile|%>
+					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
+				<% end %>
+			</select>
+			<% else %>
+				<a href="/facebook">Add a Facebook Page/App</a>
+			<% end %>
 		<% end %>
   </div>
   <div class="field">
     Twitter:<br />
-		<a href="/twitter">Add a Twitter Account</a>
+		<% if @account.twitter_token %>
+		  Token: <%= @account.twitter_token %>
+		<% else %>
+			<a href="/twitter">Add a Twitter Account</a>
+		<% end %>
   </div>
   <div class="field">
 	    Google Analytics and Adwords:<br />
-	<% if @google_profiles %>
+	<% if @account.google_profile_id %>
+		Profile ID: <%= @google_profile %> <a href="#" class="edit">Change Profile</a>
+		<div class="edit">
 			<select name="account[google_profile_id]">
 				<% @google_profiles.each do |profile|%>
-					<option value="<%= profile[1] %>"><%= profile[0] %></option>
+					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
 				<% end %>
 			</select>
+		</div>
 	<% else %>
-		<a href="/google">Add Google Analytics/Adwords</a>
+		<% if @google_profiles %>
+				<select name="account[google_profile_id]">
+					<% @google_profiles.each do |profile|%>
+						<option value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
+					<% end %>
+				</select>
+		<% else %>
+			<a href="/google">Add Google Analytics/Adwords</a>
+		<% end %>
 	<% end %>
   </div>
   <div class="field">
-    <%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
-    <%= f.text_field :mailchimp_api_key %>
-  </div>
-  <p>If you're not sure what your Mail Chimp API Key is or you don't have one, <a href="http://admin.mailchimp.com/account/api" target="_blank">Get a Key Here.</a>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+	Mailchimp:<br />
+		<% if @account.mailchimp_list_id %>
+			Profile ID: <%= @mailchimp_profile %>
+		<% else %>
+			<% if @mailchimp_lists %>
+					<select name="account[mailchimp_list_id]">
+						<% @mailchimp_lists.each do |profile|%>
+							<option value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
+						<% end %>
+					</select>
+			<% else %>
+				<%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
+		    <%= f.text_field :mailchimp_api_key %>
+				 <p>If you're not sure what your Mail Chimp API Key is or you don't have one, <a href="http://admin.mailchimp.com/account/api" target="_blank">Get a Key Here.</a>
+			<% end %>
+		<% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

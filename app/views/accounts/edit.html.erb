@@ -3,4 +3,5 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @account %> |
-<%= link_to 'Back', accounts_path %>
+<%= link_to 'Back', accounts_path %> | 
+<%= link_to 'Update Accounts', "/accounts/#{@account.id}/update_list" %>

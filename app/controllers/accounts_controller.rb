@@ -38,12 +38,31 @@ class AccountsController < ApplicationController
   def edit
     @account = Account.find(params[:id])
     
-    if(!@account.google_profile_id && @account.google_token)
-      @google_profiles = @account.get_analytic_profiles
+    get_account_lists(@account)
+  end
+  
+  def update_lists
+    @account = Account.find(params[:id])
+    
+    profile_list = AccountList.all(:conditions => {:account_id => @account.id})
+    
+    profile_list.each do |profile|
+      profile.destroy
     end
     
-    if(!@account.facebook_profile_id && @account.facebook_token)
-      @facebook_profiles = @account.get_facebook_profiles
+    if(@account.google_token)
+      @account.get_analytic_profiles
+    end
+    
+    if(@account.facebook_token)
+      @account.get_facebook_profiles
+    end
+    
+    if(@account.mailchimp_api_key)
+      @account.get_mailchimp_lists
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => "edit" }
     end
   end
 
@@ -54,6 +73,9 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.save
+        if(@account.mailchimp_api_key)
+          @account.get_mailchimp_lists
+        end
         format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
@@ -97,7 +119,7 @@ class AccountsController < ApplicationController
     
     callback_url = "http://social-dashboard.heroku.com/facebook_callback"
     
-    redirect_to client.authorization.authorize_url(:redirect_uri => callback_url , :scope => 'manage_pages')
+    redirect_to client.authorization.authorize_url(:redirect_uri => callback_url , :scope => 'manage_pages, offline_access')
   end
   
   def facebook_callback
@@ -113,6 +135,8 @@ class AccountsController < ApplicationController
 
     account.facebook_token = access_token
     account.save
+    
+    account.get_facebook_profiles
      
     redirect_to '/' 
   end
@@ -144,6 +168,8 @@ class AccountsController < ApplicationController
     
     account.twitter_token = access_token.token
     account.twitter_secret = access_token.secret
+    account.twitter
+    account.twitter_name = Twitter.user["screen_name"]
     account.save
     
     # Hand off to our app, which actually uses the API with the above token and secret
@@ -177,8 +203,28 @@ class AccountsController < ApplicationController
      account.google_token = access_token.token
      account.google_secret = access_token.secret
      account.save
+     
+     account.get_analytic_profiles
 
      # Hand off to our app, which actually uses the API with the above token and secret
      redirect_to '/'
+   end
+   
+   protected
+   def get_account_lists(account)
+     if(account.google_token)
+       @google_profile = Account.get_profile_name(account.google_profile_id,'google')
+       @google_profiles = AccountList.all(:conditions => {:account_id => account.id, :profile_type => 'google'})
+     end
+
+     if(account.facebook_token)
+       @facebook_profile = Account.get_profile_name(account.facebook_profile_id, 'facebook')
+       @facebook_profiles = AccountList.all(:conditions => {:account_id => account.id, :profile_type => 'facebook'})
+     end
+
+     if(account.mailchimp_api_key)
+       @mailchimp_profile = Account.get_profile_name(account.mailchimp_list_id, 'mailchimp')
+       @mailchimp_lists = AccountList.all(:conditions => {:account_id => account.id, :profile_type => 'mailchimp'})
+     end
    end
 end
