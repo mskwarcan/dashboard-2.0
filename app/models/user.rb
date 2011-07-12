@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
   
   validates_presence_of :email, :password, :name, :phone, :type
   
-  has_many :accounts
+  has_and_belongs_to_many :accounts
 end
