@@ -30,6 +30,8 @@ gem 'sqlite3'
 #   gem 'webrat'
 # end
 
+
+gem 'jquery-rails', '>= 0.2.6'
 gem 'devise', '1.4.2'
 gem 'oauth', '0.4.5'
 gem 'hominid', '3.0.2'
