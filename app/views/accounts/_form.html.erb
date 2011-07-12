@@ -30,7 +30,7 @@
 			</select>
 		</div>
 		<% else %>
-			<% if @account.facebook_profiles %>
+			<% if @facebook_profiles%>
 			<select name="account[facebook_profile_id]">
 				<% @facebook_profiles.each do |profile|%>
 					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>

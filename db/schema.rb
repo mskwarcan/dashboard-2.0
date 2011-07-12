@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110712200221) do
+ActiveRecord::Schema.define(:version => 20110712211008) do
 
   create_table "account_lists", :force => true do |t|
     t.string   "account_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20110712200221) do
     t.string    "twitter_name"
   end
 
-  create_table "accounts_users", :force => true do |t|
+  create_table "accounts_users", :id => false, :force => true do |t|
     t.string "account_id"
     t.string "user_id"
     t.string "access"

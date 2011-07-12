@@ -44,7 +44,7 @@ class AccountsController < ApplicationController
   def update_lists
     @account = Account.find(params[:id])
     
-    profile_list = AccountList.all(:conditions => {:account_id => @account.id})
+    profile_list = AccountList.where(:account_id => @account.id)
     
     profile_list.each do |profile|
       profile.destroy
@@ -70,10 +70,11 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
-
+    @account.users << current_user
+    
     respond_to do |format|
       if @account.save
-        if(@account.mailchimp_api_key)
+        if(!@account.mailchimp_api_key.empty?)
           @account.get_mailchimp_lists
         end
         format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
@@ -214,17 +215,17 @@ class AccountsController < ApplicationController
    def get_account_lists(account)
      if(account.google_token)
        @google_profile = Account.get_profile_name(account.google_profile_id,'google')
-       @google_profiles = AccountList.all(:conditions => {:account_id => account.id, :profile_type => 'google'})
+       @google_profiles = AccountList.where(:account_id => account.id, :profile_type => 'google')
      end
 
      if(account.facebook_token)
        @facebook_profile = Account.get_profile_name(account.facebook_profile_id, 'facebook')
-       @facebook_profiles = AccountList.all(:conditions => {:account_id => account.id, :profile_type => 'facebook'})
+       @facebook_profiles = AccountList.where(:account_id => account.id, :profile_type => 'facebook')
      end
 
-     if(account.mailchimp_api_key)
+     if(!account.mailchimp_api_key.empty?)
        @mailchimp_profile = Account.get_profile_name(account.mailchimp_list_id, 'mailchimp')
-       @mailchimp_lists = AccountList.all(:conditions => {:account_id => account.id, :profile_type => 'mailchimp'})
+       @mailchimp_lists = AccountList.where(:account_id => account.id, :profile_type => 'mailchimp')
      end
    end
 end

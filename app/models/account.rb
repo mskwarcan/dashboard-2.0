@@ -1,8 +1,7 @@
 class Account < ActiveRecord::Base
   require "open-uri"
   
-  has_many :users
-  belongs_to :users
+  has_and_belongs_to_many :users
   
   def self.get_account(id)
     Account.first(:conditions => {:id => id})
