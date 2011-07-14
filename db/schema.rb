@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713215221) do
+ActiveRecord::Schema.define(:version => 20110714161029) do
 
   create_table "account_lists", :force => true do |t|
     t.string   "account_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20110713215221) do
     t.string  "access"
     t.integer "account_id"
     t.integer "user_id"
+    t.integer "status"
   end
 
   create_table "users", :force => true do |t|
