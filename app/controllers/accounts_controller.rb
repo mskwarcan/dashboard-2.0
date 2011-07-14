@@ -61,6 +61,7 @@ class AccountsController < ApplicationController
     if(@account.mailchimp_api_key)
       @account.get_mailchimp_lists
     end
+    
     respond_to do |format|
       format.html { redirect_to :action => "edit" }
     end
@@ -212,6 +213,68 @@ class AccountsController < ApplicationController
      redirect_to '/'
    end
    
+   def remove_google
+     account = Account.find(params[:id])
+     
+     #Remove Accounts from Account List
+     @google_profiles = AccountList.where(:account_id => account.id, :profile_type => 'google')
+     @google_profiles.delete_all
+     
+     #Remove Token/Secret/google_profile_id
+     account.google_profile_id = nil
+     account.google_token = nil
+     account.google_secret = nil
+     account.save
+     
+     respond_to do |format|
+       format.html { redirect_to :action => "edit" }
+     end
+   end
+   
+   def remove_twitter
+     account = Account.find(params[:id])
+     account.twitter_name = nil
+     account.twitter_token = nil
+     account.twitter_secret = nil
+     account.save
+     
+     respond_to do |format|
+       format.html { redirect_to :action => "edit" }
+     end
+   end
+   
+   def remove_facebook
+     account = Account.find(params[:id])
+     
+     #Remove Accounts from Account List
+     @profiles = AccountList.where(:account_id => account.id, :profile_type => 'facebook')
+     @profiles.delete_all
+     
+     account.facebook_profile_id = nil
+     account.facebook_token = nil
+     account.save
+     
+     respond_to do |format|
+       format.html { redirect_to :action => "edit" }
+     end
+   end
+   
+   def remove_mailchimp
+     account = Account.find(params[:id])
+     
+     #Remove Accounts from Account List
+     @profiles = AccountList.where(:account_id => account.id, :profile_type => 'mailchimp')
+     @profiles.delete_all
+     
+     account.mailchimp_list_id = nil
+     account.mailchimp_api_key = nil
+     account.save
+     
+     respond_to do |format|
+       format.html { redirect_to :action => "edit" }
+     end
+   end
+   
    protected
    def get_account_lists(account)
      if(account.google_token)
@@ -224,7 +287,7 @@ class AccountsController < ApplicationController
        @facebook_profiles = AccountList.where(:account_id => account.id, :profile_type => 'facebook')
      end
 
-     if(!account.mailchimp_api_key.empty?)
+     if(!account.mailchimp_api_key.to_s.empty?)
        @mailchimp_profile = Account.get_profile_name(account.mailchimp_list_id, 'mailchimp')
        @mailchimp_lists = AccountList.where(:account_id => account.id, :profile_type => 'mailchimp')
      end

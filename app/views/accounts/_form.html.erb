@@ -27,7 +27,8 @@
 				<% @facebook_profiles.each do |profile|%>
 					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
 				<% end %>
-			</select>
+			</select><br />
+			<a href="/accounts/<%= @account.id %>/remove_fb">Remove Current Facebook Account</a>
 		</div>
 		<% else %>
 			<% if @facebook_profiles%>
@@ -35,7 +36,8 @@
 				<% @facebook_profiles.each do |profile|%>
 					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
 				<% end %>
-			</select>
+			</select><br />
+			<a href="/accounts/<%= @account.id %>/remove_fb">Remove Current Facebook Account</a>
 			<% else %>
 				<a href="/facebook">Add a Facebook Page/App</a>
 			<% end %>
@@ -44,7 +46,8 @@
   <div class="field">
     Twitter:<br />
 		<% if @account.twitter_token %>
-		  Token: <%= @account.twitter_token %>
+		  Token: <%= @account.twitter_name %><br />
+			<a href="/accounts/<%= @account.id %>/remove_twitter">Remove Current Twitter Account</a>
 		<% else %>
 			<a href="/twitter">Add a Twitter Account</a>
 		<% end %>
@@ -58,7 +61,8 @@
 				<% @google_profiles.each do |profile|%>
 					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
 				<% end %>
-			</select>
+			</select><br />
+			<a href="/accounts/<%= @account.id %>/remove_google">Remove Current Google Account</a>
 		</div>
 	<% else %>
 		<% if @google_profiles %>
@@ -66,7 +70,8 @@
 					<% @google_profiles.each do |profile|%>
 						<option value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
 					<% end %>
-				</select>
+				</select><br />
+				<a href="/accounts/<%= @account.id %>/remove_google">Remove Current Google Account</a>
 		<% else %>
 			<a href="/google">Add Google Analytics/Adwords</a>
 		<% end %>
@@ -75,7 +80,13 @@
   <div class="field">
 	Mailchimp:<br />
 		<% if @account.mailchimp_list_id %>
-			Profile ID: <%= @mailchimp_profile %>
+			Profile ID: <%= @mailchimp_profile %><br />
+			<select name="account[mailchimp_list_id]">
+				<% @mailchimp_lists.each do |profile|%>
+					<option value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
+				<% end %>
+			</select><br />
+			<a href="/accounts/<%= @account.id %>/remove_mc">Remove Current Mail Chimp Account</a>
 		<% else %>
 			<% if @mailchimp_lists %>
 					<select name="account[mailchimp_list_id]">
@@ -83,6 +94,7 @@
 							<option value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
 						<% end %>
 					</select>
+					<a href="/accounts/<%= @account.id %>/remove_mc">Remove Current Mail Chimp Account</a>
 			<% else %>
 				<%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
 		    <%= f.text_field :mailchimp_api_key %>
