@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110714161029) do
+ActiveRecord::Schema.define(:version => 20110714192944) do
 
   create_table "account_lists", :force => true do |t|
-    t.string   "account_id"
-    t.string   "profile_id"
     t.string   "profile_name"
     t.string   "profile_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "profile_id"
+    t.integer  "account_id"
   end
 
   create_table "accounts", :force => true do |t|
@@ -47,19 +47,19 @@ ActiveRecord::Schema.define(:version => 20110714161029) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "name"
-    t.string   "phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "type_of_user"
+    t.string    "email",                                 :default => "", :null => false
+    t.string    "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string    "reset_password_token"
+    t.timestamp "reset_password_sent_at"
+    t.timestamp "remember_created_at"
+    t.string    "confirmation_token"
+    t.timestamp "confirmed_at"
+    t.timestamp "confirmation_sent_at"
+    t.string    "name"
+    t.string    "phone"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "type_of_user"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
