@@ -25,7 +25,7 @@
 			<div class="edit">
 			<select name="account[facebook_profile_id]">
 				<% @facebook_profiles.each do |profile|%>
-					<option <% if @account.facebook_profile_id  == profile.profile_id %>selected="selected" <% end %> value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
+					<option <% if profile.profile_id.to_i == @account.facebook_profile_id.to_i %>selected="selected" <% end %> value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
 				<% end %>
 			</select><br />
 			<a href="/accounts/<%= @account.id %>/remove_fb">Remove Current Facebook Account</a>
@@ -34,7 +34,7 @@
 			<% if @facebook_profiles%>
 			<select name="account[facebook_profile_id]">
 				<% @facebook_profiles.each do |profile|%>
-					<option value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
+					<option <% if profile.profile_id.to_i == @account.facebook_profile_id.to_i %>selected="selected" <% end %> value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
 				<% end %>
 			</select><br />
 			<a href="/accounts/<%= @account.id %>/remove_fb">Remove Current Facebook Account</a>
@@ -59,7 +59,7 @@
 		<div class="edit">
 			<select name="account[google_profile_id]">
 				<% @google_profiles.each do |profile|%>
-					<option <% if @account.google_profile_id  == profile.profile_id %>selected="selected" <% end %> value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
+					<option <% if profile.profile_id.to_i == @account.google_profile_id.to_i %>selected="selected" <% end %> value="<%= profile.profile_id %>"><%= profile.profile_name %></option>
 				<% end %>
 			</select><br />
 			<a href="/accounts/<%= @account.id %>/remove_google">Remove Current Google Account</a>
@@ -68,7 +68,7 @@
 		<% if @google_profiles %>
 				<select name="account[google_profile_id]">
 					<% @google_profiles.each do |profile|%>
-						<option value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
+						<option <% if profile.profile_id.to_i == @account.google_profile_id.to_i %>selected="selected" <% end %> value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
 					<% end %>
 				</select><br />
 				<a href="/accounts/<%= @account.id %>/remove_google">Remove Current Google Account</a>
@@ -80,21 +80,27 @@
   <div class="field">
 	Mailchimp:<br />
 		<% if @account.mailchimp_list_id %>
-			Profile ID: <%= @mailchimp_profile %><br />
-			<select name="account[mailchimp_list_id]">
-				<% @mailchimp_lists.each do |profile|%>
-					<option <% if @account.mailchimp_list_id  == profile.profile_id %>selected="selected" <% end %> value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
-				<% end %>
-			</select><br />
+			Profile ID: <%= @mailchimp_profile %><br /> 					
+			<% if @mailchimp_lists %>
+				<select name="account[mailchimp_list_id]">
+					<% @mailchimp_lists.each do |profile|%>
+						<option <% if profile.profile_id.to_i == @account.mailchimp_list_id.to_i %>selected="selected" <% end %> value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
+					<% end %>
+				</select><br />
 			<a href="/accounts/<%= @account.id %>/remove_mc">Remove Current Mail Chimp Account</a>
+			<% end %>
 		<% else %>
 			<% if @mailchimp_lists %>
+				<% if @mailchimp_lists.empty? %>
+					<%= link_to 'Update your Accounts', "/accounts/#{@account.id}/update_list" %> in order to get Mail Chimp Lists.
+				<% else %>
 					<select name="account[mailchimp_list_id]">
 						<% @mailchimp_lists.each do |profile|%>
-							<option value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
+							<option <% if profile.profile_id.to_i == @account.mailchimp_list_id.to_i %>selected="selected" <% end %>  value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
 						<% end %>
 					</select>
 					<a href="/accounts/<%= @account.id %>/remove_mc">Remove Current Mail Chimp Account</a>
+				<% end %>
 			<% else %>
 				<%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
 		    <%= f.text_field :mailchimp_api_key %>
