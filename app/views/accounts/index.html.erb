@@ -45,10 +45,10 @@
 		<td><% if account.mailchimp_list_id %>
 					<%= Account.get_profile_name(account.mailchimp_list_id, "mailchimp") %>
 				<% else %>
-					<% if account.mailchimp_api_key %>
+					<% if !account.mailchimp_api_key.to_s.empty? %>
 						<p>You have verified your Mailchimp account, but you have yet to tie it to a Mail Chimp Subscription List to this profile.</p>
 					<% else %>
-						<p>You haven't verified your Google Analytics account Yet.</p>
+						<p>You haven't verified your Mail Chimp account Yet.</p>
 					<% end %>
 				<% end %>
 				</td>

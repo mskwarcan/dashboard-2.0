@@ -95,6 +95,9 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.update_attributes(params[:account])
+        if(!@account.mailchimp_api_key.empty?)
+          @account.get_mailchimp_lists
+        end
         format.html { redirect_to(@account, :notice => 'Account was successfully updated.') }
         format.xml  { head :ok }
       else
