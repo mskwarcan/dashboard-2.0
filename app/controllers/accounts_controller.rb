@@ -72,7 +72,7 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(params[:account])
     @account.users << current_user
-
+    AccountsUser.admin(current_user.id, @account.id)
     
     respond_to do |format|
       if @account.save
