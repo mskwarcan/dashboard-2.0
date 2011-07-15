@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.confirmable
       t.string :name
       t.string :phone
-      t.string :type
+      t.string :type_of_user
 
       # t.encryptable
       # t.confirmable
