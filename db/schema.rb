@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110715173048) do
+ActiveRecord::Schema.define(:version => 20110715191213) do
 
   create_table "account_lists", :force => true do |t|
-    t.string   "profile_name"
-    t.string   "profile_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "profile_id"
-    t.integer  "account_id"
+    t.string    "profile_name"
+    t.string    "profile_type"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.integer   "profile_id"
+    t.integer   "account_id"
   end
 
   create_table "accounts", :force => true do |t|
@@ -40,11 +40,11 @@ ActiveRecord::Schema.define(:version => 20110715173048) do
   end
 
   create_table "accounts_users", :id => false, :force => true do |t|
-    t.string  "access",     :default => "viewer"
+    t.string  "access",                  :default => "viewer"
     t.integer "account_id"
     t.integer "user_id"
-    t.string  "status",     :default => "pending"
-    t.integer "profile_id"
+    t.string  "status",                  :default => "pending"
+    t.integer "profile_id", :limit => 8
   end
 
   create_table "users", :force => true do |t|
