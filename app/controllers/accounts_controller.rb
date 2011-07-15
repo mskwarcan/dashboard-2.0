@@ -278,17 +278,23 @@ class AccountsController < ApplicationController
    protected
    def get_account_lists(account)
      if(account.google_token)
-       @google_profile = Account.get_profile_name(account.google_profile_id,'google')
+       if(account.google_profile_id)
+         @google_profile = Account.get_profile_name(account.google_profile_id,'google')
+       end
        @google_profiles = AccountList.where(:account_id => account.id, :profile_type => 'google')
      end
 
      if(account.facebook_token)
-       @facebook_profile = Account.get_profile_name(account.facebook_profile_id, 'facebook')
+       if(account.facebook_profile_id)
+         @facebook_profile = Account.get_profile_name(account.facebook_profile_id, 'facebook')
+        end
        @facebook_profiles = AccountList.where(:account_id => account.id, :profile_type => 'facebook')
      end
 
      if(!account.mailchimp_api_key.to_s.empty?)
-       @mailchimp_profile = Account.get_profile_name(account.mailchimp_list_id, 'mailchimp')
+       if(account.mailchimp_list_id)
+         @mailchimp_profile = Account.get_profile_name(account.mailchimp_list_id, 'mailchimp')
+       end
        @mailchimp_lists = AccountList.where(:account_id => account.id, :profile_type => 'mailchimp')
      end
    end
