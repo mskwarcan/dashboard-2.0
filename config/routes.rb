@@ -14,6 +14,8 @@ Bdashd::Application.routes.draw do
   match '/accounts/:id/remove_twitter', :controller => 'accounts', :action => 'remove_twitter'
   match '/accounts/:id/remove_google', :controller => 'accounts', :action => 'remove_google'
   match '/accounts/:id/remove_mc', :controller => 'accounts', :action => 'remove_mailchimp'
+  match '/accounts/:id/users', :controller => 'accounts', :action => 'users'
+  match '/accounts/:id/add_user', :controller => 'accounts', :action => 'add_user'
   
   
   match '/facebook', :controller => 'accounts', :action => 'facebook_register'

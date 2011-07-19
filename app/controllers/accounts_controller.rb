@@ -75,10 +75,14 @@ class AccountsController < ApplicationController
     
     respond_to do |format|
       if @account.save
-        AccountsUser.admin(current_user.id, @account.id)
+        @account.accounts_users.last.status = "confirmed"
+        @account.accounts_users.last.access = "admin"
+        @account.accounts_users.last.save
+        
         if(!@account.mailchimp_api_key.empty?)
           @account.get_mailchimp_lists
         end
+        
         format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
@@ -141,7 +145,7 @@ class AccountsController < ApplicationController
     
     account.get_facebook_profiles
      
-    redirect_to '/' 
+    redirect_to "/accounts/#{session[:account_id]}/edit"
   end
   
   def twitter_register
@@ -176,7 +180,7 @@ class AccountsController < ApplicationController
     account.save
     
     # Hand off to our app, which actually uses the API with the above token and secret
-    redirect_to '/'
+    redirect_to "/accounts/#{session[:account_id]}/edit"
     
    end
    
@@ -210,7 +214,7 @@ class AccountsController < ApplicationController
      account.get_analytic_profiles
 
      # Hand off to our app, which actually uses the API with the above token and secret
-     redirect_to '/'
+     redirect_to "/accounts/#{session[:account_id]}/edit"
    end
    
    def remove_google
@@ -272,6 +276,43 @@ class AccountsController < ApplicationController
      
      respond_to do |format|
        format.html { redirect_to :action => "edit" }
+     end
+   end
+   
+   def users
+     @account = Account.get_account(params[:id])
+     @account_users = @account.accounts_users
+     
+     respond_to do |format|
+       format.html # add_users.html.erb
+     end
+   end
+   
+   def add_user
+     @account = Account.get_account(params[:id])
+     @user = User.first(:conditions => {:email => params[:email]})
+     
+     if @user.nil?
+      redirect_to("/accounts/#{@account.id}/users", :notice => 'An account with that email adress does not exist.')
+     else
+       begin
+         @account.users << @user
+          if @account.save       
+            @account.accounts_users.last.status = params[:access]
+            @account.accounts_users.last.save
+            redirect_to("/accounts/#{@account.id}/users", :notice => "You have added #{params[:email]} to the list of users. Confirmation is pending.")
+          else
+            respond_to do |format|
+              format.html { render "/accounts/#{@account.id}/users"}
+              format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+            end
+          end
+       rescue ActiveRecord::RecordInvalid
+         respond_to do |format|
+           format.html { redirect_to "/accounts/#{@account.id}/users", :notice => 'That user is already tied to that account.'}
+           format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+         end
+       end  
      end
    end
    

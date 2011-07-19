@@ -1,0 +1,23 @@
+<table>
+	<tr>
+		<th>User</th>
+		<th>Permission</th>
+		<th>Status of Connection</th>
+	</tr>
+<% @account_users.each do |user| %>
+	<tr>
+		<td><%= user.user.email %></td>
+		<td><%= user.access %></td>
+		<td><%= user.status %></td>
+	</tr>
+<% end %>
+</table>
+
+<form id="add_user" action="/accounts/<%= @account.id %>/add_user">
+	<input type="text" name="email" />
+	<select name="access">
+		<option value="viewer">Viewer</option>
+		<option value="admin">Administrator</option>
+	</select>
+	<input type="submit">
+</form>

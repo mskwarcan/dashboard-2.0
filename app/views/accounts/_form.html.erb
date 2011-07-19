@@ -46,7 +46,7 @@
   <div class="field">
     Twitter:<br />
 		<% if @account.twitter_token %>
-		  Token: <%= @account.twitter_name %><br />
+		  User: <%= @account.twitter_name %><br />
 			<a href="/accounts/<%= @account.id %>/remove_twitter">Remove Current Twitter Account</a>
 		<% else %>
 			<a href="/twitter">Add a Twitter Account</a>
