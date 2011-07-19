@@ -16,7 +16,8 @@ Bdashd::Application.routes.draw do
   match '/accounts/:id/remove_mc', :controller => 'accounts', :action => 'remove_mailchimp'
   match '/accounts/:id/users', :controller => 'accounts', :action => 'users'
   match '/accounts/:id/add_user', :controller => 'accounts', :action => 'add_user'
-  
+  match '/accounts/:id/add_connection', :controller => 'accounts', :action => 'add_connection'
+  match '/accounts/:id/remove_connection', :controller => 'accounts', :action => 'remove_connection'
   
   match '/facebook', :controller => 'accounts', :action => 'facebook_register'
   match '/facebook_callback', :controller => 'accounts', :action => 'facebook_callback'

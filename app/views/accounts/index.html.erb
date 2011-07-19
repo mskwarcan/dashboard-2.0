@@ -1,4 +1,5 @@
-<h1>Listing accounts</h1>
+<% if !@admin_accounts.empty?%>
+<h1>Admin Accounts</h1>
 
 <table>
   <tr>
@@ -10,9 +11,10 @@
     <th></th>
     <th></th>
     <th></th>
+		<th></th>
   </tr>
 
-<% @accounts.each do |account| %>
+<% @admin_accounts.each do |account| %>
   <tr>
 	
     <td><%= account.name %></td>
@@ -52,7 +54,7 @@
 					<% end %>
 				<% end %>
 				</td>
-    <td><%= link_to 'Show', account %></td>
+    <td><%= link_to 'View Account', account %></td>		
     <td><%= link_to 'Edit', edit_account_path(account) %></td>
     <td><%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %></td>
 		<td><%= link_to 'Add Users to this Account', "accounts/#{account.id}/users"%>
@@ -61,6 +63,110 @@
 </table>
 
 <br />
+<% end %>
+
+<% if !@viewer_accounts.empty?%>
+<h1>Viewer Accounts</h1>
+
+<table>
+  <tr>
+	  <th>Name</th>
+    <th>Facebook Page/App</th>
+    <th>Twitter Account</th>
+    <th>Google Analytics Profile</th>
+    <th>Mailchimp List</th>
+    <th></th>
+  </tr>
+
+<% @viewer_accounts.each do |account| %>
+  <tr>
+	
+    <td><%= account.name %></td>
+    <td><% if account.facebook_profile_id %>
+					<%= Account.get_profile_name(account.facebook_profile_id, "facebook") %>
+				<% else %>
+					<% if account.facebook_token %>
+						<p>You have verified your Facebook account, but you have yet to tie it to a Facebook Page or App to this profile.</p>
+					<% else %>
+						<p>You haven't verified your Facebook Account Yet.</p>
+					<% end %>
+				<% end %>
+		</td>
+    <td><% if account.twitter_name %>
+					<%= account.twitter_name %>
+					<% else %>
+						<p>You haven't verified your twitter account yet.</p>
+					<% end %>
+					</td>
+    <td><% if account.google_profile_id %>
+					<%= Account.get_profile_name(account.google_profile_id, "google") %>
+				<% else %>
+					<% if account.google_token %>
+						<p>You have verified your Google Analytics account, but you have yet to tie a Google Analytics Profile to this profile.</p>
+					<% else %>
+						<p>You haven't verified your Google Analytics account Yet.</p>
+					<% end %>
+				<% end %>
+		</td>
+		<td><% if account.mailchimp_list_id %>
+					<%= Account.get_profile_name(account.mailchimp_list_id, "mailchimp") %>
+				<% else %>
+					<% if !account.mailchimp_api_key.to_s.empty? %>
+						<p>You have verified your Mailchimp account, but you have yet to tie it to a Mail Chimp Subscription List to this profile.</p>
+					<% else %>
+						<p>You haven't verified your Mail Chimp account Yet.</p>
+					<% end %>
+				<% end %>
+				</td>
+    <td><%= link_to 'View Account', account %></td>		
+  </tr>
+<% end %>
+</table>
+<% end %>
+
+<% if !@connections.empty?%>
+<h1>Connections</h1>
+
+<table>
+  <tr>
+	  <th>Name</th>
+    <th>Access</th>
+		<th></th>
+  </tr>
+
+<% @connections.each do |account| %>
+  <tr>
+    <td><%= account.account.name %></td>
+		<td><%= account.access %></td>
+    <td><%= link_to 'Remove Connection', "/accounts/#{account.account_id}/remove_connection" %></td>		
+  </tr>
+<% end %>
+</table>
+<% end %>
+
+<% if !@pending_connections.empty?%>
+<h1>Pending Connections</h1>
+
+<table>
+  <tr>
+	  <th>Name</th>
+    <th>Access</th>
+		<th></th>
+		<th></th>
+  </tr>
+
+<% @pending_connections.each do |account| %>
+  <tr>
+    <td><%= account.account.name %></td>
+		<td><%= account.access %></td>
+    <td><%= link_to 'Confirm Connection', "/accounts/#{account.account_id}/add_connection" %></td>	
+    <td><%= link_to 'Remove Connection', "/accounts/#{account.account_id}/remove_connection" %></td>	
+  </tr>
+<% end %>
+</table>
+<% end %>
+
+
 
 <%= link_to 'New Account', new_account_path %>
 

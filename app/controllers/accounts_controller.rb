@@ -1,10 +1,14 @@
 class AccountsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :verify_admin, :except => [:index, :show, :new, :create, :add_connection, :remove_connection]
   
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.all
+    @admin_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'admin', :status => 'confirmed').includes(:account).collect{|au| au.account}
+    @viewer_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'viewer', :status => 'confirmed').includes(:account).collect{|au| au.account}
+    @connections = AccountsUser.where(:user_id => current_user.id, :status => 'confirmed')
+    @pending_connections = AccountsUser.where(:user_id => current_user.id, :status => 'pending')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -297,16 +301,10 @@ class AccountsController < ApplicationController
      else
        begin
          @account.users << @user
-          if @account.save       
-            @account.accounts_users.last.status = params[:access]
-            @account.accounts_users.last.save
-            redirect_to("/accounts/#{@account.id}/users", :notice => "You have added #{params[:email]} to the list of users. Confirmation is pending.")
-          else
-            respond_to do |format|
-              format.html { render "/accounts/#{@account.id}/users"}
-              format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
-            end
-          end
+          @account.save       
+          @account.accounts_users.last.status = params[:access]
+          @account.accounts_users.last.save
+          redirect_to("/accounts/#{@account.id}/users", :notice => "You have added #{params[:email]} to the list of users. Confirmation is pending.")
        rescue ActiveRecord::RecordInvalid
          respond_to do |format|
            format.html { redirect_to "/accounts/#{@account.id}/users", :notice => 'That user is already tied to that account.'}
@@ -314,6 +312,21 @@ class AccountsController < ApplicationController
          end
        end  
      end
+   end
+   
+   def add_connection
+     @connection = AccountsUser.first(:conditions => {:account_id => params[:id], :user_id => current_user.id})
+     @connection.status = 'confirmed'
+     @connection.save
+     
+     redirect_to "/"
+   end
+   
+   def remove_connection
+     @connection = AccountsUser.first(:conditions => {:account_id => params[:id], :user_id => current_user.id})
+     @connection.destroy
+     
+     redirect_to "/"
    end
    
    protected
@@ -337,6 +350,19 @@ class AccountsController < ApplicationController
          @mailchimp_profile = Account.get_profile_name(account.mailchimp_list_id, 'mailchimp')
        end
        @mailchimp_lists = AccountList.where(:account_id => account.id, :profile_type => 'mailchimp')
+     end
+   end
+   
+   private
+   def verify_admin
+     @account = Account.find(params[:id])
+     admin = AccountsUser.first(:conditions => {:user_id => current_user.id, :account_id => @account.id, :status => 'confirmed', :access => 'admin'})
+     
+     if (admin.nil?)
+       respond_to do |format|
+         format.html { redirect_to "/", :notice => 'You do not have permission to view that page.'}
+         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+       end
      end
    end
 end
