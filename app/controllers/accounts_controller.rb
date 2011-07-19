@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :verify_admin, :except => [:index, :show, :new, :create, :add_connection, :remove_connection]
+  before_filter :verify_admin, :only => [:edit, :update, :destroy, :update_lists, :user, :add_user, :remove_facebook, :remove_twitter, :remove_google, :remove_mailchimp]
   
   # GET /accounts
   # GET /accounts.xml
