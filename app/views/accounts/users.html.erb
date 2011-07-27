@@ -1,23 +1,29 @@
-<table>
+<h1><%= @account.name %>'s Users</h1>
+<table class="accounts" cellspacing="0" cellpadding="0">
 	<tr>
 		<th>User</th>
 		<th>Permission</th>
 		<th>Status of Connection</th>
+		<th></th>
 	</tr>
 <% @account_users.each do |user| %>
 	<tr>
 		<td><%= user.user.email %></td>
 		<td><%= user.access %></td>
 		<td><%= user.status %></td>
+		<td><%= link_to 'Remove User from this Account', "/accounts/#{@account.id}/#{user.user_id}/remove_user" %></td>
 	</tr>
 <% end %>
 </table>
 
+<h3>Add a User to this Account</h3>
 <form id="add_user" action="/accounts/<%= @account.id %>/add_user">
-	<input type="text" name="email" />
+	<label for="email">Email Address</label><br />
+	<input type="text" name="email" class="text" /><br />
+	<label for="access">Account Permissions</label><br />
 	<select name="access">
 		<option value="viewer">Viewer</option>
 		<option value="admin">Administrator</option>
-	</select>
-	<input type="submit">
+	</select><br />
+	<input type="submit" class="submit_button" value="Add User" />
 </form>

@@ -1,7 +1,7 @@
 <% if !@admin_accounts.empty?%>
 <h1>Admin Accounts</h1>
 
-<table>
+<table class="accounts" cellspacing="0" cellpadding="0">
   <tr>
 	  <th>Name</th>
     <th>Facebook Page/App</th>
@@ -54,16 +54,15 @@
 					<% end %>
 				<% end %>
 				</td>
-    <td><%= link_to 'View Account', account %></td>		
-    <td><%= link_to 'Edit', edit_account_path(account) %></td>
-    <td><%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %></td>
-		<td><%= link_to 'Add Users to this Account', "accounts/#{account.id}/users"%>
+    <td><%= link_to 'View', account %></td>		
+    <td><%= link_to 'Edit Account Settings', edit_account_path(account) %></td>
+    <td><%= link_to 'Delete Account', account, :confirm => 'Are you sure?', :method => :delete %></td>
+		<td><%= link_to 'Manage Users', "accounts/#{account.id}/users"%>
   </tr>
 <% end %>
 </table>
-
-<br />
 <% end %>
+<%= link_to 'Create an Account', new_account_path, :class => 'submit_button' %>
 
 <% if !@viewer_accounts.empty?%>
 <h1>Viewer Accounts</h1>
@@ -168,6 +167,6 @@
 
 
 
-<%= link_to 'New Account', new_account_path %>
+
 
 

@@ -3,6 +3,7 @@ class Account < ActiveRecord::Base
   
   has_many :users, :through => :accounts_users
   has_many :accounts_users
+  has_many :updates
   
   def self.get_account(id)
     Account.first(:conditions => {:id => id})
@@ -31,10 +32,18 @@ class Account < ActiveRecord::Base
     end
   end
   
+  def get_analytics_data(token, start_date, end_date)
+    analytics = Hash.from_xml(token.get("https://www.google.com/analytics/feeds/data?ids=ga:#{google_profile_id}&start-date=#{start_date}&end-date=#{end_date}&metrics=ga:pageviews,ga:uniquePageviews,ga:avgTimeOnSite,ga:newVisits,ga:visits,ga:goalCompletionsAll&prettyprint=true").body)
+    analytics_hash = analytics["feed"]["entry"]["metric"]
+    adwords = Hash.from_xml(token.get("https://www.google.com/analytics/feeds/data?ids=ga:#{google_profile_id}&start-date=#{start_date}&end-date=#{end_date}&metrics=ga:impressions,ga:adClicks,ga:CTR,ga:CPC,ga:costPerConversion,ga:adCost,ga:transactions&prettyprint=true").body)
+    adwords_hash = adwords["feed"]["entry"]["metric"]
+    complete_analytics = (analytics_hash + adwords_hash)
+  end
+  
   def get_facebook_profiles
     client = Account.facebook(facebook_token)
     
-    client.selection.me.accounts.info!["data"].each do |account|
+    client.me('accounts').each do |account|
       facebook_profile = AccountList.new
       facebook_profile.account_id = id
       facebook_profile.profile_id = account["id"]
@@ -57,13 +66,17 @@ class Account < ActiveRecord::Base
     end
   end
   
-  def twitter
+  def twitter_init
     Twitter.configure do |config|
       config.consumer_key = 'GeeLSFoDBSRUaXRHLSSiQg'
       config.consumer_secret = 'cSTcJAPIC3enr7Ew5a4mNopOgb2B6srYrhdMrU8Q'
       config.oauth_token = twitter_token
       config.oauth_token_secret = twitter_secret
     end
+  end
+  
+  def twitter_user
+    Twitter.user
   end
   
   private
@@ -76,6 +89,6 @@ class Account < ActiveRecord::Base
   end
   
   def self.facebook(token = nil)
-      FBGraph::Client.new(:client_id => '231052250248689', :secret_id => 'f91517dd3a452f2d82a71dfd5c07c458', :token => token)
+      FGraph::Client.new(:client_id => '231052250248689', :client_secret => 'f91517dd3a452f2d82a71dfd5c07c458', :access_token => token)
   end
 end

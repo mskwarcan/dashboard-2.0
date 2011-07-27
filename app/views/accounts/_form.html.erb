@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => 'text' %>
   </div>
 
   <div class="field">
@@ -80,7 +80,7 @@
   <div class="field">
 	Mailchimp:<br />
 		<% if @account.mailchimp_list_id %>
-			Profile ID: <%= @mailchimp_profile %><br /> 					
+			Mail Chimp List: <%= @mailchimp_profile %><br /> 					
 			<% if @mailchimp_lists %>
 				<select name="account[mailchimp_list_id]">
 					<% @mailchimp_lists.each do |profile|%>
@@ -96,19 +96,19 @@
 				<% else %>
 					<select name="account[mailchimp_list_id]">
 						<% @mailchimp_lists.each do |profile|%>
-							<option <% if profile.profile_id.to_i == @account.mailchimp_list_id.to_i %>selected="selected" <% end %>  value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
+							<option <% if profile.profile_id == @account.mailchimp_list_id %>selected="selected" <% end %>  value="<%= profile.profile_id  %>"><%= profile.profile_name %></option>
 						<% end %>
 					</select>
 					<a href="/accounts/<%= @account.id %>/remove_mc">Remove Current Mail Chimp Account</a>
 				<% end %>
 			<% else %>
 				<%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
-		    <%= f.text_field :mailchimp_api_key %>
+		    <%= f.text_field :mailchimp_api_key, :class => 'text' %>
 				 <p>If you're not sure what your Mail Chimp API Key is or you don't have one, <a href="http://admin.mailchimp.com/account/api" target="_blank">Get a Key Here.</a>
 			<% end %>
 		<% end %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'submit' %>
   </div>
 <% end %>

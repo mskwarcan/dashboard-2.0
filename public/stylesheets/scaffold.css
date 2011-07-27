@@ -1,24 +1,3 @@
-body { background-color: #fff; color: #333; }
-
-body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
-  line-height: 18px;
-}
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-a { color: #000; }
-a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
-
-div.field, div.actions {
-  margin-bottom: 10px;
-}
 
 #notice {
   color: green;
@@ -53,4 +32,247 @@ div.field, div.actions {
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+#flash_notice
+{
+  color:#3fb84a;
+  border:#3fb84a solid 1px;
+  padding:8px 15px;
+  background:#e0ffdf;
+  margin:0 0 10px;
+  width:580px;
+}
+
+#flash_alert
+{
+  color:#d84242;
+  border:#d84242 solid 1px;
+  padding:8px 15px;
+  background:#ffdfdf;
+  margin:0 0 10px;
+  width:580px;
+}
+
+body
+{
+  margin:0;
+  padding:0;
+  background:url("/images/bg.jpg") repeat-x #fbf3da;
+  font-family:Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3
+{
+  margin:0;
+  font-family: 'Varela Round', sans-serif;
+}
+
+a
+{
+  color:#38b2f8;
+  outline:none;
+}
+
+a img
+{
+  border:none;
+}
+
+#wrapper
+{
+  width:960px;
+  margin:0 auto;
+}
+
+.header
+{
+  margin:15px 0 0 0;
+  width:960px;
+  height:80px;
+  display:inline-block;
+}
+
+img.logo
+{
+  float:left;
+  margin:0 25px 0 0;
+}
+
+.header ul.nav
+{
+  margin:25px 0 0 0;
+  padding:0;
+  list-style:none;
+}
+
+.header ul.nav li
+{
+  float:left;
+  margin-left:35px;
+}
+
+.header ul.nav li a
+{
+  text-decoration:none;
+  color:#818181;
+}
+
+/* Sign In Box */
+
+.sign_in_box
+{
+  background:#fff;
+  float:right;
+  padding:0 15px 15px;
+  width:300px;
+}
+
+.sign_in_box h2
+{
+  color:#62615c;
+  margin:0;
+}
+
+.sign_in_box p
+{
+  margin:5px 0;
+}
+
+.sign_in_box p.infield
+{
+  position:relative;
+  margin:0;
+}
+
+.sign_in_box p.infield label
+{
+  position:absolute;
+  top:15px;
+  left:10px;
+  color:#8a8a89;
+}
+
+.sign_in_box p.remember_me
+{
+  float:right;
+}
+
+.sign_in_box label.remember
+{
+  font-size:12px;
+  color:#959595;
+}
+
+.sign_in_box input.text
+{
+  border:none;
+  background:#f0f0f0;
+  padding:10px;
+  font-size:14px;
+  margin:5px 0;
+  width:280px;
+} 
+
+.sign_in_box h3
+{
+  color:#b2b2b2;
+  font-weight:normal;
+  margin:7px 0 3px;
+  font-size:16px;
+}
+
+.sign_in_box a
+{
+  font-size:14px;
+}
+
+.content
+{
+  padding:15px 0;
+}
+
+/* Accounts Table */
+table.accounts
+{
+  border-top:#e5cb73  solid 1px;
+  border-bottom:#e5cb73  solid 1px;
+  font-size:13px;
+  margin:10px 0;
+}
+
+table.accounts tr:nth-child(2n-1) td
+{
+}
+
+table.accounts tr:nth-child(2n-1) td:nth-child(2n)
+{
+  background:#f9eec9;
+}
+
+table.accounts tr:nth-child(2n-1) th:nth-child(2n)
+{
+  background:#f9eec9;
+}
+
+
+table.accounts tr:nth-child(2n)
+{
+  background:#fdf9ed;
+}
+
+table.accounts tr:nth-child(2n) td
+{
+}
+
+table.accounts tr:nth-child(2n) td:nth-child(2n)
+{
+  background:#fff6dc;
+}
+
+table.accounts th
+{
+  white-space:nowrap;
+  text-align:left;
+}
+
+table.accounts td, table.accounts th
+{
+  padding:5px 10px 5px 10px;
+  margin:0;
+}
+
+#new_account input.text, .edit_account input.text, #add_user input.text
+{
+  border:none;
+  background:#eedfa9;
+  padding:5px;
+  font-size:16px;
+  margin:4px 0;
+}
+
+#new_account input.submit, .edit_account input.submit, .submit_button
+{
+  background:-moz-linear-gradient(center top , #f6e8b5 0pt, #f1e0a3 100%) repeat scroll 0 0 transparent;
+  -moz-border-radius:3px;
+  text-shadow:0 1px 0 rgba(0, 0, 0, 0.3);
+  border:1px solid #dac372;
+  text-transform:uppercase;
+  font-size:14px;
+  padding: 3px 15px;
+  margin:4px 0;
+  color:#bfa33c;
+  font-family:Arial;
+}
+
+#add_user label
+{
+  color:#474747;
+  font-size:14px;
+}
+
+.submit_button
+{
+  text-decoration:none;
+  display:inline-block;
 }

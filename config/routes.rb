@@ -7,7 +7,9 @@ Bdashd::Application.routes.draw do
     match "/users/sign_out", :controller => 'devise/sessions', :action => 'destroy'
   end
 
-  root :to => "accounts#index"
+  root :to => "accounts#home"
+  
+  match '/accounts' => "account#index", :as => :user_root
   
   match '/accounts/:id/update_list', :controller => 'accounts', :action => 'update_lists'
   match '/accounts/:id/remove_fb', :controller => 'accounts', :action => 'remove_facebook'
@@ -18,6 +20,7 @@ Bdashd::Application.routes.draw do
   match '/accounts/:id/add_user', :controller => 'accounts', :action => 'add_user'
   match '/accounts/:id/add_connection', :controller => 'accounts', :action => 'add_connection'
   match '/accounts/:id/remove_connection', :controller => 'accounts', :action => 'remove_connection'
+  match '/accounts/:id/:user_id/remove_user', :controller => 'accounts', :action => 'remove_user_connection'
   
   match '/facebook', :controller => 'accounts', :action => 'facebook_register'
   match '/facebook_callback', :controller => 'accounts', :action => 'facebook_callback'

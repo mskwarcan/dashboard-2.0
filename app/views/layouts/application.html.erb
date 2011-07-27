@@ -2,25 +2,40 @@
 <html>
 <head>
   <title>Bdashd</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+ 	<%= stylesheet_link_tag "scaffold" %>
+	<%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "jquery.infieldlabel.min.js", "jquery.validate.min.js", "application" %>
   <%= csrf_meta_tag %>
+  <link href='http://fonts.googleapis.com/css?family=Varela+Round&v2' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<% flash.each do |name, msg| %>
-		<%= content_tag(:div, msg, :id => "flash_#{name}") %>
-	<% end %>
+<div id="wrapper">
+	<div class="header">
+		<a href="/home"><img class="logo" src="/images/logo.jpg" /></a>
+		<ul class="nav">
+			<li><a href="#">What Dashboard is</a></li>
+			<li><a href="#">What Dashboard does</a></li>
+			<li><a href="#">Support</a></li>
+			<li><a href="#">Sign Up</a></li>
+		</ul>
+	</div>
 	
-	<div id="user_nav">
-	  <% if user_signed_in? %>
-	    Signed in as <%= current_user.email %>. Not you?
-	    <%= link_to "Sign out", destroy_user_session_path %> <%= link_to "Edit User", edit_user_registration_path %>
-	  <% else %>
-	    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+	<div class="sign_in_box">
+		<% if user_signed_in? %>
+		Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path %> <%= link_to "Edit User", edit_user_registration_path %>
+		<% else %>
+			<%= render :partial => 'shared/new_session' %>
 	  <% end %>
 	</div>
+	
+	<div class="content">
+		<% flash.each do |name, msg| %>
+			<%= content_tag(:div, msg, :id => "flash_#{name}") %>
+		<% end %>
 
-<%= yield %>
-
+	  <%= yield %>
+	</div>	
+</div>
 </body>
 </html>

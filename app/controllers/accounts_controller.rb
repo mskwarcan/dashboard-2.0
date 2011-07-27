@@ -1,6 +1,13 @@
 class AccountsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :verify_admin, :only => [:edit, :update, :destroy, :update_lists, :user, :add_user, :remove_facebook, :remove_twitter, :remove_google, :remove_mailchimp]
+  before_filter :authenticate_user!, :except => :home
+  before_filter :verify_admin, :only => [:edit, :update, :destroy, :update_lists, :user, :add_user, :remove_facebook, :remove_twitter, :remove_google, :remove_mailchimp, :remove_user_connection]
+  
+  def home
+    respond_to do |format|
+      format.html # home.html.erb
+      format.xml  { render :xml => @accounts }
+    end
+  end
   
   # GET /accounts
   # GET /accounts.xml
@@ -20,6 +27,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1.xml
   def show
     @account = Account.find(params[:id])
+    @update = @account.updates.last
 
     respond_to do |format|
       format.html # show.html.erb
@@ -83,11 +91,7 @@ class AccountsController < ApplicationController
         @account.accounts_users.last.access = "admin"
         @account.accounts_users.last.save
         
-        if(!@account.mailchimp_api_key.empty?)
-          @account.get_mailchimp_lists
-        end
-        
-        format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
+        format.html { render (:action => "edit") }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
         format.html { render :action => "new" }
@@ -116,7 +120,10 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1.xml
   def destroy
     @account = Account.find(params[:id])
+    @accountsUser = AccountsUser.where(:account_id => @account.id)
+    
     @account.destroy
+    @accountsUser.delete_all
 
     respond_to do |format|
       format.html { redirect_to("/accounts") }
@@ -130,7 +137,7 @@ class AccountsController < ApplicationController
     
     callback_url = "http://social-dashboard.heroku.com/facebook_callback"
     
-    redirect_to client.authorization.authorize_url(:redirect_uri => callback_url , :scope => 'manage_pages, offline_access')
+    redirect_to client.authorization.authorize_url(:redirect_uri => callback_url , :scope => 'manage_pages, offline_access, read_insights')
   end
   
   def facebook_callback
@@ -179,7 +186,7 @@ class AccountsController < ApplicationController
     
     account.twitter_token = access_token.token
     account.twitter_secret = access_token.secret
-    account.twitter
+    account.twitter_init
     account.twitter_name = Twitter.user["screen_name"]
     account.save
     
@@ -297,7 +304,7 @@ class AccountsController < ApplicationController
      @user = User.first(:conditions => {:email => params[:email]})
      
      if @user.nil?
-      redirect_to("/accounts/#{@account.id}/users", :notice => 'An account with that email adress does not exist.')
+      redirect_to("/accounts/#{@account.id}/users", :alert => 'An account with that email adress does not exist.')
      else
        begin
          @account.users << @user
@@ -307,7 +314,7 @@ class AccountsController < ApplicationController
           redirect_to("/accounts/#{@account.id}/users", :notice => "You have added #{params[:email]} to the list of users. Confirmation is pending.")
        rescue ActiveRecord::RecordInvalid
          respond_to do |format|
-           format.html { redirect_to "/accounts/#{@account.id}/users", :notice => 'That user is already tied to that account.'}
+           format.html { redirect_to "/accounts/#{@account.id}/users", :alert => 'That user is already tied to that account.'}
            format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
          end
        end  
@@ -327,6 +334,16 @@ class AccountsController < ApplicationController
      @connection.destroy
      
      redirect_to "/"
+   end
+   
+   def remove_user_connection
+     @accountsUser = AccountsUser.first(:conditions => {:account_id => params[:id], :user_id => params[:user_id]})
+     @accountsUser.destroy
+
+     respond_to do |format|
+       format.html { redirect_to("/accounts/#{params[:id]}/users") }
+       format.xml  { head :ok }
+     end
    end
    
    protected

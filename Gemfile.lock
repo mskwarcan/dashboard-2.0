@@ -52,6 +52,7 @@ GEM
     arel (2.0.10)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    crack (0.1.8)
     devise (1.4.2)
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
@@ -64,8 +65,12 @@ GEM
       rack (>= 1.1.0, < 2)
     faraday_middleware (0.6.5)
       faraday (~> 0.6.0)
+    fgraph (0.6.1)
+      httparty (>= 0.5.0)
     hashie (1.0.0)
     hominid (3.0.2)
+    httparty (0.7.4)
+      crack (= 0.1.8)
     i18n (0.6.0)
     jquery-rails (1.0.11)
       railties (~> 3.0)
@@ -132,6 +137,7 @@ PLATFORMS
 DEPENDENCIES
   devise (= 1.4.2)
   fbgraph!
+  fgraph (= 0.6.1)
   hominid (= 3.0.2)
   jquery-rails (>= 0.2.6)
   oauth (= 0.4.5)
