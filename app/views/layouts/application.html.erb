@@ -11,7 +11,7 @@
 <body>
 <div id="wrapper">
 	<div class="header">
-		<a href="/home"><img class="logo" src="/images/logo.jpg" /></a>
+		<a href="/"><img class="logo" src="/images/logo.jpg" /></a>
 		<ul class="nav">
 			<li><a href="#">What Dashboard is</a></li>
 			<li><a href="#">What Dashboard does</a></li>
@@ -23,7 +23,7 @@
 	<div class="sign_in_box">
 		<% if user_signed_in? %>
 		Signed in as <%= current_user.email %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path %> <%= link_to "Edit User", edit_user_registration_path %>
+    <%= link_to "Sign out", destroy_user_session_path %> <%= link_to "Edit User", edit_user_registration_path %> <%= link_to "My Accounts", accounts_path %>
 		<% else %>
 			<%= render :partial => 'shared/new_session' %>
 	  <% end %>

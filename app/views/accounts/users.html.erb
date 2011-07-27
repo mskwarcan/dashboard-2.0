@@ -9,7 +9,7 @@
 <% @account_users.each do |user| %>
 	<tr>
 		<td><%= user.user.email %></td>
-		<td><%= user.access %></td>
+		<td><% if user.creator == true %>creator/<% end %><%= user.access %></td>
 		<td><%= user.status %></td>
 		<td><%= link_to 'Remove User from this Account', "/accounts/#{@account.id}/#{user.user_id}/remove_user" %></td>
 	</tr>

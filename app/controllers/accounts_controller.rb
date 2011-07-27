@@ -88,10 +88,11 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.save
         @account.accounts_users.last.status = "confirmed"
+        @account.accounts_users.last.creator = true
         @account.accounts_users.last.access = "admin"
         @account.accounts_users.last.save
         
-        format.html { render (:action => "edit") }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
         format.html { render :action => "new" }
