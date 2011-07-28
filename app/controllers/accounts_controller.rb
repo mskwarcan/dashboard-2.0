@@ -137,7 +137,7 @@ class AccountsController < ApplicationController
     client = Account.facebook
     callback_url = "http://social-dashboard.heroku.com/facebook_callback"
     
-    client.oauth_authorize_url(callback_url, :scope => 'manage_pages, offline_access, read_insights')
+    redirect_to client.oauth_authorize_url(callback_url, :scope => 'manage_pages, offline_access, read_insights')
   end
   
   def facebook_callback
