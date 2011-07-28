@@ -135,10 +135,9 @@ class AccountsController < ApplicationController
   def facebook_register
     #Set client up
     client = Account.facebook
-    
     callback_url = "http://social-dashboard.heroku.com/facebook_callback"
     
-    redirect_to client.authorization.authorize_url(:redirect_uri => callback_url , :scope => 'manage_pages, offline_access, read_insights')
+    client.oauth_authorize_url(callback_url, :scope => 'manage_pages, offline_access, read_insights')
   end
   
   def facebook_callback
@@ -148,7 +147,7 @@ class AccountsController < ApplicationController
     callback_url = "http://social-dashboard.heroku.com/facebook_callback"
     
     #Convert the request token to an access token
-    access_token = client.authorization.process_callback(params[:code], :redirect_uri => callback_url)
+    access_token = client.oauth_access_token(:redirect_uri => callback_url, :code => params[:code])
     
     account = Account.get_account(session[:account_id])
 

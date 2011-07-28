@@ -78,7 +78,7 @@
 	<% end %>
   </div>
   <div class="field">
-	Mailchimp:<br />
+	<%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
 		<% if @account.mailchimp_list_id %>
 			Mail Chimp List: <%= @mailchimp_profile %><br /> 					
 			<% if @mailchimp_lists %>
@@ -102,7 +102,6 @@
 					<a href="/accounts/<%= @account.id %>/remove_mc">Remove Current Mail Chimp Account</a>
 				<% end %>
 			<% else %>
-				<%= f.label :mailchimp_api_key, "Mail Chimp API Key" %><br />
 		    <%= f.text_field :mailchimp_api_key, :class => 'text' %>
 				 <p>If you're not sure what your Mail Chimp API Key is or you don't have one, <a href="http://admin.mailchimp.com/account/api" target="_blank">Get a Key Here.</a>
 			<% end %>
