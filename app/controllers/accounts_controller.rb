@@ -145,9 +145,10 @@ class AccountsController < ApplicationController
     client = Account.facebook
     
     callback_url = "http://social-dashboard.heroku.com/facebook_callback"
+    code = params[:code]
     
     #Convert the request token to an access token
-    access_token = client.oauth_access_token(callback_url, params[:code])
+    access_token = client.oauth_access_token(callback_url, code)
     
     account = Account.get_account(session[:account_id])
 
