@@ -60,6 +60,7 @@ body
   padding:0;
   background:url("/images/bg.jpg") repeat-x #fbf3da;
   font-family:Helvetica, Arial, sans-serif;
+  color:#343434;
 }
 
 h1, h2, h3
@@ -77,6 +78,11 @@ a
 a img
 {
   border:none;
+}
+
+select
+{
+  margin:10px 0 0;
 }
 
 #wrapper
@@ -151,6 +157,7 @@ img.logo
   top:15px;
   left:10px;
   color:#8a8a89;
+  font-size:14px;
 }
 
 .sign_in_box p.remember_me
@@ -171,7 +178,7 @@ img.logo
   padding:10px;
   font-size:14px;
   margin:5px 0;
-  width:280px;
+  width:290px;
 } 
 
 .sign_in_box h3
@@ -242,7 +249,7 @@ table.accounts td, table.accounts th
   margin:0;
 }
 
-#new_account input.text, .edit_account input.text, #add_user input.text
+#new_account input.text, .edit_account input.text, #add_user input.text, .sign_up .user_new input.text
 {
   border:none;
   background:#eedfa9;

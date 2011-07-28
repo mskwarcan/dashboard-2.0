@@ -1,3 +1,3 @@
 $(document).ready(function(){
-  $(".user_new label").inFieldLabels();
+  $(".sign_in_box .user_new label").inFieldLabels();
 });
