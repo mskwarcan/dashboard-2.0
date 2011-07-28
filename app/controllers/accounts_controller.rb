@@ -152,7 +152,7 @@ class AccountsController < ApplicationController
     
     account = Account.get_account(session[:account_id])
 
-    account.facebook_token = access_token
+    account.facebook_token = access_token["access_token"]
     account.save
     
     account.get_facebook_profiles
