@@ -70,7 +70,7 @@ class AccountsController < ApplicationController
       @account.get_facebook_profiles
     end
     
-    if(@account.mailchimp_api_key)
+    if(!@account.mailchimp_api_key.to_s.empty?)
       @account.get_mailchimp_lists
     end
     
