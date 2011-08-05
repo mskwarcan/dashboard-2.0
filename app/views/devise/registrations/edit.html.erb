@@ -3,6 +3,9 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
+  <p><%= f.label :name %><br />
+  <%= f.text_field :name %></p>
+
   <p><%= f.label :email %><br />
   <%= f.email_field :email %></p>
 
@@ -15,8 +18,15 @@
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
 
+  <p><%= f.label :phone %><br />
+  <%= f.text_field :phone %></p>
+
   <p><%= f.submit "Update" %></p>
 <% end %>
+
+<h3>Upgrade my Account</h3>
+
+<p><%= link_to "Upgrade My Account", "/users/upgrade" %></p>
 
 <h3>Cancel my account</h3>
 

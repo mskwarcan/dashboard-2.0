@@ -14,7 +14,7 @@ class AccountsController < ApplicationController
   def index
     @admin_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'admin', :status => 'confirmed').includes(:account).collect{|au| au.account}
     @viewer_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'viewer', :status => 'confirmed').includes(:account).collect{|au| au.account}
-    @connections = AccountsUser.where(:user_id => current_user.id, :status => 'confirmed')
+    @connections = AccountsUser.where(:user_id => current_user.id, :status => 'confirmed', :creator => false)
     @pending_connections = AccountsUser.where(:user_id => current_user.id, :status => 'pending')
 
     respond_to do |format|

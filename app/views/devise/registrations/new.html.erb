@@ -1,4 +1,5 @@
 <h2>Sign up</h2>
+<p>Signing up is simple and free. We will send a confirmation email after you have signed up.</p>
 <div class="sign_up">
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -17,13 +18,6 @@
 
   <p><%= f.label :phone %><br />
   <%= f.text_field :phone, :class => 'text' %></p>
-
-  <p><%= f.label :type_of_user %><br />
-  <select name="user[type_of_user]">
-		<option value="viewer">Viewer</option>
-		<option value="admin">Administrator</option>
-	</select>
-	</p>
 
   <p><%= f.submit "Sign up", :class => 'submit_button' %></p>
 <% end %>

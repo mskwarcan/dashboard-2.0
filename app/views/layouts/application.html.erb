@@ -16,7 +16,7 @@
 			<li><a href="#">What Dashboard is</a></li>
 			<li><a href="#">What Dashboard does</a></li>
 			<li><a href="#">Support</a></li>
-			<li><a href="#">Sign Up</a></li>
+			<li><a href="/users/sign_up">Sign Up</a></li>
 		</ul>
 	</div>
 	
@@ -24,6 +24,7 @@
 		<% if user_signed_in? %>
 		Signed in as <%= current_user.email %>. Not you?
     <%= link_to "Sign out", destroy_user_session_path %> <%= link_to "Edit User", edit_user_registration_path %> <%= link_to "My Accounts", accounts_path %>
+		<%= link_to "Upgrade My Account", "/users/upgrade" %>
 		<% else %>
 			<%= render :partial => 'shared/new_session' %>
 	  <% end %>

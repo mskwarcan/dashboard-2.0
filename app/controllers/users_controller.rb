@@ -80,4 +80,76 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def upgrade
+    @card = CreditCard.new
+    
+    respond_to do |format|
+      format.html { render "shared/upgrade"}
+      format.xml  { render :xml => @user }
+    end
+  end
+  
+  def process_card
+    @user = current_user
+    @card = CreditCard.new(params[:credit_card])
+    
+    # Send requests to the gateway's test servers
+    ActiveMerchant::Billing::Base.mode = :test
+    
+    if @card.save
+      # Create a new credit card object
+      credit_card = ActiveMerchant::Billing::CreditCard.new(
+        :type       => @card.card_type,
+        :number     => @card.number,
+        :month      => @card.month,
+        :year       => @card.year,
+        :first_name => @card.first_name,
+        :last_name  => @card.last_name,
+        :verification_value  => @card.ccv
+      )
+
+      if credit_card.valid?
+        # Create a gateway object to the TrustCommerce service
+        gateway = ActiveMerchant::Billing::Base.gateway(:pay_junction).new(
+                      :login => "my_account", 
+                      :password => "my_pass"
+                   )
+
+        # Authorize for $10 dollars (1000 cents)
+        response = gateway.authorize(params[:tier].to_i, credit_card)
+
+        if response.success?
+          # Capture the money
+          gateway.capture(params[:tier].to_i, response.authorization)
+          current_user.type_of_user = params[:tier]
+          current_user.save
+        
+          respond_to do |format|
+            format.html { redirect_to("/accounts", :notice => "Your account has been updated.")}
+            format.xml  { render :xml => @user }
+          end
+        else
+          raise StandardError, response.message
+          respond_to do |format|
+            flash[:alert] = response.message
+            format.html { render "shared/upgrade"}
+            format.xml  { render :xml => @user }
+          end
+        end
+      else
+        respond_to do |format|
+          flash[:alert] = 'Invalid Credit Card'
+          format.html { render "shared/upgrade"}
+          format.xml  { render :xml => @user }
+        end
+      end
+    else
+       respond_to do |format|
+        format.html { render "shared/upgrade" }
+        format.xml  { render :xml => @card.errors, :status => :unprocessable_entity }
+       end
+    end
+  end
+  
 end

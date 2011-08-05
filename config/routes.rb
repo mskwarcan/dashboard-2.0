@@ -9,6 +9,9 @@ Bdashd::Application.routes.draw do
 
   root :to => "accounts#home"
   
+  match '/users/upgrade', :controller => 'users', :action => 'upgrade'
+  match '/users/process_card', :controller => 'users', :action => 'process_card', :as => 'credit_cards'
+  
   match '/accounts' => "account#index", :as => :user_root
   
   match '/accounts/:id/update_list', :controller => 'accounts', :action => 'update_lists'
