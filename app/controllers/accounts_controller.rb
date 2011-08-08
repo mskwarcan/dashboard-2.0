@@ -229,6 +229,37 @@ class AccountsController < ApplicationController
      redirect_to "/accounts/#{session[:account_id]}/edit"
    end
    
+   def youtube_register
+     #Set client up
+     client = Account.google
+     
+     #Request a token and authorize
+     request_token = client.get_request_token({:oauth_callback => "http://social-dashboard.heroku.com/youtube_callback"}, {:scope => 'http://gdata.youtube.com'})
+     session[:request_token] = request_token
+     redirect_to request_token.authorize_url
+   end
+   
+   def youtube_callback
+     client = Account.google
+
+     # Re-create the request token
+     request_token = OAuth::RequestToken.new(client, session[:request_token].token, session[:request_token].secret)
+
+     # Convert the request token to an access token using the verifier Google gave us
+     access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+
+     # Store the token and secret that we need to make API calls
+
+     account = Account.get_account(session[:account_id])
+
+     account.youtube_token = access_token.token
+     account.youtube_secret = access_token.secret
+     account.save
+
+     # Hand off to our app, which actually uses the API with the above token and secret
+     redirect_to "/accounts/#{session[:account_id]}/edit"
+   end
+   
    def remove_google
      account = Account.find(params[:id])
      
