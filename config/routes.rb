@@ -35,7 +35,7 @@ Bdashd::Application.routes.draw do
   match '/google_callback', :controller => 'accounts', :action => 'google_callback'
   
   match '/youtube', :controller => 'accounts', :action => 'youtube_register'
-  match '/youtbe_callback', :controller => 'accounts', :action => 'youtube_callback'
+  match '/youtube_callback', :controller => 'accounts', :action => 'youtube_callback'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
