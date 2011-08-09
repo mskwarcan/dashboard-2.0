@@ -10,7 +10,7 @@ task :cron => :environment do
     if account.twitter_token
       #Delayed::Job.enqueue Tweet.new(user, @update, heroku)
       account.twitter_init
-      @update.twitter_user = account.twitter_user #profile_image_url, screen_name, followers_count
+      @update.twitter_user = ActiveSupport::JSON.encode(account.twitter_user) #profile_image_url, screen_name, followers_count
       @update.tweets = ActiveSupport::JSON.encode(Twitter.user_timeline)
 
       if Time.now.day == 1 && Time.now.hour < 3

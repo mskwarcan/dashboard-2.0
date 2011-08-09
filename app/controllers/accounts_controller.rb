@@ -12,8 +12,8 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @admin_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'admin', :status => 'confirmed').includes(:account).collect{|au| au.account}
-    @viewer_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'viewer', :status => 'confirmed').includes(:account).collect{|au| au.account}
+    @admin_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'admin', :status => 'confirmed').collect{|au| au.account}
+    @viewer_accounts = AccountsUser.where(:user_id => current_user.id, :access => 'viewer', :status => 'confirmed').collect{|au| au.account}
     @connections = AccountsUser.where(:user_id => current_user.id, :status => 'confirmed', :creator => false)
     @pending_connections = AccountsUser.where(:user_id => current_user.id, :status => 'pending')
 
