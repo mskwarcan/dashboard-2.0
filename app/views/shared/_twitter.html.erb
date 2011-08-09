@@ -1,0 +1,23 @@
+<% if @update.twitter_user %>
+  <h3>Twitter Data:</h3>
+	<% user = ActiveSupport::JSON.decode(@update.twitter_user) %>
+	<img class="twitter" src="<%= user["profile_image_url"] %>" />
+	<h3 class="noMargin"><%= user["name"] %></h3>
+	Tweets :<%= user["statuses_count"] %><br />
+	Following: <%= user["friends_count"] %><br />
+	Listed: <%= user["listed_count"] %><br />
+	<span class="number">Followers: <%= user["followers_count"] %></span>
+</div>
+	
+	<% tweets = ActiveSupport::JSON.decode(@update.tweets) %>
+	<ul>
+	<% tweets.each do |tweet|%>
+		<li><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> 
+		<div class="status">
+			<b><a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a></b><br />
+		<%= tweet["text"] %>
+		</div>
+		</li>
+	<% end%>
+	</ul>
+<% end %>

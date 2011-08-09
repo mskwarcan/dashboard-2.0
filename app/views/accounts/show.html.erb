@@ -2,23 +2,9 @@
 
 <h1><%= @account.name %></h1>
 
-<% if @update.twitter_user %>
-  Twitter Data:
-	<%# ActiveSupport::JSON.decode(@update.twitter_user) %>
-	
-	<% tweets = ActiveSupport::JSON.decode(@update.tweets) %>
-	<ul>
-	<% tweets.each do |tweet|%>
-		<li><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> 
-		<div class="status">
-			<b><a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a></b><br />
-		<%= tweet["text"] %>
-		</div>
-		</li>
-	<% end%>
-	</ul>
-<% end %>
+<%= render :partial => "shared/twitter"%>
 
+<%= render :partial => "shared/facebook"%>
 
 
 <br />

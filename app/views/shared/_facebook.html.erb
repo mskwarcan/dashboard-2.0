@@ -1,0 +1,6 @@
+<% if @update.facebook_info %>
+	<h3>Facebook Data</h3>
+	<% info = ActiveSupport::JSON.decode(@update.facebook_info) %>
+	<h3><a href="<%= info["link"] %>"><%= info["name"] %></a></h3>
+	
+<% end %>
