@@ -1,6 +1,28 @@
 <% if @update.facebook_info %>
 	<h3>Facebook Data</h3>
 	<% info = ActiveSupport::JSON.decode(@update.facebook_info) %>
+	<% if @update.facebook_info["picture"] %>
+		<img src="<%= @update.facebook_info["picture"] %>">
+	<% end %>
 	<h3><a href="<%= info["link"] %>"><%= info["name"] %></a></h3>
-	
+	<% if @update.facebook_posts %>
+		<ul class="facebook clearfix">
+		<% @update.facebook_posts.each do | feed |%>
+
+			<li> 
+			<div class="status clearfix">
+				<b><a target="_blank" href="<%= status.link %>"><%= feed["from"]["name"] %></a></b><br />
+			<p class="message"><%= feed["message"] %></p>
+			<% if feed["picture"] %>
+				<img class="facebook" src="<%= feed["picture"] %>" />
+				<a href="<%= feed["link"] %>"><%= feed["name"] %></a><br />
+				<p class="description"><%= feed["description"] %></p>
+			<% end %>
+			</div>
+			</li>
+		<% end %>
+		</ul>
+	<% else %>
+		You currently don't have any posts on your Facebook wall.
+	<% end %>
 <% end %>
