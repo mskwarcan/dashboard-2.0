@@ -1,22 +1,37 @@
 <% if @update.facebook_info %>
+<div class="facebook block">
 	<h3>Facebook Data</h3>
 	<% info = ActiveSupport::JSON.decode(@update.facebook_info) %>
 	<% if @update.facebook_info["picture"] %>
-		<img src="<%= @update.facebook_info["picture"] %>">
+		<img class="left" width="48px" height="48px" src="<%= info["picture"] %>">
 	<% end %>
 	<h3><a href="<%= info["link"] %>"><%= info["name"] %></a></h3>
 	<% if @update.facebook_posts %>
-		<ul class="facebook clearfix">
-		<% @update.facebook_posts.each do | feed |%>
+		<% posts = ActiveSupport::JSON.decode(@update.facebook_posts) %>
+		<ul class="facebook">
+		<% posts.each do | feed |%>
 
 			<li> 
-			<div class="status clearfix">
-				<b><a target="_blank" href="<%= status.link %>"><%= feed["from"]["name"] %></a></b><br />
-			<p class="message"><%= feed["message"] %></p>
-			<% if feed["picture"] %>
-				<img class="facebook" src="<%= feed["picture"] %>" />
-				<a href="<%= feed["link"] %>"><%= feed["name"] %></a><br />
-				<p class="description"><%= feed["description"] %></p>
+			<div>
+				<img width="48px" height="48px" class="left" src="<%= feed.first["picture"] %>" />
+				<b><%= feed.first["name"] %></b><br />
+			<p class="message"><%= feed.first["message"] %></p>
+			<% if feed.first["photo"] %>
+				<img class="left" src="<%= feed.first["photo"] %>" />
+				<a href="#"><%= feed.first["photo_title"] %></a><br />
+				<p class="description"><%= feed.first["description"] %></p>
+			<% end %>
+			<% if feed.first["likes"] %>
+				Likes:<%= feed.first["likes"] %><br />
+			<% end %>
+			<% if feed.first["comments"]%>
+			<h4>Comments</h4>
+				<ul class="comments">
+				<% feed.first["comments"].each do |comment| %>
+					<li><%= comment["from"]["name"] %><br />
+						  <%= comment["message"] %></li>
+				<% end %>
+				</ul>
 			<% end %>
 			</div>
 			</li>
@@ -25,4 +40,5 @@
 	<% else %>
 		You currently don't have any posts on your Facebook wall.
 	<% end %>
+</div>
 <% end %>

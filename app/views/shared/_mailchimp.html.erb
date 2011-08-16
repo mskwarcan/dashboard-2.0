@@ -1,0 +1,28 @@
+<% if @update.mailchimp_growth %>
+<div class="mailchimp block">
+	<h3>Mailchimp Data</h3>
+	<% growth = ActiveSupport::JSON.decode(@update.mailchimp_growth) %>
+	<% chatter = ActiveSupport::JSON.decode(@update.mailchimp_chatter) %>
+	<% campaigns = ActiveSupport::JSON.decode(@update.mailchimp_campaigns) %>
+	<% open_rates = ActiveSupport::JSON.decode(@update.mailchimp_open_rates) %>
+	<% click_rates = ActiveSupport::JSON.decode(@update.mailchimp_click_rates) %>
+	
+	<h3><%= Account.get_profile_name(@account.mailchimp_list_id, "mailchimp") %></h3>
+	
+	<h3>Growth</h3>
+	<table cellspacing=0>
+		<tr>
+			<td>Month</td>
+			<td>Members</td>
+			<td>New Members</td>
+		</tr>
+	<% growth.reverse.each do |growth|%>
+		<tr>
+			<td><%= Time.parse(growth["month"] + '-01').strftime("%B") %></td>
+			<td><%= growth["existing"] %></td>
+			<td><%= growth["optins"].to_i + growth["imports"].to_i %></td>
+		</tr>
+	<% end %>	
+	</table>
+</div>
+<% end %>

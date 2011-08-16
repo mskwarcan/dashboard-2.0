@@ -88,7 +88,7 @@ task :cron => :environment do
       
       campaigns.each do |campaign|
         stats = client.campaign_stats(campaign["id"])
-        campaign_stats << stats 
+        campaign_stats << [stats, campaign]
         
         opened = stats["unique_opens"]
         total = stats["emails_sent"]

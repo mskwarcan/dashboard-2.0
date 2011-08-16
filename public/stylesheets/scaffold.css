@@ -289,3 +289,38 @@ table.accounts td, table.accounts th
   text-decoration:none;
   display:inline-block;
 }
+
+/* Overview */
+.left
+{
+  float:left;
+  margin-right:10px;
+}
+
+ul.tweets, ul.facebook
+{
+  padding:0;
+  margin:0;
+  list-style:none;
+  width:300px;
+}
+
+ul.tweets li, ul.facebook li
+{
+  padding:5px 0;
+  clear:left;
+}
+
+ul.comments
+{
+  padding:5px;
+  background:#fff;
+  list-style:none;
+  margin:0;
+}
+
+.block
+{
+  width:300px;
+  float:left;
+}
