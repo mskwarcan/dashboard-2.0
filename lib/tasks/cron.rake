@@ -28,14 +28,30 @@ task :cron => :environment do
       
       page = client.object(account.facebook_profile_id)
       
-      uri = URI.parse(URI.encode("https://api.facebook.com/method/fql.query?access_token=#{account.facebook_token}&query=SELECT post_id,actor_id,message,comments,attachment,likes,impressions FROM stream WHERE source_id=#{account.facebook_profile_id} and actor_id=#{account.facebook_profile_id} LIMIT 10&format=JSON"))
+      uri = URI.parse(URI.encode("https://api.facebook.com/method/fql.query?access_token=#{account.facebook_token}&query=SELECT impressions FROM stream WHERE source_id=#{account.facebook_profile_id} and actor_id=#{account.facebook_profile_id} LIMIT 10"))
       connection = Net::HTTP.new(uri.host, 443)
       connection.use_ssl = true
       
-      posts = resp = connection.request_get(uri.path + '?' + uri.query).body
+      impressions = Hash.from_xml(resp = connection.request_get(uri.path + '?' + uri.query).body)
       
-      @update.facebook_info = ActiveSupport::JSON.encode(page) #name, like
-      @update.facebook_posts = ActiveSupport::JSON.encode(posts)
+      @update.facebook_info = ActiveSupport::JSON.encode(page) #name, likes
+      posts = client.object_posts(account.facebook_profile_id, :access_token => account.facebook_token, :limit => 10)
+      feed = []
+      posts.each_with_index do |post,i|
+        feed << [:name => post["from"]["name"], 
+                 :picture => FGraph.object(post["from"]["id"])["picture"], 
+                 :message => post["message"],
+                 :photo_title => post["name"],
+                 :photo => post["picture"],
+                 :link => post["link"]
+                 :description => post["description"],
+                 :likes => post["likes"].nil? ? nil : post["likes"]["count"],
+                 :comments => post["comments"].nil? ? nil : post["comments"]["data"],
+                 :impressions => impressions["fql_query_response"]["stream_post"][i]["impressions"]
+                 ]
+      end 
+      
+      @update.facebook_posts = ActiveSupport::JSON.encode(feed)
       
       if Time.now.day == 1 && Time.now.hour < 3
         account.facebook_monthly_count = client.object(account.facebook_profile_id)["likes"]

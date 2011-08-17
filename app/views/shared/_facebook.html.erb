@@ -24,6 +24,8 @@
 			<% if feed.first["likes"] %>
 				Likes:<%= feed.first["likes"] %><br />
 			<% end %>
+			Impressions: <%= feed.first["impressions"] %><br />
+			Feedback: <%= ()(feed.first["likes"].to_i + feed.first["comments"].count) / feed.first["impressions"].to_i)*100 %>%<br />
 			<% if feed.first["comments"]%>
 			<h4>Comments</h4>
 				<ul class="comments">
