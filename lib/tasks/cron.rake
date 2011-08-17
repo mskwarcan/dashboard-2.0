@@ -29,7 +29,9 @@ task :cron => :environment do
       page = client.object(account.facebook_profile_id)
       
       uri = URI.parse(URI.encode("https://api.facebook.com/method/fql.query?access_token=#{account.facebook_token}&query=SELECT post_id,actor_id,message,comments,attachment,likes,impressions FROM stream WHERE source_id=#{account.facebook_profile_id} and actor_id=#{account.facebook_profile_id} LIMIT 10&format=JSON"))
-
+      connection = Net::HTTP.new(uri.host, 443)
+      connection.use_ssl = true
+      
       posts = resp = connection.request_get(uri.path + '?' + uri.query).body
       
       @update.facebook_info = ActiveSupport::JSON.encode(page) #name, like
