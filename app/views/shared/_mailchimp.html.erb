@@ -24,5 +24,83 @@
 		</tr>
 	<% end %>	
 	</table>
+	
+	<table class="data" cellspacing=0>
+		<tr>
+			<td colspan="3"><h3>Top 5 Opened Rates Campaigns</h3></td>
+		</tr>
+		<tr>
+			<td width="140">Campaign</td>
+			<td>Open Rate</td>
+			<td>Opened</td>
+		</tr>
+	<% open_rates[0..4].each do |rate|%>
+		<tr>
+			<td><%= rate["name"] %></td>
+			<td><%= rate["rate"] %>%</td>
+			<td><%= rate["opened"] %></td>
+		</tr>
+	<% end %>
+	</table>
+	
+	<table class="data" cellspacing=0>
+		<tr>
+			<td colspan="3"><h3>Top 5 Click Rates Campaigns</h3></td>
+		</tr>
+		<tr>
+			<td width="140">Campaign</td>
+			<td>Click Rate</td>
+			<td>Clicks</td>
+		</tr>
+	<% click_rates[0..4].each do |rate|%>
+		<tr>
+			<td><%= rate["name"] %></td>
+			<td><%= rate["rate"] %>%</td>
+			<td><%= rate["clicks"].to_i %></td>
+		</tr>
+	<% end %>
+
+	</table>
+	
+	<table class="data" cellspacing=0>
+		<tr>
+			<td colspan="3"><h3 class="noMargin bold">Most Recent Campaigns</h3></td>
+		</tr>
+	<% campaigns.reverse.each do |campaign|%>
+		<tr>
+			<td>Name</td>
+			<td colspan="2"><%= campaign[1]["title"] %></td>
+		</tr>
+		<tr>
+			<td>Sent at</td>
+			<td colspan="2"><%= Time.parse(campaign[1]["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+		</tr>
+		<tr>
+			<td>Messages Sent</td>
+			<td colspan="2"><%= campaign[0]["emails_sent"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Messages Opened</td>
+			<td><%= campaign[0]["unique_opens"].to_i %></td>
+			<td><%= sprintf("%.2f", campaign[0]["unique_opens"]/campaign[0]["emails_sent"]*100) %>%</td>
+		</tr>
+		<tr>
+			<td>Messages Clicked</td>
+			<td colspan="2"><%= campaign[0]["users_who_clicked"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Click Rate</td>
+			<td colspan="2"><%= sprintf("%.2f", campaign[0]["users_who_clicked"]/campaign[0]["emails_sent"]*100) %>%</td>
+		</tr>
+	<% end %>
+	</table>
+	
+	<h3>Chimp Chatter</h3>
+	<ul class="chatter">
+		<% chatter[0..4].each do |chat| %>
+			<li><%= Time.parse(chat["update_time"]).strftime("%b %d, %Y at %I:%M%p") %>
+			<p class="<% if chat["type"] == 'lists:new-subscriber' %>up<% elsif chat["type"] == 'lists:unsubscribes' %>down<% end %>"><%= chat["message"]%></p></li>
+		<% end %>
+	</ul>
 </div>
 <% end %>
