@@ -45,4 +45,5 @@ gem 'heroku'
 gem 'youtube_it'
 gem 'hominid'
 gem 'oauth'
+gem 'nokogiri'
 
