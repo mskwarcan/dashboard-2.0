@@ -304,7 +304,7 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
-	
+  </div>	
 	<div class="col3">
 		
 		<% growth = ActiveSupport::JSON.decode(@update.growth) %>
@@ -400,7 +400,6 @@
     			<p class="<% if chat["type"] == 'lists:new-subscriber' %>up<% elsif chat["type"] == 'lists:unsubscribes' %>down<% end %>"><%= chat["message"]%></p></li>
     		<% end %>
     	</ul>
-    		</div>
 	</div>
 	<% else %>
 	<div class="col2">
