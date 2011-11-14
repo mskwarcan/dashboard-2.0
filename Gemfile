@@ -1,5 +1,9 @@
 source 'http://rubygems.org'
 
+group :test, :development do
+  gem "hoe"
+end
+
 gem 'rails', '3.0.4'
 
 # Bundle edge Rails instead:
