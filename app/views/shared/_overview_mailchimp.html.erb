@@ -21,28 +21,28 @@
 			<td><h3 class="noMargin"><%= growth.last["existing"] %></h3></td>
 			<td><h3 class="noMargin"><%= growth.last["optins"].to_i + growth.last["imports"].to_i %></h3></td>
 		</tr>
-		<% if growth[-2] %>
+		<% if growth[-2]["existing"] %>
 		<tr>
 			<td><%= Time.parse(growth[-2]["month"] + '-01').strftime("%B") %></td>
 			<td><%= growth[-2]["existing"] %></td>
 			<td><%= growth[-2]["optins"].to_i + growth[-2]["imports"].to_i %></td>
 		</tr>
 		<% end %>
-		<% if growth[-3] %>
+		<% if growth[-3]["existing"] %>
 		<tr>
 			<td><%= Time.parse(growth[-3]["month"] + '-01').strftime("%B") %></td>
 			<td><%= growth[-3]["existing"] %></td>
 			<td><%= growth[-3]["optins"].to_i + growth[-3]["imports"].to_i %></td>
 		</tr>
 		<% end %>
-		<% if growth[-4] %>
+		<% if growth[-4]["existing"] %>
 		<tr>
 			<td><%= Time.parse(growth[-4]["month"] + '-01').strftime("%B") %></td>
 			<td><%= growth[-4]["existing"] %></td>
 			<td><%= growth[-4]["optins"].to_i + growth[-4]["imports"].to_i %></td>
 		</tr>
 		<% end %>
-		<% if growth[-5] %>
+		<% if growth[-5]["existing"] %>
 		<tr>
 			<td><%= Time.parse(growth[-5]["month"] + '-01').strftime("%B") %></td>
 			<td><%= growth[-5]["existing"] %></td>
@@ -53,9 +53,10 @@
 	
 	<% campaign = ActiveSupport::JSON.decode(@update.campaign) %>
 	<% stats = ActiveSupport::JSON.decode(@update.stats) %>
+
 	<table class="data" cellspacing=0>
 		<tr>
-			<td colspan="3"><h3 class="noMargin bold">Most Recent Campaign</h3></td>
+			<td colspan="3"><h3 class="noMargin bold">Most Recent Campaigns</h3></td>
 		</tr>
 		<tr>
 			<td>Name</td>
@@ -83,6 +84,66 @@
 			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 		</tr>
 	</table>
+
+	<% stats = ActiveSupport::JSON.decode(@update.stats2) %>
+
+	<table class="data" cellspacing=0>
+		<tr>
+			<td>Name</td>
+			<td colspan="2"><%= campaign.second["title"] %></td>
+		</tr>
+		<tr>
+			<td>Sent at</td>
+			<td colspan="2"><%= Time.parse(campaign.second["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+		</tr>
+		<tr>
+			<td>Messages Sent</td>
+			<td colspan="2"><%= stats["emails_sent"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Messages Opened</td>
+			<td><%= stats["unique_opens"].to_i %></td>
+			<td><%= sprintf("%.2f", stats["unique_opens"]/stats["emails_sent"]*100) %>%</td>
+		</tr>
+		<tr>
+			<td>Messages Clicked</td>
+			<td colspan="2"><%= stats["users_who_clicked"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Click Rate</td>
+			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
+		</tr>
+	</table>
+	
+	<% stats = ActiveSupport::JSON.decode(@update.stats3) %>
+
+	<table class="data" cellspacing=0>
+		<tr>
+			<td>Name</td>
+			<td colspan="2"><%= campaign.third["title"] %></td>
+		</tr>
+		<tr>
+			<td>Sent at</td>
+			<td colspan="2"><%= Time.parse(campaign.third["create_time"]).strftime("%b %d, %Y at %I:%M%p")%></td>
+		</tr>
+		<tr>
+			<td>Messages Sent</td>
+			<td colspan="2"><%= stats["emails_sent"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Messages Opened</td>
+			<td><%= stats["unique_opens"].to_i %></td>
+			<td><%= sprintf("%.2f", stats["unique_opens"]/stats["emails_sent"]*100) %>%</td>
+		</tr>
+		<tr>
+			<td>Messages Clicked</td>
+			<td colspan="2"><%= stats["users_who_clicked"].to_i %></td>
+		</tr>
+		<tr>
+			<td>Click Rate</td>
+			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
+		</tr>
+	</table>
 	
 	<% else %>
 			<h2>Sorry! Your information is not ready yet.</h2>
@@ -90,5 +151,5 @@
 	<% end %>
 <% else %>
 	<h3>Get Your MailChimp Information!</h3>
-	<p>Please contact <a href="mailto:steph@balcomagency.com">Steph</a> at The Balcom Agency in order to get your Mail Chimp Information.</p>
+	<p>Please contact <a href="mailto:Lauren@balcomagency.com">Lauren</a> at The Balcom Agency in order to get your Mail Chimp Information.</p>
 <% end %>

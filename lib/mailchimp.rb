@@ -12,6 +12,13 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       @update.stats = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].first["id"]))
       @update.stats2 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].second["id"]))
       @update.stats3 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
+      @update.stats4 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
+      @update.stats5 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
+      @update.stats6 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
+      @update.stats7 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
+      @update.stats8 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
+      @update.stats9 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
+      @update.stats10 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
       @update.chatter = ActiveSupport::JSON.encode(h.chimp_chatter)
       click_rate = []
       open_rate = []
