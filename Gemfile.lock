@@ -153,6 +153,7 @@ DEPENDENCIES
   fbgraph
   gattica
   heroku
+  hoe
   hominid
   jquery-rails (>= 0.2.6)
   linkedin
