@@ -5,7 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake/dsl_definition'
 require 'rake'
 
-module ::Dashboard  
+module ::CashFacebook  
   class Application
     include Rake::DSL
   end
