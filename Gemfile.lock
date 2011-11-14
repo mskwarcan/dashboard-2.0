@@ -159,7 +159,6 @@ DEPENDENCIES
   nokogiri
   oauth
   rails (= 3.0.4)
-  rake
   redis
   sqlite3
   twitter
