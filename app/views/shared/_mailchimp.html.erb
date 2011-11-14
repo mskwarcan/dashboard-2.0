@@ -323,28 +323,28 @@
 				<td><h3 class="noMargin"><%= growth.last["existing"] %></h3></td>
 				<td><h3 class="noMargin"><%= growth.last["optins"].to_i + growth.last["imports"].to_i %></h3></td>
 			</tr>
-			<% if growth[-2]["existing"] %>
+			<% if growth[-2] %>
 			<tr>
 				<td><%= Time.parse(growth[-2]["month"] + '-01').strftime("%B") %></td>
 				<td><%= growth[-2]["existing"] %></td>
 				<td><%= growth[-2]["optins"].to_i + growth[-2]["imports"].to_i %></td>
 			</tr>
 			<% end %>
-			<% if growth[-3]["existing"] %>
+			<% if growth[-3] %>
 			<tr>
 				<td><%= Time.parse(growth[-3]["month"] + '-01').strftime("%B") %></td>
 				<td><%= growth[-3]["existing"] %></td>
 				<td><%= growth[-3]["optins"].to_i + growth[-3]["imports"].to_i %></td>
 			</tr>
 			<% end %>
-			<% if growth[-4]["existing"] %>
+			<% if growth[-4] %>
 			<tr>
 				<td><%= Time.parse(growth[-4]["month"] + '-01').strftime("%B") %></td>
 				<td><%= growth[-4]["existing"] %></td>
 				<td><%= growth[-4]["optins"].to_i + growth[-4]["imports"].to_i %></td>
 			</tr>
 			<% end %>
-			<% if growth[-5]["existing"] %>
+			<% if growth[-5] %>
 			<tr>
 				<td><%= Time.parse(growth[-5]["month"] + '-01').strftime("%B") %></td>
 				<td><%= growth[-5]["existing"] %></td>
