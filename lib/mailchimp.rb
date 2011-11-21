@@ -9,16 +9,35 @@ class Mailchimp < Struct.new(:user, :update, :heroku)
       @update.chimp_name = h.lists.first.second.first["name"]
       @update.growth = ActiveSupport::JSON.encode(h.list_growth_history(list_id))
       @update.campaign = ActiveSupport::JSON.encode(h.campaigns(filters ={:status => "sent"}, start= 0)["data"])
-      @update.stats = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].first["id"]))
-      @update.stats2 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].second["id"]))
-      @update.stats3 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].third["id"]))
-      @update.stats4 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].fourth["id"]))
-      @update.stats5 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"].fifth["id"]))
-      @update.stats6 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][6]["id"]))
+      @update.stats = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][1]["id"]))
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][2]["id"]))
+      @update.stats2 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][2]["id"]))
+      end
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][3]["id"]))
+      @update.stats3 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][3]["id"]))
+      end
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][4]["id"]))
+      @update.stats4 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][4]["id"]))
+      end
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][5]["id"]))
+      @update.stats5 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][5]["id"]))
+      end 
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][6]["id"]))
+        @update.stats6 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][6]["id"]))
+      end
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][7]["id"]))
       @update.stats7 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][7]["id"]))
+      end
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][8]["id"]))
       @update.stats8 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][8]["id"]))
+      end
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][9]["id"]))
       @update.stats9 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][9]["id"]))
+      end
+      if(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][10]["id"]))
       @update.stats10 = ActiveSupport::JSON.encode(h.campaign_stats(h.campaigns(filters ={:status => "sent"}, start= 0)["data"][10]["id"]))
+      end
+
       @update.chatter = ActiveSupport::JSON.encode(h.chimp_chatter)
       click_rate = []
       open_rate = []
