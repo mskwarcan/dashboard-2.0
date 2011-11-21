@@ -35,7 +35,7 @@
 				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 			</tr>
 		</table>
-    <% if(!@update.stats2.nil?) %>
+    <% if(campaign.second["title"]) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats2) %>
 
 		<table class="data" cellspacing=0>
@@ -66,7 +66,7 @@
 			</tr>
 		</table>
 		<% end %>
-    <% if(!@update.stats3.nil?) %>
+    <% if(campaign[3]["title"]) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats3) %>
 
 		<table class="data" cellspacing=0>
@@ -97,7 +97,7 @@
 			</tr>
 		</table>
 		<% end %>
-    <% if(!@update.stats4.nil?) %>
+    <% if(campaign[4]["title"]) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats4) %>
 
   	<table class="data" cellspacing=0>
@@ -128,7 +128,7 @@
   		</tr>
   	</table>
     <% end %>
-    <% if(!@update.stats5.nil?) %>
+    <% if(campaign[5]["title"]) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats5) %>
 
   	<table class="data" cellspacing=0>
@@ -159,7 +159,7 @@
   		</tr>
   	</table>
     <% end %>
-    <% if(!@update.stats6.nil?) %>
+    <% if(campaign[6]["title"]) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats6) %>
 
   	<table class="data" cellspacing=0>
@@ -190,7 +190,7 @@
   		</tr>
   	</table>
   	<% end %>
-    <% if(!@update.stats7.nil?) %>
+    <% if(campaign[7]["title"]) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats7) %>
 
   	<table class="data" cellspacing=0>
@@ -221,7 +221,7 @@
   		</tr>
   	</table>
     <% end %>
-    <% if(!@update.stats8.nil?) %>
+    <% if(campaign[8]["title"]) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats8) %>
 
   	<table class="data" cellspacing=0>
@@ -252,7 +252,7 @@
   		</tr>
   	</table>
     <% end %>
-    <% if(!@update.stats9.nil?) %>
+    <% if(campaign[9]["title"]) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats9) %>
 
   	<table class="data" cellspacing=0>
@@ -283,7 +283,7 @@
   		</tr>
   	</table>
     <% end %>
-    <% if(!@update.stats10.nil?) %>
+    <% if(campaign[10]["title"]) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats10) %>
 
   	<table class="data" cellspacing=0>
