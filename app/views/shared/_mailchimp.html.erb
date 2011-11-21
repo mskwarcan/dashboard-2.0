@@ -35,7 +35,7 @@
 				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 			</tr>
 		</table>
-
+    <% if(@update.stats2) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats2) %>
 
 		<table class="data" cellspacing=0>
@@ -65,7 +65,8 @@
 				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 			</tr>
 		</table>
-		
+		<% end %>
+    <% if(@update.stats3) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats3) %>
 
 		<table class="data" cellspacing=0>
@@ -95,6 +96,8 @@
 				<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
 			</tr>
 		</table>
+		<% end %>
+    <% if(@update.stats4) %>
 		<% stats = ActiveSupport::JSON.decode(@update.stats4) %>
 
   	<table class="data" cellspacing=0>
@@ -124,7 +127,8 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
-
+    <% end %>
+    <% if(@update.stats5) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats5) %>
 
   	<table class="data" cellspacing=0>
@@ -154,7 +158,8 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
-
+    <% end %>
+    <% if(@update.stats6) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats6) %>
 
   	<table class="data" cellspacing=0>
@@ -184,7 +189,7 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
-
+    <% if(@update.stats7) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats7) %>
 
   	<table class="data" cellspacing=0>
@@ -214,7 +219,8 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
-
+    <% end %>
+    <% if(@update.stats8) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats8) %>
 
   	<table class="data" cellspacing=0>
@@ -244,7 +250,8 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
-
+    <% end %>
+    <% if(@update.stats9) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats9) %>
 
   	<table class="data" cellspacing=0>
@@ -274,7 +281,8 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
-
+    <% end %>
+    <% if(@update.stats10) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats10) %>
 
   	<table class="data" cellspacing=0>
@@ -304,6 +312,7 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
+  	<% end %>
   </div>	
 	<div class="col3">
 		
