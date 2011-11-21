@@ -189,6 +189,7 @@
   			<td colspan="2"><%= sprintf("%.2f", stats["users_who_clicked"]/stats["emails_sent"]*100) %>%</td>
   		</tr>
   	</table>
+  	<% end %>
     <% if(@update.stats7) %>
   	<% stats = ActiveSupport::JSON.decode(@update.stats7) %>
 
